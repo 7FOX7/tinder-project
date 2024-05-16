@@ -1,0 +1,91 @@
+
+.login-with-phone-number-popup {
+    display: none; 
+    position: fixed; 
+    top: 0%; 
+    width: 100vw; 
+    height: 100vh; 
+    z-index: 1; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.login-with-mobile-phone-container {
+    width: 30vw; 
+    height: 55vh; 
+}
+
+.main-body-phone {
+    display: flex; 
+    flex-direction: column; 
+    width: 100%; 
+    margin-top: 5%; 
+    justify-content: space-between; 
+}
+
+.phone-enter-section {
+    display: flex; 
+    flex-direction: column; 
+}
+
+.form {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.phone-input-field {
+    font-size: 1.5vw;
+    padding: 10px;  
+    border: solid; 
+    border-color: rgb(118, 118, 118); 
+    border-width: 1px; 
+    border-radius: 10px; 
+}
+
+.next-button {
+    margin-top: 12%; 
+    font-size: 20px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    padding: 15px; 
+    width: 15vw; 
+    border-radius: 35px; 
+    color: white; 
+    border: none;   
+    background-image: linear-gradient(to bottom right, red, hotpink);
+    transition: 0.35s; 
+}
+
+.next-button:hover {
+    filter: brightness(80%); 
+}
+
+.phone-enter-field {
+    width: 70%; 
+    font-size: 25px; 
+}
+
+.alert {
+    font-size: 1vw; 
+    margin-top: 4%; 
+    padding: 10px; 
+    border-radius: 5px;
+    border: none; 
+}
+
+.alert-info {
+    border-color: #bce8f1;
+    color: #31708f;
+    background-color: #d9edf7;
+}
+
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+.login-with-phone-number-popup.active {
+    display: flex; 
+}

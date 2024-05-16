@@ -1,0 +1,88 @@
+.registration-popup {
+    top: 0; 
+    display: flex;
+    visibility: hidden;  
+    position: fixed; 
+    width: 100vw; 
+    height: 100vh; 
+    z-index: 1; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0; 
+    transition: opacity 0.18s, visibility 0.18s;
+}
+
+.registration-container {
+    width: 50vw; 
+    height: 80vh; 
+}
+
+.main-body {
+    display: flex; 
+    flex-direction: column; 
+    margin-top: 3%; 
+    text-align: center; 
+}
+
+.main-body-buttons {
+    margin-top: 11%; 
+    display: flex; 
+    flex-direction: column;
+    height: 27vh;   
+    justify-content: space-between; 
+}
+
+.login-text {
+    position: relative; 
+    top: 12px; 
+    left: 17px; 
+}
+
+.footage {
+    display: flex; 
+    margin-top: 40px; 
+}
+
+.btn {
+    font-weight: bold;
+    border-radius: 25px; 
+    font-size: 22px;    
+    transition: 0.25s; 
+    padding: 4px; 
+}
+
+.btn:hover {
+    filter: brightness(90%); 
+}
+
+.google-lgn-button {
+    background-color: #acffb7; 
+}
+
+.facebook-lgn-button {
+    background-color: #6877ff; 
+}
+
+.phone-lgn-button {
+    background-color: rgb(234, 234, 234)
+}
+
+.link-in-text {
+    transition: 0.1s; 
+}
+
+.link-in-text:hover {
+    text-decoration: none; 
+}
+
+.registration-popup.active {
+    visibility: visible; 
+    opacity: 1; 
+}
+
+.img {
+    width: 50px; 
+    height: 50px;
+    float: right; 
+    margin-right: 18px; 
+}

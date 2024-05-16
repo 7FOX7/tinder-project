@@ -1,0 +1,39 @@
+
+button {
+    cursor: pointer; 
+    border: none; 
+}
+
+.container {
+    cursor: default; 
+    display: flex; 
+    flex-direction: column; 
+    background-color: white;
+    border-radius: 20px;  
+    z-index: 2; 
+    padding: 20px; 
+    align-items: center; 
+}
+
+.header {
+    width: 100%; 
+    font-size: 20px;
+    flex-direction: column; 
+}
+
+.header-upper-section {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    margin-left: 47%; 
+}
+
+.header-lower-section {
+    display: flex; 
+    justify-content: center; 
+    margin-top: -3%; 
+}
+
+.close-window-button {
+    background-color: transparent;
+}

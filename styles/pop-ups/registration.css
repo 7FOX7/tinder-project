@@ -1,19 +1,21 @@
+/* 
 .registration-popup {
     top: 0; 
-    display: flex;
+    display: none;
     visibility: hidden;  
     position: fixed; 
-    width: 100vw; 
-    height: 100vh; 
-    z-index: 1; 
+    width: 50%; 
+    height: 50%; 
+    z-index: 10;
     align-items: center; 
     justify-content: center; 
     opacity: 0; 
     transition: opacity 0.18s, visibility 0.18s;
 }
-
+ */
+ 
 .registration-container {
-    width: 50vw; 
+    width: 45vw; 
     height: 80vh; 
 }
 
@@ -73,11 +75,6 @@
 
 .link-in-text:hover {
     text-decoration: none; 
-}
-
-.registration-popup.active {
-    visibility: visible; 
-    opacity: 1; 
 }
 
 .img {

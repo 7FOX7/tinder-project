@@ -1,14 +1,14 @@
-
+/* 
 .login-with-phone-number-popup {
     display: none; 
     position: fixed; 
     top: 0%; 
-    width: 100vw; 
-    height: 100vh; 
-    z-index: 1; 
+    width: 50%; 
+    height: 50%; 
+    z-index: 10; 
     align-items: center; 
     justify-content: center; 
-}
+} */
 
 .login-with-mobile-phone-container {
     width: 30vw; 
@@ -84,8 +84,4 @@
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
-}
-
-.login-with-phone-number-popup.active {
-    display: flex; 
 }

@@ -5,7 +5,7 @@ registrationHTML += `
     <div class="header">
         <div class="header-upper-section">
             <img src="images/favicon.ico">
-            <button class="close-window-button js-button" id="close-window">
+            <button class="close-modal js-close-modal">
                 <img src="images/close_window_icon.png">
             </button>
          </div>
@@ -30,7 +30,7 @@ registrationHTML += `
                 <span class="login-text">Log in with Facebook</span>
                 <img class="img facebook-icon" src="./images/facebook_icon.png" alt="Facebook">
             </button>
-            <button class="btn phone-lgn-button js-button" id="login-with-phone-number">
+            <button class="btn phone-lgn-button js-button" data-modal="Phone Login">
                 <span class="login-text">Log in with phone number</span>
                 <img class="img phone-icon" src="./images/phone_icon.png" alt="Phone"> 
             </button>

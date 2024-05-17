@@ -5,7 +5,7 @@ loginWithPhoneNumberHTML += `
         <div class="header">
             <div class="header-upper-section">
                 <img src="images/favicon.ico">
-                <button class="close-window-button js-button" id="close-window">
+                <button class="close-modal js-close-modal">
                     <img src="images/close_window_icon.png">
                 </button>
                 </div>
@@ -27,5 +27,6 @@ loginWithPhoneNumberHTML += `
     </div>
 `
 
-document.querySelector('.js-login-with-phone-number-popup')
+// $('.js-modal')
+document.querySelector('.js-modal')
     .innerHTML = loginWithPhoneNumberHTML; 

@@ -57,20 +57,27 @@
 }
 
 .tinder-header-right-section {
-    min-width: 80px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tinder-change-language-button {
-    border: none; 
-    border-radius: 8px; 
-    cursor: pointer; 
+    align-items: center;
+    display: flex;
+    color:  white;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .tinder-change-language-img {
-    width: 40px; 
+    width: 25%;
+    margin-right: 5px;
 }
 
 .tinder-main-body { 

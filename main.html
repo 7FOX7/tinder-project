@@ -21,7 +21,7 @@
         <div class="tinder-header">
             <div class="tinder-header-left-section">
                 <a href="main.html">
-                    <img class="tinder-logo" src="images/logo.png">
+                    <img class="tinder-logo" src="images/logo.png" alt="tinder home page link">
                 </a>
             </div>
             <div class="tinder-header-middle-section">
@@ -35,7 +35,7 @@
             </div>
             <div class="tinder-header-right-section">
                 <button class="tinder-change-language-button">
-                    <img class="tinder-change-language-img" src="images/language.png">
+                    <img class="tinder-change-language-img" src="images/language.png" alt="change language">
                     Language
                 </button>
             </div>
@@ -139,6 +139,7 @@
             if(phoneInput.isValidNumber()) {
                 info.style.display = "";
                 info.innerHTML = `Phone number: <strong>${phoneNumber}</strong>`; 
+                window.location.replace("./pages/createAccount.html"); 
             }
             else {
                 error.style.display = ""; 

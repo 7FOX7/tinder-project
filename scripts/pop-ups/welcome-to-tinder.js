@@ -69,9 +69,11 @@ document.querySelector('.js-welcome-popup')
     .innerHTML = welcomeToTinderHTML; 
 
 document.body.style.position = 'fixed'; 
+document.body.style.top = `-${window.scrollY}px`;
 
 $("#agree-button").on("click", function() {
     document.body.style.position = ''; 
+    document.body.style.top = ''; 
     $('.js-overlay-popup').addClass('inactive');
     $('.js-popup').addClass('inactive'); 
 }); 

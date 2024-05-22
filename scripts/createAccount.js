@@ -54,9 +54,6 @@ $(document).ready(function() {
             return; 
         }
         else {
-            // $('.js-image-field').each(function() {
-            //     fill_ImageFields_in_Order($(this), imageUrl); 
-            // });
             $('.js-image-field').each(function() {
                 if($(this).css('background-image') === 'none') {
                     $(this).css({"background-image" : `url(${imageUrl})`});

@@ -275,15 +275,6 @@ $(document).ready(function() {
         }
     })
     
-    /*
-    $('js-search-results-container').on("scroll", function() {
-        var scrollHeight = 295; 
-        var scrollPosition = $(this).height() + $(this).scrollTop();
-        if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-            console.log('you are at the bottom'); 
-        }
-    });
-    */
 
     $(window).on("scroll", function() {
         var scrollHeight = $(document).height();

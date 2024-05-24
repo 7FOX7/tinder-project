@@ -129,7 +129,21 @@ jQuery.fn.extend({
         }
     })
 
-    function setImage(imageURL) {
+  
 
+
+
+    <label> refers to the <div> element. div element contains an id
+
+    so the div with the id equals to 15, label id will be equal to 15 too
+
+    (we have the third element which is 'more > ' button )
+
+
+
+    div.change(e) {
+        name e.target.value;     
+        button = name; 
     }
+
 */

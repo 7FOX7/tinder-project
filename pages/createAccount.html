@@ -11,6 +11,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
+        <div class="overlay js-overlay"></div>
+        <div class="js-show-genders-popup"></div>
         <div class="js-welcome-popup"></div>
         <div class="header">
             <div class="header-left-section">
@@ -71,13 +73,13 @@
                         <button class="left-section-button">
                             Woman
                         </button>
-                        <button class="left-section-button">
+                        <button class="js-gender-button left-section-button">
                             More > 
                         </button>
                     </div>
                     <div class="checkbox-section">
-                        <label class="custom-checkbox">
-                            <input type="checkbox" checked>
+                        <label class="custom-checkbox" for="checkboxInput">
+                            <input class="js-checkbox" type="checkbox" id="checkboxInput">
                             <span class="checkmark"></span>
                         </label>
                         <span>Show my gender on my profile</span>
@@ -377,5 +379,6 @@
     -->
         <script src="../scripts/createAccount.js"></script>
         <script src="../scripts/pop-ups/welcome-to-tinder.js"></script>
+        <script src="../scripts/pop-ups/choose-gender-popup.js"></script>
     </body>
 </html>

@@ -38,7 +38,7 @@
     margin-block: 30px 10px; 
 }
 
-input[type=text]:focus {
+.main-body-left-section input[type=text]:focus {
     outline: 1px solid rgb(70, 70, 255);     
 }
 
@@ -102,12 +102,18 @@ input[type=text] {
     display: inline-block; 
     border-radius: 6px; 
     transition: 0.1s; 
+    background-color: #fff; 
+}
+
+.custom-checkbox:hover {
+    filter: brightness(85%); 
 }
 
 .custom-checkbox input:checked + .checkmark {
     background: rgb(255, 23, 93)
     url(../../../images/checkmark.png) center/70% no-repeat;
     transition: 0.3s; 
+    border: none; 
 }
 
 .custom-checkbox input {

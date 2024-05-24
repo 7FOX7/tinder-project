@@ -1,7 +1,6 @@
 let welcomeToTinderHTML = ''; 
 
 welcomeToTinderHTML += `
-<div class="overlay-popup js-overlay-popup">
 <div class="popup js-popup">
 <div style="display: flex; flex-direction: column; align-items: center; background-color: #fff; width: 100%; height: 100%; border-radius: 10px; padding: 5%;" >
     <div class="header-popup">
@@ -31,7 +30,7 @@ welcomeToTinderHTML += `
                 <div style="display: flex; flex-direction: column">
                     <label class="label-popup">Stay safe</label>
                     <div style="margin-block: 5px;">
-                        <span class="span-popup">Don't be too quick to give out personal information. <a href="#" style="text-decoration: none;"><span style="color: blue;">Date Safely</span></a></span>
+                        <span class="span-popup">Don't be too quick to give out personal information. <a href="#" style="text-decoration: none;"><span style="color: blue; font-size: 14px;">Date Safely</span></a></span>
                     </div>
                 </div>
             </li>
@@ -60,21 +59,26 @@ welcomeToTinderHTML += `
         </div>
     </div>
 </div>
-</div>
 `
+
 
 $('head').append('<link rel="stylesheet" type="text/css" href="../../styles/pop-ups/welcome-to-tinder.css">'); 
 
-document.querySelector('.js-welcome-popup')
+$(document).ready(function() {
+    document.querySelector('.js-welcome-popup')
     .innerHTML = welcomeToTinderHTML; 
 
-document.body.style.position = 'fixed'; 
-document.body.style.top = `-${window.scrollY}px`;
+    $('.js-popup').addClass('active'); 
+    $('.js-overlay').addClass('active'); 
 
-$("#agree-button").on("click", function() {
-    document.body.style.position = ''; 
-    document.body.style.top = ''; 
-    $('.js-overlay-popup').addClass('inactive');
-    $('.js-popup').addClass('inactive'); 
-}); 
+    document.body.style.position = 'fixed'; 
+    document.body.style.top = `-${window.scrollY}px`;
 
+    $("#agree-button").on("click", function() {
+        document.body.style.position = ''; 
+        document.body.style.top = ''; 
+        document.body.style.overflow = 'auto'; 
+        $('.js-overlay').removeClass('active');
+        $('.js-popup').removeClass('active'); 
+    }); 
+})

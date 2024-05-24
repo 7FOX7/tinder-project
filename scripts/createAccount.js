@@ -80,6 +80,60 @@ $(document).ready(function() {
         element1.css("display", "none"); 
         element2.css("display", "flex"); 
     }
+
+    const nameField = $('.js-required-name'); 
+    const emailField = $('.js-required-email'); 
+    const monthField = $('#monthOfBirth'); 
+    const dayField = $('#dayOfBirth'); 
+    const yearField = $('#yearOfBirth'); 
+
+    handleInvalidInput(nameField); 
+    handleInvalidInput(emailField); 
+    handleMonth(monthField); 
+    handleDay(dayField); 
+
+    function handleInvalidInput(field) {
+        $(field).on('focusout', function() {
+            var errorMessage = $(this).closest('.js-input-section').find('.js-error-message'); 
+            if($(this).val() === "") {
+                errorMessage.addClass('active'); 
+            }
+            else {
+                errorMessage.removeClass('active'); 
+            }
+        })
+    }
+
+    function handleMonth(month) {  
+        // const parent = $(month).closest('.js-input-section'); 
+        const nextField = dayField; 
+        const regex = /\b(10|11|12)\b/g;
+        $(month).on('keyup', function() {
+            var stringValue = $(month).val(); 
+            
+            if(regex.test(stringValue)) {
+                nextField.focus(); 
+            }
+            else {
+                console.log(`${stringValue} is Invalid`); 
+            }
+        }); 
+    }
+
+    function handleDay(day) {
+        const nextField = yearOfBirth; 
+        const regex = /\b([12]?\d|3[01])\b/; 
+        $(day).on('keyup', function(){
+            var stringValue = $(day).val();
+
+            if(regex.test(stringValue) && stringValue.length === 2)  {
+                nextField.focus(); 
+            }
+            else {
+                console.log(`${stringValue} is Invalid`); 
+            }
+        }); 
+    }
 }); 
 
 

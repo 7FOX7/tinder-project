@@ -33,38 +33,41 @@
         </div>
         <div class="main-body">
             <div class="main-body-left-section">
-                <div class="input-section1">
+                <div class="input-section input-section1 js-input-section">
                     <label class="first-name-label">First Name</label>
-                    <input type="text" placeholder="First Name">
+                    <input type="text" class="js-required-name" placeholder="First Name">
+                    <span class="error-message js-error-message">This field must be between 1 - 22 characters.</span>
                 </div>
-                <div class="input-section2">
+                <div class="input-section js-input-section">
                     <label class="email-label">Email</label>
-                    <input type="text" placeholder="Email">
+                    <input type="text" class="js-required-email" placeholder="Email">
+                    <span class="error-message js-error-message">Please enter a valid email.</span>
                 </div>
-                <div class="input-section3">
+                <div class="input-section js-input-section">
                     <label class="birthday-label">Birthday</label>
                     <div class="birthday-data">
                         <div>
                             <label class="month-birth-label">Month</label>
                             <div class="month-input-field">
-                                <input type="text" placeholder="MM">
+                                <input type="text" class="js-required-date" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="MM" id="monthOfBirth">
                             </div>
                         </div>
                         <div>
                             <label class="day-birth-label">Day</label>
                             <div class="day-input-field">
-                                <input type="text" placeholder="DD">
+                                <input type="text" class="js-required-date" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="DD" id="dayOfBirth">
                             </div>
                         </div>
                         <div>
                             <label class="year-birth-label">Year</label>
                             <div class="year-input-field">
-                                <input type="text" placeholder="YYYY">
+                                <input type="text" class="js-required-date" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="YYYY" id="yearOfBirth">
                             </div>
                         </div>
                     </div>
+                    <span class="error-message js-error-message">Please enter a valid date.</span>
                 </div>
-                <div class="input-section4">
+                <div class="input-section js-input-section">
                     <label class="gender-label">Gender</label>
                     <div class="gender-selection">
                         <button class="left-section-button">
@@ -85,7 +88,7 @@
                         <span>Show my gender on my profile</span>
                     </div>
                 </div>
-                <div class="input-section5">
+                <div class="input-section js-input-section">
                     <label class="interested-in-label">Interested in</label>
                     <div class="interest-group">
                         <button class="left-section-button">
@@ -99,7 +102,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="input-section6">
+                <div class="input-section js-input-section">
                     <label class="relationship-intent-label">Looking for</label>
                     <button class="left-section-button relationship-intent-button">
                         <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">

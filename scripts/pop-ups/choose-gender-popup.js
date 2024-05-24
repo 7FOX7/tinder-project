@@ -2,7 +2,7 @@ let chooseGenderHTML = '';
 
 chooseGenderHTML = `
 <div class="popup-container js-popup-container">
-<div class="main-body">
+<div class="main-body js-main-body">
     <div class="header-container">
         <div class="header">
             <label style="font-size: 23px; font-weight: bold;">What's your gender?</label>
@@ -275,14 +275,6 @@ $(document).ready(function() {
         }
     })
     
-
-    $(window).on("scroll", function() {
-        var scrollHeight = $(document).height();
-        var scrollPosition = $(window).height() + $(window).scrollTop();
-        if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
-            console.log('you are at the bottom'); 
-        }
-    });
 
     $('.js-overlay').click(function() {
         closePopup(); 

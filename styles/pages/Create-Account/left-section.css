@@ -5,7 +5,7 @@
     height: 850px; 
 }
 
-.input-section1,
+/* .input-section1,
 .input-section2,
 .input-section3,
 .input-section4,
@@ -14,6 +14,12 @@
     display: flex; 
     flex-direction: column; 
     padding-right: 10%; 
+} */
+
+.input-section {
+    display: flex; 
+    flex-direction: column; 
+    padding-right: 10%;
 }
 
 .left-section-button {
@@ -35,7 +41,7 @@
 .gender-label,
 .interested-in-label,
 .relationship-intent-label {
-    margin-block: 30px 10px; 
+    margin-block: 15px 10px; 
 }
 
 .main-body-left-section input[type=text]:focus {
@@ -120,3 +126,13 @@ input[type=text] {
     display: none; 
 }
 
+.error-message {
+    visibility: hidden; 
+    font-weight: bold; 
+    color: rgb(202, 0, 0); 
+    font-size: 16px; 
+}
+
+.error-message.active {
+    visibility: visible; 
+}

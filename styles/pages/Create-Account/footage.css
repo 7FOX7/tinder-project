@@ -42,3 +42,7 @@
     transition: 0.2s; 
     background-color: #fff; 
 }
+
+button:disabled {
+    opacity: 0.5; 
+}

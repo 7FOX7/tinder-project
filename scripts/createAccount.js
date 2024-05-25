@@ -81,60 +81,168 @@ $(document).ready(function() {
         element2.css("display", "flex"); 
     }
 
-    const nameField = $('.js-required-name'); 
-    const emailField = $('.js-required-email'); 
+    const nameField = $('#firstName'); 
+    const emailField = $('#emailAddress'); 
     const monthField = $('#monthOfBirth'); 
     const dayField = $('#dayOfBirth'); 
     const yearField = $('#yearOfBirth'); 
 
-    handleInvalidInput(nameField); 
-    handleInvalidInput(emailField); 
+    handleInvalidName(nameField); 
+    handleInvalidEmail(emailField); 
     handleMonth(monthField); 
     handleDay(dayField); 
+    handleYear(yearField); 
 
-    function handleInvalidInput(field) {
-        $(field).on('focusout', function() {
-            var errorMessage = $(this).closest('.js-input-section').find('.js-error-message'); 
-            if($(this).val() === "") {
+    function handleInvalidName(nameField) {
+        const errorMessage = $(nameField).closest('.js-input-section').find('.js-error-message'); 
+        $(nameField).on('keyup', function() {
+             removeRedBorder(nameField); 
+        })
+        $(nameField).on('focusout', function() {
+            var stringValue = $(nameField).val(); 
+            if(stringValue === "") {
                 errorMessage.addClass('active'); 
+                addRedBorder(nameField); 
+            }
+            else {
+                stringValue = stringValue.replace(/\b[a-z]/, function(match) {
+                    return match.toUpperCase(); 
+                }); 
+                $(nameField).val(stringValue); 
+                errorMessage.removeClass('active'); 
+                removeRedBorder(nameField); 
+            }
+        })
+    }
+
+    function handleInvalidEmail(emailField) {
+        const errorMessage = $(emailField).closest('.js-input-section').find('.js-error-message'); 
+        const regex =  /^\S+@\S+\.\S+$/; 
+        $(emailField).on('keyup', function() {
+            removeRedBorder(emailField);
+        });
+        $(emailField).on('focusout', function() {
+            var stringValue = $(emailField).val(); 
+            if(!regex.test(stringValue)) {
+                errorMessage.addClass('active'); 
+                addRedBorder(emailField); 
             }
             else {
                 errorMessage.removeClass('active'); 
+                removeRedBorder(emailField); 
             }
         })
     }
 
     function handleMonth(month) {  
-        // const parent = $(month).closest('.js-input-section'); 
+        const errorMessage = $(month).closest('.js-input-section').find('.js-error-message'); 
         const nextField = dayField; 
-        const regex = /\b(10|11|12)\b/g;
-        $(month).on('keyup', function() {
-            var stringValue = $(month).val(); 
-            
-            if(regex.test(stringValue)) {
+        // const regex = /\b(10|11|12)\b/g;
+        var stringValue;
+        const regex = /^(0[1-9]|[1-9]|1[0-2])$/; 
+        $(month).on('keyup', function() { 
+            removeRedBorder(month);
+            stringValue = $(month).val(); 
+            if(regex.test(stringValue) && stringValue.length === 1) {
+                errorMessage.removeClass('active'); 
+            }
+            else if(regex.test(stringValue) && stringValue.length === 2) {
+                errorMessage.removeClass('active');  
                 nextField.focus(); 
             }
             else {
-                console.log(`${stringValue} is Invalid`); 
+                errorMessage.addClass('active'); 
             }
         }); 
+
+        month.on('focusout', function() {
+            if(regex.test(stringValue)) {
+                errorMessage.removeClass('active'); 
+                removeRedBorder(month); 
+                if(stringValue.length === 1) {
+                    $('#monthOfBirth:text').val(`0${stringValue}`);
+                    nextField.focus(); 
+                } 
+            }
+            else {
+                errorMessage.addClass('active'); 
+                addRedBorder(month);
+            }
+        })   
     }
 
     function handleDay(day) {
+        var errorMessage = $(day).closest('.js-input-section').find('.js-error-message'); 
         const nextField = yearOfBirth; 
-        const regex = /\b([12]?\d|3[01])\b/; 
+        const regex = /^(0[1-9]|[1-9]|1[0-9]|2[0-9]|3[01])$/; 
+        var stringValue; 
         $(day).on('keyup', function(){
-            var stringValue = $(day).val();
-
-            if(regex.test(stringValue) && stringValue.length === 2)  {
-                nextField.focus(); 
+            removeRedBorder(day);
+            stringValue = $(day).val();
+            if(regex.test(stringValue) && stringValue.length === 1) {
+                errorMessage.removeClass('active'); 
+            }
+            else if(regex.test(stringValue) && stringValue.length === 2) {
+                errorMessage.removeClass('active'); 
+                nextField.focus();
             }
             else {
-                console.log(`${stringValue} is Invalid`); 
+                errorMessage.addClass('active');  
+            }
+        }); 
+
+        $(day).on('focusout', function() {
+            if(regex.test(stringValue)) {
+                errorMessage.removeClass('active'); 
+                removeRedBorder(day);
+                if(stringValue.length === 1) {
+                    $(`#dayOfBirth:text`).val('0' + `${stringValue}`); 
+                    nextField.focus(); 
+                }
+            }
+            else {
+                errorMessage.addClass('active'); 
+                addRedBorder(day); 
             }
         }); 
     }
+
+    function handleYear(year) {
+        var errorMessage = $(year).closest('.js-input-section').find('.js-error-message');
+        var stringValue; 
+        const regex = /^(1[0-9][0-9][0-9]|2[0][0-2][0-9])$/; 
+
+        $(year).on('keyup', function() {
+            stringValue = $(year).val(); 
+            removeRedBorder(year); 
+            if(!regex.test(stringValue)) {
+                errorMessage.addClass('active');  
+            }
+            else {
+                errorMessage.removeClass('active'); 
+            }
+        });
+        $(year).on('focusout', function() {
+            if(regex.test(stringValue)) {
+                errorMessage.removeClass('active'); 
+                removeRedBorder(year);
+            }
+            else {
+                errorMessage.addClass('active'); 
+                addRedBorder(year);
+            }
+        })
+    }
+
+    function removeRedBorder(field) {
+        $(field).css("border-color", "rgba(0, 0, 0, 0.4)"); 
+    }
+
+    function addRedBorder(field) {
+        $(field).css("border-color", "red"); 
+    }
 }); 
+
 
 
 /*

@@ -126,13 +126,13 @@ input[type=text] {
     display: none; 
 }
 
-.error-message {
+.create-account-format .error-message {
     visibility: hidden; 
     font-weight: bold; 
     color: rgb(202, 0, 0); 
     font-size: 16px; 
 }
 
-.error-message.active {
+.create-account-format .error-message.active {
     visibility: visible; 
 }

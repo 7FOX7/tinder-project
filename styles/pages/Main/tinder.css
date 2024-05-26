@@ -1,3 +1,26 @@
+* {
+    font-family: "Poppins", sans-serif; 
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0; 
+    padding: 0; 
+}
+
+button {
+    cursor: pointer; 
+    border: none; 
+}
+
+.main-page a {
+    cursor: pointer; 
+}
+
+.main-page ul {
+    list-style: none; 
+}
+
 .tinder-background {
     top: 0; 
     position: fixed; 
@@ -5,17 +28,24 @@
     z-index: -1;  
 }
 
-.tinder-back-people-kissing {
+.main-page .header {
+    display: flex;
+    width: 100%;
+    font-size: 20px;
+    flex-direction: column;
+}
+
+.main-page .tinder-back-people-kissing {
     width: 100vw;
     height: 100vh;  
 }
 
-.tinder-list {
+.main-page .tinder-list {
     display: inline; 
     margin: 15px; 
 }
 
-.tinder-header {
+.main-page .tinder-header {
     display: flex;
     background-color: black; 
     justify-content: space-between; 
@@ -29,7 +59,7 @@
     height: 7vh;
 }
 
-.tinder-header-left-section {
+.main-page .tinder-header-left-section {
     /*
         even if you set width to 100%, it will NOT occupy (overlap)
         the entire header because there are still other flex-items 
@@ -38,32 +68,32 @@
     min-width: 130px;  
 }
 
-.tinder-header-middle-section {
+.main-page .tinder-header-middle-section {
     flex: 1; 
     display: flex; 
     min-width: 630px;
 }
 
-.tinder-link-header {
+.main-page .tinder-link-header {
     color: white; 
     text-decoration: none; 
     letter-spacing: 1.5px; 
     font-size: 20px; 
 }
 
-.tinder-link-header:hover {
+.main-page .tinder-link-header:hover {
     color: crimson; 
     text-decoration: underline; 
 }
 
-.tinder-header-right-section {
+.main-page .tinder-header-right-section {
     min-width: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.tinder-change-language-button {
+.main-page .tinder-change-language-button {
     align-items: center;
     display: flex;
     color:  white;
@@ -75,12 +105,12 @@
     cursor: pointer;
 }
 
-.tinder-change-language-img {
+.main-page .tinder-change-language-img {
     width: 25%;
     margin-right: 5px;
 }
 
-.tinder-main-body { 
+.main-page .tinder-main-body { 
     color: black; 
     margin-top: 160px; 
     font-size: 2vw; 
@@ -91,11 +121,11 @@
     cursor: default; 
 }
 
-.tinder-main-body > p {
+.main-page .tinder-main-body > p {
     color: white; 
 }
 
-.tinder-main-body > button {
+.main-page .tinder-main-body > button {
     font-size: 25px; 
     font-weight: bold; 
     cursor: pointer; 
@@ -105,14 +135,14 @@
     color: white; 
 }
 
-.create-account-button {
+.main-page .create-account-button {
     margin-top: 50px;    
     border: none;   
     background-image: linear-gradient(to bottom right, red, hotpink);
     transition: 0.35s; 
 }
 
-.login-button {
+.main-page .login-button {
     margin-top: 40px; 
     background-color: transparent;
     border-width: 5px; 
@@ -121,17 +151,17 @@
     transition: 0.35s; 
 }
 
-.login-button:hover {
+.main-page .login-button:hover {
     color: black; 
     background-color: lightgray; 
     opacity: 0.7; 
 }
 
-.create-account-button:hover {
+.main-page .create-account-button:hover {
     filter: brightness(80%); 
 }
 
-.tinder-footage {
+.main-page .tinder-footage {
     display: flex; 
     font-size: 20px; 
     margin-top: 40px; 
@@ -139,19 +169,19 @@
     padding-right: 45px; 
 }
 
-.tinder-link-download {
+.main-page .tinder-link-download {
     color: white; 
     text-decoration: none; 
     letter-spacing: 1.5px; 
     font-size: 20px;
 }
 
-.tinder-logo {
+.main-page .tinder-logo {
     max-width: 100px; 
     max-height: 100px; 
 }
 
-.tinder-download-img {
+.main-page .tinder-download-img {
     height: 40px;
     width: 50px; 
     animation-duration: 1.8s;     
@@ -173,7 +203,7 @@
     
 } */
 
-.tinder-background.active {
+.main-page .tinder-background.active {
     filter: brightness(55%);
 }
 

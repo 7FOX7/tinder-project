@@ -8,22 +8,22 @@ body {
     cursor: default; 
 }
 
-button {
+.create-account-format button {
     cursor: pointer; 
     font-weight: bold; 
 }
 
-button:hover {
+.create-account-format button:hover {
     filter: brightness(92%); 
 }
 
-span {
+.create-account-format span {
     font-size: 18px; 
     font-weight: normal; 
     color: rgba(0, 0, 0, 0.6); 
 }
 
-.header{
+.create-account-format .header{
     display: flex;
     background-color: white;  
     position: sticky; 
@@ -34,17 +34,17 @@ span {
     z-index: 5; 
 }
 
-.header-left-section {
+.create-account-format .header-left-section {
     display: flex; 
     align-items: center; 
 }
 
-.header-right-section {
+.create-account-format .header-right-section {
     display: flex; 
     align-items: center; 
 }
 
-.change-language-button {
+.create-account-format .change-language-button {
     background-color: white; 
     color: black; 
     border: none; 
@@ -58,12 +58,12 @@ span {
     transition: 0.3s; 
 }
 
-.change-language-img {
+.create-account-format .change-language-img {
     width: 25%; 
     margin: 5px; 
 }
 
-.line {
+.create-account-format .line {
     position: sticky; 
     top: 16.45%; 
     background-color: rgba(0, 0, 0, 0.15);  
@@ -71,7 +71,7 @@ span {
     height: 1px; 
 }
 
-.main-body {
+.create-account-format .main-body {
     display: flex; 
     /* background-color: rgba(0, 0, 0, 0.2);  */
     width: 100%; 
@@ -82,7 +82,7 @@ span {
     font-size: 17px; 
 }
 
-.footage {
+.create-account-format .footage {
     display: flex; 
     flex-direction: column; 
     width: 100%; 
@@ -93,7 +93,7 @@ span {
     font-size: 17px;
 }
 
-.title {
+.create-account-format .title {
     display: flex; 
     font-size: 25px;  
     justify-content: center; 

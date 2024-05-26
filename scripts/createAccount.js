@@ -297,6 +297,12 @@ $(document).ready(function() {
             removeRedBorder(field);
         }); 
     }
+
+    document.querySelector('.js-create-account-continue-button')
+        .addEventListener('click', (event) => {
+            event.preventDefault(); 
+            window.location.replace('../pages/captcha.html'); 
+        })
 }); 
 
 

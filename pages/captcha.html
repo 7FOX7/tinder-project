@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="../styles/pages/Captcha/captcha.css">
+        <link href="https://fonts.cdnfonts.com/css/proxima-nova-condensed" rel="stylesheet">
         <title>Captcha</title>
     </head>
     <body>
-        <p>still</p>
+        <div class="captcha-container">
+            <div class="cross-sign">
+                <button class="cross-sign-button js-cross-sign-button">
+                    <img class="js-cross-small cross-small" src="../images/close_window_icon.png" alt="cross-sign">
+                    <img class="js-cross-large cross-large" src="../images/close_window_icon.png" alt="cross-sign">
+                </button>
+            </div>
+            <div class="captcha-inner-container">
+                <div class="captcha-inner-content">
+                    <div class="inner-text">
+                        <span>Please, solve this puzzle so we know you are a real person</span>
+                    </div>
+                    <div class="inner-button">
+                        <button>Verify</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="../scripts/pages/captcha.js"></script>
 </html>

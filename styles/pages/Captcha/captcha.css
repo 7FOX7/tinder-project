@@ -14,6 +14,26 @@ body {
     padding: 25px; 
 }
 
+.captcha-inner-container ul {
+    margin: 0; 
+    padding: 4px; 
+    list-style: none; 
+    width: 198px;  
+    height: 160px; 
+} 
+
+.captcha-inner-container li {
+    outline: 2px solid black; 
+    cursor: pointer; 
+    width: 60px; 
+    height: 60px; 
+}
+
+.captcha-inner-container li:hover {
+    outline: 3px dashed red; 
+    outline-offset: 1px; 
+}
+
 .captcha-inner-container {
     display: flex; 
     position: fixed; 

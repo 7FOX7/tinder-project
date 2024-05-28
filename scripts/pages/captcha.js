@@ -100,9 +100,15 @@ listArr.forEach((list, index) => {
 }); 
 // document.addEventListener('DOMContentLoaded', init()); 
 
-const listSelection1 = document.querySelector('.js-list-selection1'); 
 
 function init() {
+    let rightSelection = Math.floor(Math.random()*listArr.length);
+    while(CAPTCHA_imageList.firstChild) {
+        CAPTCHA_imageList.removeChild(CAPTCHA_imageList.lastChild); 
+    }
+    listArr.forEach((list) => {
+        list.innerHTML = ''; 
+    }); 
 
     for(let i = 0; i < listArr.length; i++) {
         const imageAtRandomPos = getRandomImage(); 
@@ -111,30 +117,32 @@ function init() {
         listArr[i].append(updatedImgArr[i]); 
         CAPTCHA_imageList.append(listArr[i]); 
     }
-    let rightSelection = Math.floor(Math.random()*updatedImgArr.length);
+    
     // updatedImgArr.splice(0, updatedImgArr.length); 
     updatedImgArr.length = 0; 
     /////////////////////////////////////
     // SLOW BUT SHOULD WORK
 
-    listSelection1.addEventListener('click', (event) => {
-            event.preventDefault(); 
-            if(Number(event.target.id) === rightSelection) {
-                console.log('you are right')
-            }
-            else {
-                console.log('you are wrong'); 
-            }
-        })
+    
     ////////////////////////////////////
     document.querySelector('.js-captcha-inner-content').style.display = "none"; 
     document.querySelector('.js-captcha-inner-container').style.transform = "translate(-40%, -40%)"; 
     document.querySelector('.js-captcha-inner-container').append(CAPTCHA_imageList);
     document.querySelector('.js-captcha-inner-container').append(reloadButton);
-    console.log(rightSelection);  
+    const listSelection1 = document.querySelector('.js-list-selection1'); 
 
-    
+    listSelection1.addEventListener('click', (event) => {
+        event.preventDefault(); 
+        if(Number(listSelection1.getAttribute('id')) === rightSelection) {
+            console.log('you are right')
+        }
+        else {
+            console.log('you are wrong'); 
+        }
+    });
+    console.log(rightSelection);  
 } 
+
 
 // function locateAtRandomPosition(updatedImgArr) {
 //     imageArr.forEach(() => {

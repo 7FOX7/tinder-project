@@ -98,11 +98,14 @@ listArr.forEach((list, index) => {
     index += 1; 
     list.setAttribute('class', `js-list-selection${index}`); 
 }); 
-// document.addEventListener('DOMContentLoaded', init()); 
 
 
 function init() {
-    let rightSelection = Math.floor(Math.random()*listArr.length);
+    // random number is generated here (range: 0 - 5 inclusively)
+    const rightSelection = Math.floor(Math.random()*listArr.length);
+    
+
+    // clear the list (<ul>) before adding <li> elements to it (does not make a difference though)
     while(CAPTCHA_imageList.firstChild) {
         CAPTCHA_imageList.removeChild(CAPTCHA_imageList.lastChild); 
     }
@@ -110,6 +113,9 @@ function init() {
         list.innerHTML = ''; 
     }); 
 
+
+    // gets a random number and add it to the array.
+    // 'getRandomImage()' is a recursive function here 
     for(let i = 0; i < listArr.length; i++) {
         const imageAtRandomPos = getRandomImage(); 
         updatedImgArr.push(imageAtRandomPos); 
@@ -118,19 +124,19 @@ function init() {
         CAPTCHA_imageList.append(listArr[i]); 
     }
     
-    // updatedImgArr.splice(0, updatedImgArr.length); 
     updatedImgArr.length = 0; 
-    /////////////////////////////////////
-    // SLOW BUT SHOULD WORK
 
-    
-    ////////////////////////////////////
+
+    // attach updated list to the container dynamically
     document.querySelector('.js-captcha-inner-content').style.display = "none"; 
     document.querySelector('.js-captcha-inner-container').style.transform = "translate(-40%, -40%)"; 
     document.querySelector('.js-captcha-inner-container').append(CAPTCHA_imageList);
     document.querySelector('.js-captcha-inner-container').append(reloadButton);
     const listSelection1 = document.querySelector('.js-list-selection1'); 
 
+
+    // add a 'click' event to the first <li> element and compare its id to the 
+    // selected number. 
     listSelection1.addEventListener('click', (event) => {
         event.preventDefault(); 
         if(Number(listSelection1.getAttribute('id')) === rightSelection) {
@@ -246,5 +252,67 @@ function addToCanvas() {
 
 
 
+/*
+here is the code: 
 
+```
+function init() {
+    // random number is generated here (range: 0 - 5 inclusively)
+    const rightSelection = Math.floor(Math.random()*listArr.length);
+    
+
+    // clear the list (<ul>) before adding <li> elements to it (does not make a difference though)
+    while(CAPTCHA_imageList.firstChild) {
+        CAPTCHA_imageList.removeChild(CAPTCHA_imageList.lastChild); 
+    }
+    listArr.forEach((list) => {
+        list.innerHTML = ''; 
+    }); 
+
+
+    // gets a random number and add it to the array.
+    // 'getRandomImage()' is a recursive function here 
+    for(let i = 0; i < listArr.length; i++) {
+        const imageAtRandomPos = getRandomImage(); 
+        updatedImgArr.push(imageAtRandomPos); 
+
+        listArr[i].append(updatedImgArr[i]); 
+        CAPTCHA_imageList.append(listArr[i]); 
+    }
+    
+    updatedImgArr.length = 0; 
+
+
+    // attach updated list to the container dynamically
+    document.querySelector('.js-captcha-inner-content').style.display = "none"; 
+    document.querySelector('.js-captcha-inner-container').style.transform = "translate(-40%, -40%)"; 
+    document.querySelector('.js-captcha-inner-container').append(CAPTCHA_imageList);
+    document.querySelector('.js-captcha-inner-container').append(reloadButton);
+    const listSelection1 = document.querySelector('.js-list-selection1'); 
+
+
+    // add a 'click' event to the first <li> element and compare its id to the 
+    // selected number. 
+    listSelection1.addEventListener('click', (event) => {
+        event.preventDefault(); 
+        if(Number(listSelection1.getAttribute('id')) === rightSelection) {
+            console.log('you are right')
+        }
+        else {
+            console.log('you are wrong'); 
+        }
+    });
+} 
+```
+
+The problem is as follows: When I first run this code and click on the '<li>' element, I get a single message in the console, however, when I 'click' on the 'reload' button: 
+
+```
+reloadButton.addEventListener('click', () => {
+    init(); 
+})
+```
+
+and click on the same <li> element , the previous value of rightSelection (which lets say was 3) is still being used for the comparison, so I actually have two comparisons. And with each reload, the previous values are still considered. 
+*/
 

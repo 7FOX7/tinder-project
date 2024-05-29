@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <form onsubmit="process(event)" action="post">
+            <input class="js-name-field" placeholder="Name" type="text">
+            <button type="submit">submit</button>
+        </form>
+    </body>
+    <script>
+        function process(event) {
+            event.preventDefault(); 
+            const username = document.querySelector('.js-name-field').value; 
+            if(username === 'kheeugene') {
+                window.location.replace('./view.html'); 
+            }
+            else {
+                alert('name does not match'); 
+            }
+        }
+    </script>
+</html>

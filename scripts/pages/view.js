@@ -40,21 +40,10 @@ function toggleImages(btn, defaultImg, colorImg) {
 }
 
 
-////////////////////////////////////////////////////
-const underline = document.createElement('label'); 
-underline.style.width = "100%"; 
-underline.style.display = "flex"; 
-underline.style.height = "4px"; 
-underline.style.backgroundImage = "linear-gradient(to right, rgb(255, 46, 46), rgb(255, 86, 114))"; 
-/*
-    display: flex; 
-    width: 100%; 
-    height: 4px; 
-    background-image: linear-gradient(to right, rgb(255, 46, 46), rgb(255, 86, 114)); 
-*/
 const matchesBtn = document.querySelector('.js-matches-button');
 const messagesBtn = document.querySelector('.js-messages-button'); 
-
+const underlineMatches = document.querySelector('.js-underline-matches'); 
+const underlineMessages = document.querySelector('.js-underline-messages'); 
 // displayUnderlineFor(matchesBtn); 
 // displayUnderlineFor(messagesBtn); 
 
@@ -64,6 +53,85 @@ const messagesBtn = document.querySelector('.js-messages-button');
 //         underline.style.display = "flex"; 
 //         parent.append(underline); 
 //     })
+// }
+
+const moveLeft = [
+    {left: "0"}, 
+    {left: "-175px"}
+]
+
+const moveRight = [
+    {left: "0"}, 
+    {left: "175px"}
+]
+
+const duration = 350; 
+const timing = {
+    duration, 
+    easing: "ease-in-out"
+}; 
+
+// doSomething(matchesBtn, underlineMessages, moveLeft, timing); 
+
+runAnimation(matchesBtn, underlineMatches, underlineMessages, moveLeft, timing); 
+runAnimation(messagesBtn, underlineMessages, underlineMatches, moveRight, timing); 
+
+function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) {
+    btn.addEventListener('click', () => {
+        // const t0 = performance.now(); 
+        underlineToHide.animate(animation, timing); 
+        const animationPromise = underlineToHide.animate(animation, timing).finished; 
+        animationPromise.then(() => {
+            // const t1 = performance.now(); 
+            // const millisecondTime = t1 - t0; 
+            // const executionTime = (Math.round(millisecondTime)/1000).toFixed(1); 
+            // console.log(executionTime); 
+            // if(Number(executionTime) === 0.3 || Number(executionTime) === 0.4) {    
+                underlineToHide.style.opacity = "0"; 
+                underlineToShow.style.opacity = "1";
+            //} 
+            // else {
+            //     console.log("transition failed"); 
+            // }
+        })
+    })
+}
+
+
+
+ 
+// function doSomething(button, line, animation, timing) {
+//     button.addEventListener('click', () => {
+//         const t0 = performance.now();
+//         line.animate(animation, timing);
+//         const animationPromise = line.animate(animation, timing).finished; 
+//         animationPromise.then(() => {
+//             const t1 = performance.now();
+//             const millisecondTime = t1 - t0;  
+//             const executionTime = (Math.round(millisecondTime) / 1000).toFixed(1); 
+//             if(Number(executionTime) === 1.0 || Number(executionTime) === 1.1) {
+//                 line.style.opacity = "0"; 
+//             }
+//         })
+//     }); 
+    
+// }
+
+
+
+// function stopPlaying() {
+
+// }
+
+
+// function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) {
+//     btn.addEventListener('click', () => {
+//         underlineToHide.animate(animation, timing); 
+//     }); 
+//     setTimeout(() => {
+//         underlineToShow.style.opacity = "1"; 
+//         underlineToHide.style.opacity = "0"; 
+//     }, 1000); 
 // }
 
 

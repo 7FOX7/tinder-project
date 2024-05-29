@@ -1,4 +1,6 @@
-
+.root {
+    --main-color: linear-gradient(to right, rgb(255, 46, 46), rgb(255, 86, 114));
+}
 
 * {
     box-sizing: border-box; 
@@ -86,7 +88,6 @@ aside {
 }
 
 .main-body .button-container {
-    background-color: blue; 
     display: flex; 
     justify-content: space-around;
 }
@@ -95,33 +96,27 @@ aside {
     height: 3px; 
     margin-top: 0px; 
     border: none; 
-    background: linear-gradient(to right, rgb(255, 46, 46), rgb(255, 86, 114));
-    overflow: visible;
-    position: relative; 
-    display: block; 
-    animation: growLeft 1s; 
-    content: "";  
+    background: var(--main-color); 
+    position: relative;  
 }
-/* 
-.underline::before {
-    width: 60px; 
-    height: 3px; 
-    position: relative;
-    display: block; 
-    background: linear-gradient(to left, rgb(255, 46, 46), rgb(255, 86, 114));
-    animation: growLeft 1s;
-    content: "";  
-} */
 
 
-@keyframes growLeft {
-    0% {
-        left: 0; 
-    }
+.main-content {
+    width: 100%; 
+    height: 100%; 
+    background-color: blue; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
 
-    100% {
-        left: -130px; 
-    }
+.main-content .rectangle-images-container {
+    width: 100%; 
+    padding: 15px;
+    background-color: gray;  
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
 }
 
 

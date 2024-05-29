@@ -57,18 +57,17 @@ const underlineMessages = document.querySelector('.js-underline-messages');
 
 const moveLeft = [
     {left: "0"}, 
-    {left: "-175px"}
+    {left: "-164px"}
 ]
 
 const moveRight = [
     {left: "0"}, 
-    {left: "175px"}
+    {left: "164px"}
 ]
 
-const duration = 350; 
+const duration = 250; 
 const timing = {
-    duration, 
-    easing: "ease-in-out"
+    duration
 }; 
 
 // doSomething(matchesBtn, underlineMessages, moveLeft, timing); 

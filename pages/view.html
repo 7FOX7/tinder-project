@@ -12,7 +12,7 @@
                     <nav class="navigation">
                         <div class="profile-container">
                             <a class="js-profile-link-button profile-link-button" rel="button">
-                                <img class="profile-image" style="width: 55%; border-radius: 50px; height: 100%; " src="/images/people_kissing.jpg" alt="Explore">
+                                <img class="profile-image" style="width: 50%; border-radius: 50px; height: 50px; " src="/images/people_kissing.jpg" alt="Explore">
                                 <span>Mike</span>
                             </a>
                         </div>
@@ -45,21 +45,38 @@
                     <div class="button-container">
                         <div class="js-button-section">
                             <button class="js-matches-button matches-button">Matches</button>
-                            <hr style="opacity: 0;" class="js-underline-matches underline">
+                            <hr class="js-underline-matches underline">
                         </div>  
                         <div class="js-button-section">
                             <button class="js-messages-button messages-button">Messages</button>
-                            <hr fill="var(--main-color)" class="js-underline-messages underline">
+                            <hr style="opacity: 0;" class="js-underline-messages underline">
                         </div>
                     </div>
                     <div class="main-content">
                         <div class="rectangle-images-container">
-                            <svg width="150" height="210">
-                                <rect width="100%" height="100%" fill="var()"></rect>
+                            <svg width="120" height="180" transform="translate(110 45)">
+                                <rect width="120" height="180" fill="var(--add-rect-color)" rx="10" ry="10" fill-opacity="0.2"></rect>
                             </svg>
+                            <svg width="120" height="180" transform="translate(-25 35)"> 
+                                <rect width="120" height="180" fill="var(--add-rect-color)" rx="10" ry="10" fill-opacity="0.3" ></rect>
+                            </svg>
+                            <svg width="120" height="180" transform="translate(85 -165)">
+                                <defs>
+                                    <linearGradient id="main-rect-gradient" x1="60%" y1="50%">
+                                        <stop offset="0%" stop-color="rgb(255, 60, 109)"></stop>
+                                        <stop offset="100%" stop-color="orange"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <rect fill="url(#main-rect-gradient)" width="120" height="180" rx="10" ry="10"></rect>
+                            </svg>
+                            
                         </div>
                         <div class="content-text-container">
-
+                            <span style="font-weight: 500; font-size: 25px;">Start Matching</span>
+                            <span style="font-weight: 300; font-size: 14px; "> 
+                                Matches will appear here once you start to Like people. You can message them directly from here when
+                                you're ready to spark up the conversation. 
+                            </span>
                         </div>
                     </div>
                 </div>

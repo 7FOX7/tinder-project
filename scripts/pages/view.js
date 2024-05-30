@@ -57,25 +57,31 @@ const moveRight = [
 ]
 
 const cardBounce = [
-    {transform: "rotate(15deg)"}
+    {transform: "rotate(15deg)"},
+    {transform: "rotate(30deg)"},
+    {transform: "rotate(0)"}
 ]
 
+const cardTiming = {
+    duration: 800, 
+}
 
 const duration = 250; 
 const timing = {
-    duration,
+    duration
 }; 
 
 // doSomething(matchesBtn, underlineMessages, moveLeft, timing); 
 
-runAnimation(matchesBtn, underlineMatches, underlineMessages, moveLeft, timing, mainRect, cardBounce); 
-runAnimation(messagesBtn, underlineMessages, underlineMatches, moveRight, timing, mainRect, cardBounce); 
+runAnimation(matchesBtn, underlineMatches, underlineMessages, moveLeft, timing); 
+runAnimation(messagesBtn, underlineMessages, underlineMatches, moveRight, timing); 
 
-function runAnimation(btn, underlineToShow, underlineToHide, animation, timing, figure, addAnimation) {
+function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) {
     btn.addEventListener('click', () => {
         // const t0 = performance.now(); 
         underlineToHide.animate(animation, timing); 
-        figure.animate(addAnimation, timing); 
+        // figure.animate(addAnimation, addTiming);
+        runAnimationForCard();  
         const animationPromise = underlineToHide.animate(animation, timing).finished; 
         animationPromise.then(() => {
             // const t1 = performance.now(); 
@@ -93,6 +99,9 @@ function runAnimation(btn, underlineToShow, underlineToHide, animation, timing, 
     })
 }
 
+function runAnimationForCard() {
+    mainRect.animate(cardBounce, cardTiming); 
+}
 
 
  

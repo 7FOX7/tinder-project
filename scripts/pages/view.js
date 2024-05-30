@@ -44,16 +44,7 @@ const matchesBtn = document.querySelector('.js-matches-button');
 const messagesBtn = document.querySelector('.js-messages-button'); 
 const underlineMatches = document.querySelector('.js-underline-matches'); 
 const underlineMessages = document.querySelector('.js-underline-messages'); 
-// displayUnderlineFor(matchesBtn); 
-// displayUnderlineFor(messagesBtn); 
-
-// function displayUnderlineFor(element) {
-//     const parent = element.closest('.js-button-section'); 
-//     element.addEventListener('click', () => {
-//         underline.style.display = "flex"; 
-//         parent.append(underline); 
-//     })
-// }
+const mainRect = document.querySelector('.js-main-rect'); 
 
 const moveLeft = [
     {left: "0"}, 
@@ -65,20 +56,26 @@ const moveRight = [
     {left: "164px"}
 ]
 
+const cardBounce = [
+    {transform: "rotate(15deg)"}
+]
+
+
 const duration = 250; 
 const timing = {
-    duration
+    duration,
 }; 
 
 // doSomething(matchesBtn, underlineMessages, moveLeft, timing); 
 
-runAnimation(matchesBtn, underlineMatches, underlineMessages, moveLeft, timing); 
-runAnimation(messagesBtn, underlineMessages, underlineMatches, moveRight, timing); 
+runAnimation(matchesBtn, underlineMatches, underlineMessages, moveLeft, timing, mainRect, cardBounce); 
+runAnimation(messagesBtn, underlineMessages, underlineMatches, moveRight, timing, mainRect, cardBounce); 
 
-function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) {
+function runAnimation(btn, underlineToShow, underlineToHide, animation, timing, figure, addAnimation) {
     btn.addEventListener('click', () => {
         // const t0 = performance.now(); 
         underlineToHide.animate(animation, timing); 
+        figure.animate(addAnimation, timing); 
         const animationPromise = underlineToHide.animate(animation, timing).finished; 
         animationPromise.then(() => {
             // const t1 = performance.now(); 

@@ -54,13 +54,13 @@
                     </div>
                     <div class="main-content">
                         <div class="rectangle-images-container">
-                            <svg width="120" height="180" transform="translate(110 45)">
+                            <svg width="120" height="180" style="position: absolute; left: 20px; top: 20px;">
                                 <rect width="120" height="180" fill="var(--add-rect-color)" rx="10" ry="10" fill-opacity="0.2"></rect>
                             </svg>
-                            <svg width="120" height="180" transform="translate(-25 35)"> 
+                            <svg width="120" height="180" style="position: absolute; left: 10px; top: 10px;"> 
                                 <rect width="120" height="180" fill="var(--add-rect-color)" rx="10" ry="10" fill-opacity="0.3" ></rect>
                             </svg>
-                            <svg width="120" height="180" transform="translate(85 -165)">
+                            <svg width="120" height="180" style="position: relative;" class="js-main-rect">
                                 <defs>
                                     <linearGradient id="main-rect-gradient" x1="60%" y1="50%">
                                         <stop offset="0%" stop-color="rgb(255, 60, 109)"></stop>
@@ -68,8 +68,7 @@
                                     </linearGradient>
                                 </defs>
                                 <rect fill="url(#main-rect-gradient)" width="120" height="180" rx="10" ry="10"></rect>
-                            </svg>
-                            
+                            </svg>  
                         </div>
                         <div class="content-text-container">
                             <span style="font-weight: 500; font-size: 25px;">Start Matching</span>
@@ -78,6 +77,7 @@
                                 you're ready to spark up the conversation. 
                             </span>
                         </div>
+                        
                     </div>
                 </div>
             </aside>

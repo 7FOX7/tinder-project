@@ -108,6 +108,7 @@ aside {
 }
 
 .main-content {
+    margin-top: 15px; 
     width: 100%; 
     height: 100%; 
     display: flex; 
@@ -116,12 +117,12 @@ aside {
 }
 
 .main-content .rectangle-images-container {
-    width: 100%; 
-    height: 240px; 
-    display: block;  
+    position: relative; 
+    overflow: visible; 
 }
 
 .main-content .content-text-container {
+    margin-top: 20px; 
     padding: 0 35px; 
     width: 100%; 
     height: 270px; 

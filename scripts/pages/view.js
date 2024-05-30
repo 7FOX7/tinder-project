@@ -1,3 +1,4 @@
+
 function createImage(src, alt) {
     const image = new Image(); 
     image.src = src; 
@@ -39,21 +40,25 @@ function toggleImages(btn, defaultImg, colorImg) {
     }); 
 }
 
-
+const innerText_Container = document.querySelector('.js-content-text-container');
+const matchesSection = document.querySelector('.js-rectangle-images-container'); 
+const messagesSection = document.querySelector('.js-talk-images-container'); 
 const matchesBtn = document.querySelector('.js-matches-button');
 const messagesBtn = document.querySelector('.js-messages-button'); 
 const underlineMatches = document.querySelector('.js-underline-matches'); 
 const underlineMessages = document.querySelector('.js-underline-messages'); 
 const mainRect = document.querySelector('.js-main-rect'); 
+const bigTalk = document.querySelector('.js-big-talk'); 
+const smallTalk = document.querySelector('.js-small-talk'); 
 
 const moveLeft = [
     {left: "0"}, 
-    {left: "-164px"}
+    {left: "-155px"}
 ]
 
 const moveRight = [
     {left: "0"}, 
-    {left: "164px"}
+    {left: "155px"}
 ]
 
 const cardBounce = [
@@ -62,8 +67,15 @@ const cardBounce = [
     {transform: "rotate(0)"}
 ]
 
-const cardTiming = {
-    duration: 800, 
+const talkScale = [
+    {scale: "1.1"}, 
+    {scale: "1.25"}, 
+    {scale: "1"}
+]
+
+const iconTiming = {
+    duration: 800,
+    easing: "ease-out"
 }
 
 const duration = 250; 
@@ -73,15 +85,15 @@ const timing = {
 
 // doSomething(matchesBtn, underlineMessages, moveLeft, timing); 
 
-runAnimation(matchesBtn, underlineMatches, underlineMessages, moveLeft, timing); 
-runAnimation(messagesBtn, underlineMessages, underlineMatches, moveRight, timing); 
+// runAnimation(matchesBtn, underlineMatches, underlineMessages, moveLeft, timing); 
+// runAnimation(messagesBtn, underlineMessages, underlineMatches, moveRight, timing); 
 
 function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) {
     btn.addEventListener('click', () => {
         // const t0 = performance.now(); 
         underlineToHide.animate(animation, timing); 
         // figure.animate(addAnimation, addTiming);
-        runAnimationForCard();  
+        // runAnimationForCard();  
         const animationPromise = underlineToHide.animate(animation, timing).finished; 
         animationPromise.then(() => {
             // const t1 = performance.now(); 
@@ -99,44 +111,57 @@ function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) 
     })
 }
 
-function runAnimationForCard() {
-    mainRect.animate(cardBounce, cardTiming); 
+matchesBtn.addEventListener('click', () => {
+    toggleSections(matchesSection, messagesSection); 
+
+    const innerTitle = innerText_Container.firstElementChild; 
+    const innerText = innerText_Container.lastElementChild; 
+    innerTitle.textContent = "Start Matching"; 
+    innerText.textContent = `Matches will appear here once you start to Like people. You can message them directly from here when
+    you're ready to spark up the conversation.`
+
+    underlineMatches.animate(moveLeft, timing); 
+    runAnimationForCard(); 
+    onFinish(underlineMessages, underlineMatches, moveLeft, timing); 
+})
+
+messagesBtn.addEventListener('click', () => {
+    toggleSections(messagesSection, matchesSection); 
+
+    const innerTitle = innerText_Container.firstElementChild;
+    const innerText = innerText_Container.lastElementChild; 
+    innerText.textContent = `Looking to strike up a conversation? When you match with others, 
+    you can send them a message under “Matches”.`; 
+    innerTitle.textContent = "Say Hello"; 
+
+    underlineMessages.animate(moveRight, timing); 
+    runAnimationForTalk(); 
+    onFinish(underlineMatches, underlineMessages, moveRight, timing);
+})
+
+function onFinish(underlineToHide, underlineToShow, animation, timing) {
+    const animationPromise = underlineToHide.animate(animation, timing).finished; 
+    animationPromise.then(() => {
+        underlineToHide.style.opacity = "0"; 
+        underlineToShow.style.opacity = "1"; 
+    }); 
 }
 
+function runAnimationForCard() {
+    mainRect.animate(cardBounce, iconTiming); 
+}
 
- 
-// function doSomething(button, line, animation, timing) {
-//     button.addEventListener('click', () => {
-//         const t0 = performance.now();
-//         line.animate(animation, timing);
-//         const animationPromise = line.animate(animation, timing).finished; 
-//         animationPromise.then(() => {
-//             const t1 = performance.now();
-//             const millisecondTime = t1 - t0;  
-//             const executionTime = (Math.round(millisecondTime) / 1000).toFixed(1); 
-//             if(Number(executionTime) === 1.0 || Number(executionTime) === 1.1) {
-//                 line.style.opacity = "0"; 
-//             }
-//         })
-//     }); 
-    
-// }
+function runAnimationForTalk() {
+    smallTalkTimeout = setTimeout(() => {
+        smallTalk.animate(talkScale, iconTiming);
+    }, 800);   
+    bigTalk.animate(talkScale, iconTiming); 
+}
 
+function toggleSections(sectionToDisplay, sectionToHide) {
+    sectionToDisplay.style.display = "inline"; 
+    sectionToHide.style.display = "none"; 
+}
 
-
-// function stopPlaying() {
-
-// }
-
-
-// function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) {
-//     btn.addEventListener('click', () => {
-//         underlineToHide.animate(animation, timing); 
-//     }); 
-//     setTimeout(() => {
-//         underlineToShow.style.opacity = "1"; 
-//         underlineToHide.style.opacity = "0"; 
-//     }, 1000); 
-// }
 
 

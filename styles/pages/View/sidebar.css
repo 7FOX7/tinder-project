@@ -1,6 +1,10 @@
 :root {
     --main-color: linear-gradient(to right, rgb(255, 46, 46), rgb(255, 86, 114));
     --add-rect-color: rgb(206, 206, 206); 
+    --big-talk-color: rgb(238, 238, 238); 
+    --small-talk-start-color: rgb(224, 0, 86); 
+    --small-talk-middle-color: rgb(255, 17, 116); 
+    --small-talk-end-color: rgb(240, 69, 27); 
 }
 
 * {
@@ -116,11 +120,17 @@ aside {
     align-items: center; 
 }
 
-.main-content .rectangle-images-container {
+.main-content .rectangle-images-container{
     position: relative; 
     overflow: visible; 
 }
 
+.main-content .talk-images-container {
+    position: relative; 
+    overflow: visible; 
+}
+
+.main-content .content-text-container,
 .main-content .content-text-container {
     margin-top: 20px; 
     padding: 0 35px; 

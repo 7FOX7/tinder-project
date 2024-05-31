@@ -19,15 +19,29 @@ const createImage = function(src, alt) {
 
 
 const blueDolphinImg = createImage('../../images/CAPTCHA-blue_dolphin.png', 'blue dolphin'); 
+blueDolphinImg.setAttribute('data', 'blue'); 
+
 const greenDolphinImg = createImage('../../images/CAPTCHA-green_dolphin.png', 'green dolphin'); 
+greenDolphinImg.setAttribute('data', 'green'); 
+
 const lightBlueDolphinImg = createImage('../../images/CAPTCHA-lightblue_dolphin.png', 'lightblue dolphin'); 
+lightBlueDolphinImg.setAttribute('data', 'lightblue'); 
+
 const orangeDolphinImg = createImage('../../images/CAPTCHA-orange_dolphin.png', 'orange dolphin'); 
+orangeDolphinImg.setAttribute('data', 'orange'); 
+
 const redDolphinImg = createImage('../../images/CAPTCHA-red_dolphin.png', 'red dolphin'); 
+redDolphinImg.setAttribute('data', 'red'); 
+
 const violetDolphinImg = createImage('../../images/CAPTCHA-violet_dolphin.png', 'violet dolphin');
+violetDolphinImg.setAttribute('data', 'violet'); 
 
 const reloadImg = createImage('../../images/reload_icon.png', 'reload'); 
 reloadImg.style.width = "100%"; 
 
+
+
+const CAPTCHA_text = document.createElement('span'); 
 
 const CAPTCHA_imageList = document.createElement('ul'); 
 
@@ -73,7 +87,7 @@ reloadButton.style.border = "none";
 reloadButton.style.backgroundColor = "transparent"; 
 reloadButton.style.cursor = "pointer"; 
 reloadButton.addEventListener('click', () => {
-    init(); 
+    locateAtRandomPositions(); 
 })
 
 const imageArr = []; 
@@ -94,72 +108,69 @@ listArr.push(CAPTCHA_imageList4);
 listArr.push(CAPTCHA_imageList5);
 listArr.push(CAPTCHA_imageList6);
 
-listArr.forEach((list, index) => {
-    index += 1; 
-    list.setAttribute('class', `js-list-selection${index}`); 
+listArr.forEach((list) => {
+    list.setAttribute('class', `js-list-selection`); 
 }); 
 
-
 function init() {
-    // random number is generated here (range: 0 - 5 inclusively)
-    const rightSelection = Math.floor(Math.random()*listArr.length);
+    locateAtRandomPositions(); 
+    document.querySelector('.js-captcha-inner-content').style.display = "none"; 
+    document.querySelector('.js-captcha-inner-container').style.transform = "translate(-40%, -40%)"; 
+    document.querySelector('.js-captcha-inner-container').prepend(CAPTCHA_text); 
+    document.querySelector('.js-captcha-inner-container').append(CAPTCHA_imageList);
+    document.querySelector('.js-captcha-inner-container').append(reloadButton);
+
+    const listSelections = document.querySelectorAll('.js-list-selection');
+
+    const randDolphin = listSelections[randomNumGen()].firstElementChild; 
+    const randDolphinColor = getDolphinColor(randDolphin); 
+    CAPTCHA_text.textContent = randDolphinColor; 
+
+    listSelections.forEach((list) => {
+        list.addEventListener('click', function() {
+            compareSelections(list, listSelections); 
+        });
+    });
+} 
+
+/*
     
+*/
 
-    // clear the list (<ul>) before adding <li> elements to it (does not make a difference though)
-    while(CAPTCHA_imageList.firstChild) {
-        CAPTCHA_imageList.removeChild(CAPTCHA_imageList.lastChild); 
+
+function compareSelections(userSelection, listSelections) {  
+    const userDolphin = userSelection.firstElementChild; 
+    const randomDolphin = listSelections[Math.floor(Math.random()*listArr.length)].firstElementChild;
+    // CAPTCHA_text.textContent = getDolphinColor(randomDolphin); 
+    if(getDolphinColor(userDolphin) === getDolphinColor(randomDolphin)) {
+        console.log(`you are right. it is indeed ${getDolphinColor(randomDolphin)} dolphin`)
     }
-    listArr.forEach((list) => {
-        list.innerHTML = ''; 
-    }); 
+    else {
+        console.log(`you are wrong. it is ${getDolphinColor(randomDolphin)} dolphin`); 
+        locateAtRandomPositions(); 
+    }
+}
 
+function randomNumGen() {
+    const randNum = Math.floor(Math.random()*listArr.length); 
+    return randNum; 
+}
 
-    // gets a random number and add it to the array.
-    // 'getRandomImage()' is a recursive function here 
+function getDolphinColor(dolphin) {
+     const dolphinColor = dolphin.getAttribute('data'); 
+     return dolphinColor; 
+}
+
+function locateAtRandomPositions() {
+    updatedImgArr.length = 0; 
     for(let i = 0; i < listArr.length; i++) {
         const imageAtRandomPos = getRandomImage(); 
         updatedImgArr.push(imageAtRandomPos); 
 
         listArr[i].append(updatedImgArr[i]); 
-        CAPTCHA_imageList.append(listArr[i]); 
-    }
-    
-    updatedImgArr.length = 0; 
-
-
-    // attach updated list to the container dynamically
-    document.querySelector('.js-captcha-inner-content').style.display = "none"; 
-    document.querySelector('.js-captcha-inner-container').style.transform = "translate(-40%, -40%)"; 
-    document.querySelector('.js-captcha-inner-container').append(CAPTCHA_imageList);
-    document.querySelector('.js-captcha-inner-container').append(reloadButton);
-    const listSelection1 = document.querySelector('.js-list-selection1'); 
-
-
-    // add a 'click' event to the first <li> element and compare its id to the 
-    // selected number. 
-    listSelection1.addEventListener('click', (event) => {
-        event.preventDefault(); 
-        if(Number(listSelection1.getAttribute('id')) === rightSelection) {
-            console.log('you are right')
-        }
-        else {
-            console.log('you are wrong'); 
-        }
-    });
-    console.log(rightSelection);  
-} 
-
-
-// function locateAtRandomPosition(updatedImgArr) {
-//     imageArr.forEach(() => {
-//         const ind = Math.floor(Math.random()*imageArr.length);
-//         if(!updatedImgArr.includes(imageArr[ind])) {
-//             updatedImgArr.push(imageArr[ind]);  
-//         } 
-//         return locateAtRandomPosition(updatedImgArr); 
-//     }); 
-//     return updatedImgArr; 
-// }
+        CAPTCHA_imageList.append(listArr[i]);
+    } 
+}
 
 function getRandomImage() {
     const ind = Math.floor(Math.random()*imageArr.length);

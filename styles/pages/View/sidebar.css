@@ -31,7 +31,7 @@ button {
 
 aside {
     cursor: default; 
-    width: 18%;  
+    width: 20%;  
     height: 100%; 
     background-color: #fff; 
     border-right: 1px solid rgba(78, 78, 78, 0.2); 
@@ -54,7 +54,7 @@ aside {
     color: #fff; 
     display: flex; 
     width: 30%; 
-    margin-right: 70px; 
+    margin-right: 90px; 
 }
 
 .profile-container > .profile-link-button {

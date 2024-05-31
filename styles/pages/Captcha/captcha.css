@@ -1,4 +1,10 @@
 
+:root {
+    --verify-button-color: rgb(224, 0, 86); 
+    --wrong-answer-color: rgb(173, 0, 0); 
+    --right-answer-color: rgb(0, 158, 0); 
+}
+
 * {
     font-family: 'Proxima Nova Condensed', sans-serif; 
     box-sizing: border-box; 
@@ -7,6 +13,7 @@
 body {
     margin: 0; 
     padding: 0; 
+    cursor: default;
 }
 
 .captcha-container {
@@ -80,8 +87,6 @@ body {
     border-radius: 35px; 
     color: white; 
     background-image: linear-gradient(to bottom right, red, hotpink);
-    outline: black dashed; 
-    outline-offset: 5px; 
 }
 
 .captcha-inner-container .inner-button button:hover {

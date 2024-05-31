@@ -111,33 +111,50 @@ function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) 
     })
 }
 
-matchesBtn.addEventListener('click', () => {
-    toggleSections(matchesSection, messagesSection); 
+function displaySections() {
+    let matchesSectionIsOpen = false; 
+    let messagesSectionIsOpen = false; 
+    matchesBtn.addEventListener('click', () => {
+        if(matchesSectionIsOpen) {
+            return; 
+        }
+        matchesSectionIsOpen = true; 
+        messagesSectionIsOpen = false; 
+        clearTimeout(smallTalkTimeout); 
+        toggleSections(matchesSection, messagesSection); 
+    
+        const innerTitle = innerText_Container.firstElementChild; 
+        const innerText = innerText_Container.lastElementChild; 
+        innerTitle.textContent = "Start Matching"; 
+        innerText.textContent = `Matches will appear here once you start to Like people. You can message them directly from here when
+        you're ready to spark up the conversation.`
+    
+        underlineMatches.animate(moveLeft, timing); 
+        runAnimationForCard(); 
+        onFinish(underlineMessages, underlineMatches, moveLeft, timing); 
+    })
+    
+    messagesBtn.addEventListener('click', () => {
+        if(messagesSectionIsOpen) {
+            return; 
+        }
+        messagesSectionIsOpen = true; 
+        matchesSectionIsOpen = false; 
+        toggleSections(messagesSection, matchesSection); 
+    
+        const innerTitle = innerText_Container.firstElementChild;
+        const innerText = innerText_Container.lastElementChild; 
+        innerText.textContent = `Looking to strike up a conversation? When you match with others, 
+        you can send them a message under “Matches”.`; 
+        innerTitle.textContent = "Say Hello"; 
+    
+        underlineMessages.animate(moveRight, timing); 
+        runAnimationForTalk(); 
+        onFinish(underlineMatches, underlineMessages, moveRight, timing);
+    })
+}
 
-    const innerTitle = innerText_Container.firstElementChild; 
-    const innerText = innerText_Container.lastElementChild; 
-    innerTitle.textContent = "Start Matching"; 
-    innerText.textContent = `Matches will appear here once you start to Like people. You can message them directly from here when
-    you're ready to spark up the conversation.`
 
-    underlineMatches.animate(moveLeft, timing); 
-    runAnimationForCard(); 
-    onFinish(underlineMessages, underlineMatches, moveLeft, timing); 
-})
-
-messagesBtn.addEventListener('click', () => {
-    toggleSections(messagesSection, matchesSection); 
-
-    const innerTitle = innerText_Container.firstElementChild;
-    const innerText = innerText_Container.lastElementChild; 
-    innerText.textContent = `Looking to strike up a conversation? When you match with others, 
-    you can send them a message under “Matches”.`; 
-    innerTitle.textContent = "Say Hello"; 
-
-    underlineMessages.animate(moveRight, timing); 
-    runAnimationForTalk(); 
-    onFinish(underlineMatches, underlineMessages, moveRight, timing);
-})
 
 function onFinish(underlineToHide, underlineToShow, animation, timing) {
     const animationPromise = underlineToHide.animate(animation, timing).finished; 
@@ -163,5 +180,6 @@ function toggleSections(sectionToDisplay, sectionToHide) {
     sectionToHide.style.display = "none"; 
 }
 
+displaySections(); 
 
 

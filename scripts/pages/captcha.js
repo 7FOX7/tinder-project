@@ -1,3 +1,4 @@
+
 const crossButton = document.querySelector('.js-cross-sign-button'); 
 
 crossButton.addEventListener('mouseenter', () => {
@@ -40,6 +41,15 @@ const reloadImg = createImage('../../images/reload_icon.png', 'reload');
 reloadImg.style.width = "100%"; 
 
 
+const CAPTCHA_resultText = document.createElement('span'); 
+CAPTCHA_resultText.textContent = "default"; 
+CAPTCHA_resultText.style.fontWeight = "bold"; 
+CAPTCHA_resultText.style.fontSize = "30px"; 
+CAPTCHA_resultText.style.visibility = "hidden";  
+CAPTCHA_resultText.style.marginBottom = "30px"; 
+
+const CAPTCHA_addText = document.createElement('span');
+CAPTCHA_addText.textContent = 'Please pick a dolphin that is '; 
 
 const CAPTCHA_text = document.createElement('span'); 
 
@@ -87,7 +97,10 @@ reloadButton.style.border = "none";
 reloadButton.style.backgroundColor = "transparent"; 
 reloadButton.style.cursor = "pointer"; 
 reloadButton.addEventListener('click', () => {
+    CAPTCHA_resultText.style.visibility = "hidden";  
     locateAtRandomPositions(); 
+    const randDolphin = generateRandomColor(); 
+    changeTextColor(randDolphin); 
 })
 
 const imageArr = []; 
@@ -115,50 +128,70 @@ listArr.forEach((list) => {
 function init() {
     locateAtRandomPositions(); 
     document.querySelector('.js-captcha-inner-content').style.display = "none"; 
-    document.querySelector('.js-captcha-inner-container').style.transform = "translate(-40%, -40%)"; 
-    document.querySelector('.js-captcha-inner-container').prepend(CAPTCHA_text); 
+    document.querySelector('.js-captcha-inner-container').style.transform = "translate(-45%, -60%)"; 
+    document.querySelector('.js-captcha-inner-container').prepend(CAPTCHA_addText); 
+    document.querySelector('.js-captcha-inner-container').append(CAPTCHA_text); 
     document.querySelector('.js-captcha-inner-container').append(CAPTCHA_imageList);
     document.querySelector('.js-captcha-inner-container').append(reloadButton);
+    document.querySelector('.js-captcha-inner-container').prepend(CAPTCHA_resultText); 
 
     const listSelections = document.querySelectorAll('.js-list-selection');
-
-    const randDolphin = listSelections[randomNumGen()].firstElementChild; 
+    const index = randomNumGen(); 
+    const randDolphin = listSelections[index].firstElementChild; 
     const randDolphinColor = getDolphinColor(randDolphin); 
     CAPTCHA_text.textContent = randDolphinColor; 
+    changeTextColor(randDolphin); 
 
     listSelections.forEach((list) => {
         list.addEventListener('click', function() {
-            compareSelections(list, listSelections); 
+            compareSelections(list); 
         });
     });
 } 
 
-/*
-    
-*/
-
-
-function compareSelections(userSelection, listSelections) {  
+function compareSelections(userSelection) {  
     const userDolphin = userSelection.firstElementChild; 
-    const randomDolphin = listSelections[Math.floor(Math.random()*listArr.length)].firstElementChild;
+    // const randomDolphin = listSelections[Math.floor(Math.random()*listArr.length)].firstElementChild;
     // CAPTCHA_text.textContent = getDolphinColor(randomDolphin); 
-    if(getDolphinColor(userDolphin) === getDolphinColor(randomDolphin)) {
-        console.log(`you are right. it is indeed ${getDolphinColor(randomDolphin)} dolphin`)
+    if(getDolphinColor(userDolphin) === CAPTCHA_text.textContent) {
+        CAPTCHA_resultText.style.visibility = "visible"; 
+        CAPTCHA_resultText.style.color = "var(--right-answer-color)"; 
+        CAPTCHA_resultText.textContent = "Correct!"; 
+        setTimeout(() => {
+            window.location.replace('../../pages/view.html');
+        }, 1500); 
     }
     else {
-        console.log(`you are wrong. it is ${getDolphinColor(randomDolphin)} dolphin`); 
+        CAPTCHA_resultText.style.visibility = "visible"; 
+        CAPTCHA_resultText.style.color = "var(--wrong-answer-color)"; 
+        CAPTCHA_resultText.textContent = "Oops! Please, try again";  
         locateAtRandomPositions(); 
+        generateRandomColor(); 
     }
 }
 
+function generateRandomColor() {
+    const listSelections = document.querySelectorAll('.js-list-selection'); 
+    const index = randomNumGen(); 
+    const randDolphin = listSelections[index].firstElementChild; 
+    CAPTCHA_text.textContent = getDolphinColor(randDolphin); 
+    changeTextColor(randDolphin); 
+    return randDolphin; 
+}
+
 function randomNumGen() {
-    const randNum = Math.floor(Math.random()*listArr.length); 
-    return randNum; 
+    return Math.floor(Math.random()*listArr.length);  
 }
 
 function getDolphinColor(dolphin) {
      const dolphinColor = dolphin.getAttribute('data'); 
      return dolphinColor; 
+}
+
+function changeTextColor(dolphin) {
+    CAPTCHA_text.style.color = `${getDolphinColor(dolphin)}`; 
+    CAPTCHA_text.style.fontWeight = "bold"; 
+    CAPTCHA_text.style.fontSize = "20px"; 
 }
 
 function locateAtRandomPositions() {
@@ -183,7 +216,12 @@ function getRandomImage() {
 
 document.querySelector('.js-inner-button')
     .addEventListener('click', () => {
-        init(); 
+        const verifyButton = document.getElementById('verifyBtn');  
+        verifyButton.style.outline = "var(--verify-button-color) solid"; 
+        verifyButton.style.outlineOffset = "5px";
+        setTimeout(() => {
+            init(); 
+        }, 300); 
     }); 
 
 /*
@@ -326,4 +364,6 @@ reloadButton.addEventListener('click', () => {
 
 and click on the same <li> element , the previous value of rightSelection (which lets say was 3) is still being used for the comparison, so I actually have two comparisons. And with each reload, the previous values are still considered. 
 */
+
+
 

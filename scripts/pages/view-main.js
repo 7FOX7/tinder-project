@@ -52,6 +52,15 @@ const keenSliderContainer_timing = {
 document.addEventListener('DOMContentLoaded', () => {
     let sliderPosition = 0; 
     const sliderImageArr = [];
+    const nextSlide_Button = document.querySelector('.js-next-slider-button');
+    const previousSlide_Button = document.querySelector('.js-previous-slider-button'); 
+
+    function setDefault() {
+        nextSlide_Button.style.visibility = "visible"; 
+        previousSlide_Button.style.visibility = "hidden"; 
+    }
+
+    setDefault(); 
     const images = document.querySelectorAll('.js-keen-slider-item'); 
 
     images.forEach((image) => {
@@ -60,28 +69,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log(sliderImageArr.length); 
 
-    const nextSlide_Button = document.querySelector('.js-next-slider-button');
+    
 
     nextSlide_Button.addEventListener('click', () => {
-        if(sliderPosition === sliderImageArr.length) {
+        previousSlide_Button.style.visibility = "visible";  
+        sliderPosition++; 
+        updateSlide(); 
+        if(sliderPosition === sliderImageArr.length -1) {
             nextSlide_Button.style.visibility = "hidden"; 
-        }
-        else {
-            nextSlide_Button.style.visibility = "visible";
-            sliderPosition++; 
-            updateSlide(); 
         }
     })
 
-    const previousSlide_Button = document.querySelector('.js-previous-slider-button'); 
     previousSlide_Button.addEventListener('click', () => {
+        nextSlide_Button.style.visibility = "visible"; 
+        sliderPosition --; 
+        updateSlide(); 
         if(sliderPosition === 0) {
             previousSlide_Button.style.visibility = "hidden"; 
-        }
-        else {
-            previousSlide_Button.style.visibility = "visible"; 
-            sliderPosition--; 
-            updateSlide(); 
         }
     }); 
 
@@ -89,10 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
         sliderImageArr.forEach((image) => {
             const index = sliderImageArr.indexOf(image); 
             if(index !== sliderPosition) {
-                image[index].style.display = "none"; 
+                image.style.display = "none"; 
             }
             else {
-                image[index].style.display = "block"; 
+                image.style.display = "block"; 
             }
         })
     }

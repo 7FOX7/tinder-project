@@ -102,7 +102,82 @@
                 </div>
             </aside>
         </div>
-        <main>still</main>
-        <script src="../scripts/pages/view.js"></script>
+        <main>
+            <div class="image-cards-container">
+                <div style="transform: translate3d(0px, 0px, 0px) scale(1, 1) rotate(0); transform-origin: center center; width: 100%; height: 100%; background-color: green;">
+                    <div class="js-keen-slider keen-slider">
+                        <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
+                            <div class="image sampleImg1"></div>
+                        </span>
+                        <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
+                            <div class="image sampleImg2"></div>
+                        </span>
+                        <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
+                            <div class="image sampleImg3"></div>
+                        </span>
+                        <div class="keen-slider-button-container js-keen-slider-button-container">
+                            <button class="js-previous-slider-button keen-slider-button">
+                                <span>
+                                    <img src="../images/arrow_previous.png">
+                                </span>
+                            </button>
+                            <button class="js-next-slider-button keen-slider-button" >
+                                <span>
+                                    <img src="../images/arrow_next.png">
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    <div style="z-index: 5; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 30%; left: 0; top: 50%;"></div>
+                    <div style="z-index: 8; width: 100%; position: absolute; left: 0; height: 20%; top: 60%;">
+                        <div class="info-part" style="display: flex; color: #fff; padding: 8px; flex-direction: column;">
+                            <span>Evgenii Khe</span>
+                            <span>Cool boy</span>
+                        </div>
+                    </div>
+                    <div class="button-section">
+                        <div class="button-container">
+                            <div class="js-interactive-button interactive-button">
+                                <button class="button-icon" style="outline: solid rgb(255, 204, 0) 1px; outline-offset: 10px;">
+                                    <span class="js-interaction-icon" style="position: relative; top: 2px;">
+                                        <img style="width: 30px; height: 30px;" src="../images/refresh_icon.png" alt="refresh">
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="js-interactive-button interactive-button" role="button">
+                                <button class="button-icon" style="outline: solid rgb(194, 0, 0) 1px; outline-offset: 10px;">
+                                    <span class="js-interaction-icon">
+                                        <img style="width: 45px; height: 45px; position: relative; top: 3px;" src="../images/cross_icon.png" alt="cross">
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="js-interactive-button interactive-button" role="button">
+                                <button class="button-icon" style="outline: solid rgb(0, 133, 222) 1px; outline-offset: 10px;">
+                                    <span class="js-interaction-icon" style="position: relative; top: 2px;">
+                                        <img style="width: 30px; height: 30px;" src="../images/star_icon.png" alt="star">
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="js-interactive-button interactive-button" role="button">
+                                <button class="button-icon" style="outline: solid rgb(0, 202, 134) 1px; outline-offset: 10px;">
+                                    <span class="js-interaction-icon" style="position: relative; top: 3px;">
+                                        <img style="width: 45px; height: 45px;" src="../images/heart_icon.png" alt="heart">
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="js-interactive-button interactive-button" role="button">
+                                <button class="button-icon" style="outline: solid rgb(154, 0, 219) 1px; outline-offset: 10px;">
+                                    <span class="js-interaction-icon" style="position: relative; top: 2px; left: 1px;">
+                                        <img style="width: 30px; height: 30px;" src="../images/lighting_bolt_icon.png" alt="lighting_bolt">
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="../scripts/pages/view-sidebar.js"></script>
+        <script src="../scripts/pages/view-main.js"></script>
     </body>
 </html>

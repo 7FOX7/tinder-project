@@ -135,56 +135,89 @@ document.addEventListener('DOMContentLoaded', () => {
     /////////////////////////////////////////////////////////////////////////////
     // make the image container draggable: 
     let isDragging = false; 
-    let offsetX; 
-    let offsetY;
+    let targetX = 0; 
+    let targetY = 0; 
+    let previousMouseX = 0; 
+    let previousMouseY = 0; 
 
     const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
     console.log(keenSliderImageContainer.getBoundingClientRect()); 
     keenSliderImageContainer.addEventListener('mousedown', e => {
         isDragging = true; 
-        offsetX = e.clientX - keenSliderImageContainer.getBoundingClientRect().left; 
-        offsetY = e.clientY - keenSliderImageContainer.getBoundingClientRect().top; 
+        previousMouseX = e.clientX; 
+        previousMouseY = e.clientY; 
+
         keenSliderImageContainer.addEventListener('mousemove', move); 
     });
 
 
-    window.addEventListener('mouseup', () => {
+    keenSliderImageContainer.addEventListener('mouseup', () => {
         console.log('image was removed'); 
         isDragging = false; 
         keenSliderImageContainer.removeEventListener('mousemove', move);
+        // if(keenSliderImageContainer.getBoundingClientRect().top <= 290) {
+            // superLikeAnim().finished;
+            // anotherAction (for example, remove the image container fires);  
+        // }
+        // else if(keenSliderImageContainer.getBoundingClientRect().left >= 1470) {
+            // likeAnim().finished; 
+        //}
+        // else if(keenSliderImageContainer.getBoundingClientRect().left <= 200) {
+            // calcelAnim(); 
+        //}
+        // else if(keenSliderImageContainer.getBoundingClientRect().top >= 705) {
+            // putInPlaceAnim(); 
+        //}
     });
 
     function move(e) {
         if(isDragging) {
-            keenSliderImageContainer.style.left = `${e.clientX - offsetX}px`; 
-            keenSliderImageContainer.style.top = `${e.clientY - offsetY}px`;
+            const deltaCoordinate = {
+                x: e.clientX - previousMouseX, 
+                y: e.clientY - previousMouseY
+            }
+
+            targetX += deltaCoordinate.x; 
+            targetY += deltaCoordinate.y; 
+
+            previousMouseX = e.clientX; 
+            previousMouseY = e.clientY; 
+            keenSliderImageContainer.style.left = `${targetX}px`; 
+ 
+            }
+            keenSliderImageContainer.style.top = `${targetY}px`;
+            // if(keenSliderImageContainer.getBoundingClientRect().left ===)
+            console.log(keenSliderImageContainer.getBoundingClientRect()); 
         }
-    }
+
+    /////////////////////////////////////////////////////////////////////////////
+    // make the image container rotate when swiping left / right:
+    /*
+        keenSliderImageContainer; 
+
+        const swipingLeftAnim = [
+            {transform: rotate(5deg)}, 
+            {transform: rotate(10deg)}, 
+            {transform: rotate(20deg)}, 
+            {transform: rotate(40deg)}
+        ]; 
+
+        const swipingRightAnim = [
+            {transform: rotate(-5deg)}, 
+            {transform: rotate(-10deg)}, 
+            {transform: rotate(-20deg)}, 
+            {transform: rotate(-40deg)}
+        ]; 
+
+        
+        function superLikeAnim() {
+            
+        }
+
+
+        function likeAnim() {
+            keenSliderImagecontainer.animate(animateion, duration); 
+        }
+    */
 }); 
 
-/*
-    let isDragged = false; 
-    image.addEventListener('mousedown', (e) => { 
-        isDragged = true; 
-    });
-
-    image.addEventListener('mousemove', (e) => {
-        if(isDragged) {
-            let x = e.offsetX; 
-            let y = e.offsetY
-            moveImage(image, x, y); 
-        }
-    });
-
-    image.addEventListener('mouseup', (e) => {
-        if(isDragged) {
-            removeImage(image); 
-            moveImage(directionX, directionY); 
-            isDragged = false; 
-        }
-    })
-
-    function moveImage(image, x, y) {
-        image.style.transform = `translate(${x}, ${y})`; 
-    }
-*/

@@ -1,5 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // make the buttons increase/decrease the size on hover:
+
 const interactiveBtns = document.querySelectorAll('.js-interactive-button'); 
 
 interactiveBtns.forEach((button) => {
@@ -141,12 +142,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let previousMouseY = 0; 
 
     const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
-    console.log(keenSliderImageContainer.getBoundingClientRect()); 
+    const initialPosition = {
+        positionX: keenSliderImageContainer.getBoundingClientRect().x, 
+        positionY: keenSliderImageContainer.getBoundingClientRect().y         
+    }; 
+
+
     keenSliderImageContainer.addEventListener('mousedown', e => {
         isDragging = true; 
         previousMouseX = e.clientX; 
         previousMouseY = e.clientY; 
-
         keenSliderImageContainer.addEventListener('mousemove', move); 
     });
 
@@ -155,9 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('image was removed'); 
         isDragging = false; 
         keenSliderImageContainer.removeEventListener('mousemove', move);
-        // if(keenSliderImageContainer.getBoundingClientRect().top <= 290) {
-            // superLikeAnim().finished;
-            // anotherAction (for example, remove the image container fires);  
+        // if(keenSliderImageContainer.style.left >= "25") {
+        //     console.log('you are on the right'); 
         // }
         // else if(keenSliderImageContainer.getBoundingClientRect().left >= 1470) {
             // likeAnim().finished; 
@@ -171,53 +175,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function move(e) {
+        /*
+            if there is prioritize for the swiping to the right/left/top/down , then play that animation:
+
+            targetX > 0 ? startSwipeRightAnim() : startSwipeLeftAnim()
+
+            function rotateHorizontal() {
+                increase the degrees in rotation as long as the targetX is increasing: 
+                let rotationStrength = targetX; 
+                keenSliderImageContainer.style.transform = `scale(${rotationStrength}deg)`;
+            }
+
+            function increaseBy(increasedNum) {
+                const rotateTheCard = {
+                    transform: rotate(${increasedNum}deg)
+                } 
+                
+                keenSliderImageContainer.animate(rotateTheCard)
+            }
+        */
         if(isDragging) {
             const deltaCoordinate = {
                 x: e.clientX - previousMouseX, 
                 y: e.clientY - previousMouseY
             }
-
             targetX += deltaCoordinate.x; 
             targetY += deltaCoordinate.y; 
 
             previousMouseX = e.clientX; 
             previousMouseY = e.clientY; 
             keenSliderImageContainer.style.left = `${targetX}px`; 
- 
-            }
             keenSliderImageContainer.style.top = `${targetY}px`;
-            // if(keenSliderImageContainer.getBoundingClientRect().left ===)
-            console.log(keenSliderImageContainer.getBoundingClientRect()); 
+            console.log(targetX);
+            
+            rotateCard(targetX); 
         }
+    }
 
     /////////////////////////////////////////////////////////////////////////////
     // make the image container rotate when swiping left / right:
+    console.log(keenSliderImageContainer.getBoundingClientRect()); 
+
     /*
-        keenSliderImageContainer; 
-
-        const swipingLeftAnim = [
-            {transform: rotate(5deg)}, 
-            {transform: rotate(10deg)}, 
-            {transform: rotate(20deg)}, 
-            {transform: rotate(40deg)}
-        ]; 
-
-        const swipingRightAnim = [
-            {transform: rotate(-5deg)}, 
-            {transform: rotate(-10deg)}, 
-            {transform: rotate(-20deg)}, 
-            {transform: rotate(-40deg)}
-        ]; 
-
-        
-        function superLikeAnim() {
-            
+        if(keenSliderImageContainer.wasMoved()) {
+            playAnim(); 
         }
 
+        function wasMoved() {
+            const currentPosition = {
+                positionX: keenSliderImageContainer.getboundingRect().x; 
+                positionY: keenSliderImageContainer.getboundingRect().y; 
+            } 
 
-        function likeAnim() {
-            keenSliderImagecontainer.animate(animateion, duration); 
+            return isDifferent(currentPosition.positionX);  
+        }
+
+        function isDifferent(currentPosition) {
+            return initialPosition.positionX === currentPosition.positionX; 
         }
     */
-}); 
+    function rotateCard() {
+        keenSliderImageContainer.style.transform = `rotate(${getCustomRotateValue()}deg)`; 
+        console.log(getCustomRotateValue()); 
+    }
 
+    function getCustomRotateValue() {
+        const maxAngleForContainer = 27; 
+        return Math.floor(targetX / maxAngleForContainer); 
+    }
+}); 

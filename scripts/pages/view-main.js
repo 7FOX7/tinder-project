@@ -47,11 +47,16 @@ const keenSliderContainer_timing = {
     duration: 200
 };
 
-/////////////////////////////////////////////////////////////////////////////
-// make the slider buttons interactive: 
+
 document.addEventListener('DOMContentLoaded', () => {
+
+    /////////////////////////////////////////////////////////////////////////////
+    // make the slider buttons interactive and handle the dots: 
     let sliderPosition = 0; 
+    let dotPosition = -1; 
     const sliderImageArr = [];
+    const sliderDotArr = []; 
+
     const nextSlide_Button = document.querySelector('.js-next-slider-button');
     const previousSlide_Button = document.querySelector('.js-previous-slider-button'); 
 
@@ -63,83 +68,123 @@ document.addEventListener('DOMContentLoaded', () => {
     setDefault(); 
     const images = document.querySelectorAll('.js-keen-slider-item'); 
 
+
     images.forEach((image) => {
-        sliderImageArr.push(image)
+        dotPosition++; 
+        const dot = document.createElement('button'); 
+        dot.setAttribute('id', `${dotPosition}`);
+        sliderDotArr.push(dot); 
+        sliderImageArr.push(image);
     }); 
 
-    console.log(sliderImageArr.length); 
-
-    
+    sliderDotArr[0].classList.add('active'); 
+    sliderDotArr.forEach((dot) => {
+        dot.addEventListener('click', () => {
+            const index = dot.getAttribute('id'); 
+            sliderPosition = Number(index); 
+            updateSlide(); 
+        });
+        document.querySelector('.js-slide-dot-container').append(dot); 
+    }); 
 
     nextSlide_Button.addEventListener('click', () => {
-        previousSlide_Button.style.visibility = "visible";  
         sliderPosition++; 
         updateSlide(); 
-        if(sliderPosition === sliderImageArr.length -1) {
-            nextSlide_Button.style.visibility = "hidden"; 
-        }
     })
 
     previousSlide_Button.addEventListener('click', () => {
-        nextSlide_Button.style.visibility = "visible"; 
         sliderPosition --; 
         updateSlide(); 
-        if(sliderPosition === 0) {
-            previousSlide_Button.style.visibility = "hidden"; 
-        }
     }); 
 
     function updateSlide() {
+        handleKeenSliderButtons(); 
         sliderImageArr.forEach((image) => {
             const index = sliderImageArr.indexOf(image); 
-            if(index !== sliderPosition) {
-                image.style.display = "none"; 
-            }
-            else {
-                image.style.display = "block"; 
-            }
+            updateSlideImage(index); 
+            updateDots(index); 
         })
+    } 
+
+    function handleKeenSliderButtons() {
+        if(sliderPosition === 0) {
+            nextSlide_Button.style.visibility = "visible"; 
+            previousSlide_Button.style.visibility = "hidden"; 
+        }
+        else if(sliderPosition === sliderImageArr.length -1) {
+            nextSlide_Button.style.visibility = "hidden"; 
+            previousSlide_Button.style.visibility = "visible"; 
+        }
+        else if(sliderPosition === 1) {
+            nextSlide_Button.style.visibility = "visible"; 
+            previousSlide_Button.style.visibility = "visible"; 
+        }
     }
-    /*
-    let slidePosition = 0; 
-    const imgArr = []; 
-    const images = document.querySelectorAll(images)
-    images.forEach((image) => {
-        imgArr.push(image)
+
+    function updateSlideImage(index) {
+        const image = sliderImageArr[index]; 
+        index === sliderPosition ? image.style.display = "block" : image.style.display = "none"; 
+    }
+
+    function updateDots(index) {
+        const progressButton = sliderDotArr[index]; 
+        index === sliderPosition ? progressButton.classList.add('active') : progressButton.classList.remove('active'); 
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////
+    // make the image container draggable: 
+    let isDragging = false; 
+    let offsetX; 
+    let offsetY;
+
+    const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
+    console.log(keenSliderImageContainer.getBoundingClientRect()); 
+    keenSliderImageContainer.addEventListener('mousedown', e => {
+        isDragging = true; 
+        offsetX = e.clientX - keenSliderImageContainer.getBoundingClientRect().left; 
+        offsetY = e.clientY - keenSliderImageContainer.getBoundingClientRect().top; 
+        keenSliderImageContainer.addEventListener('mousemove', move); 
     });
 
-    const nextButton = document.querySelector('.js-next-button')
-        .addEventListener('click', () => {
-            if(sliderPosition === imgArr.length) {
-                nextButton.style.display = "none"; 
-            }
-            else {
-                sliderPosition++; 
-                updateSlide(); 
-            } 
-        }); 
 
-    function updateSlide() {
-        imgArr.forEach((image) => {
-            const index = imgArr.indexOf(image); 
-            if(index !== slidePosition) {
-                image[index].style.display = "none"; 
-            }
-            else {
-                image[index].style.display = "flex"; 
-            }
-        })
+    window.addEventListener('mouseup', () => {
+        console.log('image was removed'); 
+        isDragging = false; 
+        keenSliderImageContainer.removeEventListener('mousemove', move);
+    });
+
+    function move(e) {
+        if(isDragging) {
+            keenSliderImageContainer.style.left = `${e.clientX - offsetX}px`; 
+            keenSliderImageContainer.style.top = `${e.clientY - offsetY}px`;
+        }
     }
+}); 
 
-    const previousButton = document.querySelector('.js-previous-button')
-        .addEventListener('click', () => {
-            if(sliderPosition === 0) {
-                previousButton.style.display = "none"; 
-            }
-            else {
-                sliderPosition --; 
-                updateSlide();  
-            }
-        })
-    */
-});
+/*
+    let isDragged = false; 
+    image.addEventListener('mousedown', (e) => { 
+        isDragged = true; 
+    });
+
+    image.addEventListener('mousemove', (e) => {
+        if(isDragged) {
+            let x = e.offsetX; 
+            let y = e.offsetY
+            moveImage(image, x, y); 
+        }
+    });
+
+    image.addEventListener('mouseup', (e) => {
+        if(isDragged) {
+            removeImage(image); 
+            moveImage(directionX, directionY); 
+            isDragged = false; 
+        }
+    })
+
+    function moveImage(image, x, y) {
+        image.style.transform = `translate(${x}, ${y})`; 
+    }
+*/

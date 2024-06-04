@@ -2,23 +2,23 @@ main {
     position: fixed;
     top: 0%; 
     left: 20%; 
-    display: flex; 
     width: 80%; 
     height: 100%; 
     background: gray;
     display: flex; 
-    align-items: center;
     justify-content: center;  
 }
 
 main .image-cards-container {
+    margin-top: 5px;
     position: relative; 
-    width: 25%; 
-    height: 72%;
+    width: 30%; 
+    height: 80%;
     background-color: red;
     display: flex; 
     align-items: center; 
     justify-content: center; 
+    
 }
 
 main .image-cards-container .user-info-container {
@@ -27,7 +27,7 @@ main .image-cards-container .user-info-container {
     width: 100%; 
     height: 25%; 
     left: 0; 
-    top: 60%;
+    top: 70%;
     padding: 22px; 
     color: #fff; 
     font-size: 14px;
@@ -46,7 +46,7 @@ main .image-cards-container .button-section {
     top: 85%; 
     width: 100%; 
     height: 15%; 
-    background-color: rgba(255, 255, 0, 0.5); 
+    background-color: #000; 
 }
 
 .button-section .button-container {
@@ -59,9 +59,15 @@ main .image-cards-container .button-section {
     justify-content: space-between; 
 }
 
+.image-cards-container .keen-slider-container {
+    position: absolute; 
+    width: 100%; 
+    height: 85%;  
+}
+
 .image-cards-container .keen-slider {
     width: 100%;
-    height: 80%; 
+    height: 100%; 
     overflow: hidden; 
     position: relative; 
     display: flex; 
@@ -77,10 +83,11 @@ main .image-cards-container .button-section {
 }
 
 .keen-slider .keen-slider-item .image {
-    background-size: 100%; 
+    background-size: cover; 
     background-repeat: no-repeat; 
     width: 100%; 
-    height: 100%; 
+    height: 100%;
+    background-position: center; 
 }
 
 .sampleImg1 {
@@ -124,4 +131,31 @@ main .image-cards-container .button-section {
 
 .keen-slider .keen-slider-button-container.active {
     opacity: 1; 
+}
+
+.image-cards-container .slide-dot-container {
+    z-index: 10; 
+    position: absolute; 
+    display: flex; 
+    align-items: center; 
+    width: 100%; 
+    height: 7px; 
+    margin-top: 5px; 
+    padding-inline: 8px; 
+}
+
+.slide-dot-container > button {
+    background-color: #3e3e3e; 
+    height: 100%;
+    margin: 1px; 
+    border-top-left-radius: 8px; 
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    width: 100%; 
+    padding: 0; 
+}
+
+.slide-dot-container > button.active {
+    background-color: #fff; 
 }

@@ -105,92 +105,100 @@
         <main>
             <div class="image-cards-container">
                 <div class="image-card-content" style="transform: translate3d(0px, 0px, 0px) scale(1, 1) rotate(0); transform-origin: center center; width: 100%; height: 100%; background-color: green; cursor: pointer;">
-                    <div class="js-keen-slider keen-slider">
-                        <span style="display: block" class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
-                            <div class="image sampleImg1"></div>
-                        </span>
-                        <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
-                            <div class="image sampleImg2"></div>
-                        </span>
-                        <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
-                            <div class="image sampleImg3"></div>
-                        </span>
-                        <div class="keen-slider-button-container js-keen-slider-button-container">
-                            <button class="js-previous-slider-button keen-slider-button">
-                                <span>
-                                    <img src="../images/arrow_previous.png">
-                                </span>
-                            </button>
-                            <button class="js-next-slider-button keen-slider-button" >
-                                <span>
-                                    <img src="../images/arrow_next.png">
-                                </span>
-                            </button>
-                        </div>
+                    <div class="js-slide-dot-container slide-dot-container">
                     </div>
-                    <div style="z-index: 5; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 60%;"></div>
-                    <div class="user-info-container">
-                        <div class="user-info-content">
-                            <div style="display: flex; align-items: center;">
-                                <div style="width: 10px; height: 10px; background-color: rgb(48, 255, 48); margin-right: 5px; border-radius: 50%;"></div>
-                                <span>Recently Active</span>
+                    <div class="keen-slider-container js-keen-slider-container">
+                        <div class="js-keen-slider keen-slider">
+                            <span style="display: block" class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
+                                <div class="image sampleImg1"></div>
+                            </span>
+                            <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
+                                <div class="image sampleImg2"></div>
+                            </span>
+                            <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item">
+                                <div class="image sampleImg3"></div>
+                            </span>
+                            <div class="keen-slider-button-container js-keen-slider-button-container">
+                                <button class="js-previous-slider-button keen-slider-button">
+                                    <span>
+                                        <img src="../images/arrow_previous.png">
+                                    </span>
+                                </button>
+                                <button class="js-next-slider-button keen-slider-button" >
+                                    <span>
+                                        <img src="../images/arrow_next.png">
+                                    </span>
+                                </button>
                             </div>
-                            <div style="font-size: 2em;">
-                                <span style="font-weight: bold">Evgenii</span>
-                                <span>19</span>
-                                <span style="margin-left: 2px;">
-                                    <img style="width: 26px;" src="../images/verified_icon.png">
-                                </span>
-                                <span style="float: right;">
-                                    <img src="../images/more_info_icon.png">
-                                </span>
-                            </div>
-                            <div style="display: flex; align-items: center; font-size: 15px;">
-                                <span style="margin-right: 5px;">
-                                    <img style="width: 17px;" src="../images/home_icon.png">
-                                </span>
-                                <span>Lives in Toronto</span>
-                            </div>
-                            <div style="display: flex; align-items: center; font-size: 15px;">
-                                <span style="margin-right: 5px;">
-                                    <img style="width: 17px;" src="../images/location_icon.png">
-                                </span>
-                                <span>4 kilometers away</span>
+                        </div>
+                        <div style="z-index: 5; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 75%;"></div>
+                        <div class="js-user-info-container user-info-container">
+                            <div class="user-info-content">
+                                <div style="display: flex; align-items: center;">
+                                    <div style="width: 10px; height: 10px; background-color: rgb(48, 255, 48); margin-right: 5px; border-radius: 50%;"></div>
+                                    <span>Recently Active</span>
+                                </div>
+                                <div style="font-size: 2em;">
+                                    <span style="font-weight: bold">Evgenii</span>
+                                    <span>19</span>
+                                    <span style="margin-left: 2px;">
+                                        <img style="width: 26px;" src="../images/verified_icon.png">
+                                    </span>
+                                    <div class="js-interactive-button" role="button" style="float: right;">
+                                        <button style="display: flex; align-items: center; padding: 0; background-color: transparent;">
+                                            <span class="js-interaction-icon">
+                                                <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;">
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; font-size: 15px;">
+                                    <span style="margin-right: 5px;">
+                                        <img style="width: 17px;" src="../images/home_icon.png">
+                                    </span>
+                                    <span>Lives in Toronto</span>
+                                </div>
+                                <div style="display: flex; align-items: center; font-size: 15px;">
+                                    <span style="margin-right: 5px;">
+                                        <img style="width: 17px;" src="../images/location_icon.png">
+                                    </span>
+                                    <span>4 kilometers away</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="button-section">
                         <div class="button-container">
                             <div class="js-interactive-button interactive-button">
-                                <button class="button-icon" style="outline: solid rgb(255, 204, 0) 1px; outline-offset: 10px;">
+                                <button class="button-icon" style="outline: solid rgb(255, 204, 0) 1px; outline-offset: 8px;">
                                     <span class="js-interaction-icon" style="position: relative; top: 2px;">
                                         <img style="width: 30px; height: 30px;" src="../images/refresh_icon.png" alt="refresh">
                                     </span>
                                 </button>
                             </div>
                             <div class="js-interactive-button interactive-button" role="button">
-                                <button class="button-icon" style="outline: solid rgb(194, 0, 0) 1px; outline-offset: 10px;">
+                                <button class="button-icon" style="outline: solid rgb(194, 0, 0) 1px; outline-offset: 11px;">
                                     <span class="js-interaction-icon">
-                                        <img style="width: 45px; height: 45px; position: relative; top: 3px;" src="../images/cross_icon.png" alt="cross">
+                                        <img style="width: 35px; height: 35px; position: relative; top: 3px;" src="../images/cross_icon.png" alt="cross">
                                     </span>
                                 </button>
                             </div>
                             <div class="js-interactive-button interactive-button" role="button">
-                                <button class="button-icon" style="outline: solid rgb(0, 133, 222) 1px; outline-offset: 10px;">
+                                <button class="button-icon" style="outline: solid rgb(0, 133, 222) 1px; outline-offset: 8px;">
                                     <span class="js-interaction-icon" style="position: relative; top: 2px;">
                                         <img style="width: 30px; height: 30px;" src="../images/star_icon.png" alt="star">
                                     </span>
                                 </button>
                             </div>
                             <div class="js-interactive-button interactive-button" role="button">
-                                <button class="button-icon" style="outline: solid rgb(0, 202, 134) 1px; outline-offset: 10px;">
+                                <button class="button-icon" style="outline: solid rgb(0, 202, 134) 1px; outline-offset: 11px;">
                                     <span class="js-interaction-icon" style="position: relative; top: 3px;">
-                                        <img style="width: 45px; height: 45px;" src="../images/heart_icon.png" alt="heart">
+                                        <img style="width: 35px; height: 35px;" src="../images/heart_icon.png" alt="heart">
                                     </span>
                                 </button>
                             </div>
                             <div class="js-interactive-button interactive-button" role="button">
-                                <button class="button-icon" style="outline: solid rgb(154, 0, 219) 1px; outline-offset: 10px;">
+                                <button class="button-icon" style="outline: solid rgb(154, 0, 219) 1px; outline-offset: 8px;">
                                     <span class="js-interaction-icon" style="position: relative; top: 2px; left: 1px;">
                                         <img style="width: 30px; height: 30px;" src="../images/lighting_bolt_icon.png" alt="lighting_bolt">
                                     </span>

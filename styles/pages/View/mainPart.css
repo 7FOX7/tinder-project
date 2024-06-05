@@ -133,6 +133,14 @@ main .image-cards-container .button-section {
     opacity: 1; 
 }
 
+.keen-slider-container .stamp {
+    position: absolute; 
+    z-index: 15; 
+    width: 320px; 
+    height: 320px;
+    opacity: 0; 
+}
+
 .image-cards-container .keen-slider-container .slide-dot-container {
     z-index: 10; 
     position: absolute; 

@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     /////////////////////////////////////////////////////////////////////////////
-    // make the image container draggable: 
+    // make the image container draggable and show the stamp: 
     let isDragging = false; 
     let targetX = 0; 
     let targetY = 0; 
@@ -142,6 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let previousMouseY = 0; 
 
     const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
+    const stampArr = document.querySelectorAll('.js-stamp'); 
+
     const initialPosition = {
         positionX: keenSliderImageContainer.getBoundingClientRect().x, 
         positionY: keenSliderImageContainer.getBoundingClientRect().y         
@@ -206,34 +208,16 @@ document.addEventListener('DOMContentLoaded', () => {
             previousMouseY = e.clientY; 
             keenSliderImageContainer.style.left = `${targetX}px`; 
             keenSliderImageContainer.style.top = `${targetY}px`;
-            console.log(targetX);
+            console.log(`targetY: ${targetY}, targetX: ${targetX}`);
             
-            rotateCard(targetX); 
+            rotateCard(); 
+            displayStamp(); 
         }
     }
 
     /////////////////////////////////////////////////////////////////////////////
     // make the image container rotate when swiping left / right:
     console.log(keenSliderImageContainer.getBoundingClientRect()); 
-
-    /*
-        if(keenSliderImageContainer.wasMoved()) {
-            playAnim(); 
-        }
-
-        function wasMoved() {
-            const currentPosition = {
-                positionX: keenSliderImageContainer.getboundingRect().x; 
-                positionY: keenSliderImageContainer.getboundingRect().y; 
-            } 
-
-            return isDifferent(currentPosition.positionX);  
-        }
-
-        function isDifferent(currentPosition) {
-            return initialPosition.positionX === currentPosition.positionX; 
-        }
-    */
     function rotateCard() {
         keenSliderImageContainer.style.transform = `rotate(${getCustomRotateValue()}deg)`; 
         console.log(getCustomRotateValue()); 
@@ -243,4 +227,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const maxAngleForContainer = 27; 
         return Math.floor(targetX / maxAngleForContainer); 
     }
+
+    function displayStamp() {
+        if(targetY < 0 && (targetX <=50 || targetX >= -50)) {
+            animateStamp(stampArr[2]); 
+        }
+        else if(targetX < 0 && (targetY >= -20 || targetY <= 20)) {
+            animateStamp(stampArr[0]) 
+        }
+        else if(targetX > 0 && (targetY >= -20 || targetY <= 20)) {
+            animateStamp(stampArr[1]);
+        }  
+    }
+
+    
+    function animateStamp(stamp) {
+        stampArr.forEach((value) => {
+            value === stamp ? value.style.opacity = `0.${Math.abs(targetX) * 1.5}` : value.style.opacity = "0" ;  
+        }); 
+    }
+    
+    /*
+        function displayAction() {
+            if(isMoved) {        
+                const rejectStamp = keenSliderImageContainer.querySelector('.js-reject-stamp'); 
+                const likeStamp = keenSliderImageContainer.querySelector('.js-like-stamp'); 
+                const superLikeStamp = keenSliderImageContainer.querySelector('.js-super-like-stamp'); 
+
+
+                targetY > 0 ? superLikeStamp.style.display = "inline" : superLikeStamp.style.display = "none"; 
+                targetX < 0 ? rejectStamp.style.display = "inline" : acceptStamp.style.display = "inline";
+            } 
+        }
+
+
+
+        function showOneStamp() {
+            if
+        } 
+    */
 }); 

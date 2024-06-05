@@ -141,13 +141,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let previousMouseX = 0; 
     let previousMouseY = 0; 
     const pageMaxWidth = document.querySelector('.js-main').clientWidth; 
-    const pageMinWidth = Math.floor(pageMaxWidth/2); 
+    const pageMinWidth = Math.floor(pageMaxWidth/4); 
     const pageMaxWidth_format = Number((pageMaxWidth/1000).toFixed(3)); 
     const pageMinWidth_format = Number((pageMinWidth/1000).toFixed(3)); 
     console.log(pageMinWidth_format); 
 
     const pageMaxHeight = document.querySelector('.js-main').clientHeight; 
-    const pageMinHeight = Math.floor(pageMaxHeight/3);  
+    const pageMinHeight = Math.floor(pageMaxHeight/5);  
     const pageMaxHeight_format = Number((pageMaxHeight/1000).toFixed(3)); 
     const pageMinHeight_format = Number((pageMinHeight/1000).toFixed(3));
     console.log(pageMinHeight_format); 
@@ -219,12 +219,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function handleStampX(stamp) { 
         let fadeValue = Math.abs(targetX/1000).toFixed(3);
-        inBetween(Number(fadeValue), pageMinWidth_format, pageMaxWidth_format) ? stamp.style.opacity = "1" : stamp.style.opacity = fadeValue; 
+        console.log(fadeValue); 
+        inBetween(fadeValue, pageMinWidth_format, pageMaxWidth_format) ? stamp.style.opacity = "1" : stamp.style.opacity = `${fadeValue * 2}`; 
     }
 
     function handleStampY(stamp) { 
-        let fadeValue = Math.abs(targetY/1000 * 1.5).toFixed(3);
-        inBetween(fadeValue, pageMinHeight_format, pageMaxHeight_format) ? stamp.style.opacity = "1" : stamp.style.opacity = fadeValue;  
+        let fadeValue = Math.abs(targetY/1000).toFixed(3);
+        inBetween(fadeValue, pageMinHeight_format, pageMaxHeight_format) ? stamp.style.opacity = "1" : stamp.style.opacity = `${fadeValue * 5}`;  
     }
 
     function inBetween(val, min, max) {

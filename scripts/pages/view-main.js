@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayStamp() {
-        if(targetY < 0 && (targetX <=50 || targetX >= -50)) {
+        if(targetY < 0 && (targetX <=90 && targetX >= -90 || targetX === 0)) {
             animateStamp(stampArr[2]); 
         }
         else if(targetX < 0 && (targetY >= -20 || targetY <= 20)) {

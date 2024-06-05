@@ -140,14 +140,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let targetY = 0; 
     let previousMouseX = 0; 
     let previousMouseY = 0; 
+    const pageMaxWidth = document.querySelector('.js-main').clientWidth; 
+    const pageMinWidth = Math.floor(pageMaxWidth/2); 
+    const pageMaxWidth_format = Number((pageMaxWidth/1000).toFixed(3)); 
+    const pageMinWidth_format = Number((pageMinWidth/1000).toFixed(3)); 
+    console.log(pageMinWidth_format); 
+
+    const pageMaxHeight = document.querySelector('.js-main').clientHeight; 
+    const pageMinHeight = Math.floor(pageMaxHeight/3);  
+    const pageMaxHeight_format = Number((pageMaxHeight/1000).toFixed(3)); 
+    const pageMinHeight_format = Number((pageMinHeight/1000).toFixed(3));
+    console.log(pageMinHeight_format); 
 
     const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
     const stampArr = document.querySelectorAll('.js-stamp'); 
-
-    const initialPosition = {
-        positionX: keenSliderImageContainer.getBoundingClientRect().x, 
-        positionY: keenSliderImageContainer.getBoundingClientRect().y         
-    }; 
 
 
     keenSliderImageContainer.addEventListener('mousedown', e => {
@@ -162,40 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('image was removed'); 
         isDragging = false; 
         keenSliderImageContainer.removeEventListener('mousemove', move);
-        // if(keenSliderImageContainer.style.left >= "25") {
-        //     console.log('you are on the right'); 
-        // }
-        // else if(keenSliderImageContainer.getBoundingClientRect().left >= 1470) {
-            // likeAnim().finished; 
-        //}
-        // else if(keenSliderImageContainer.getBoundingClientRect().left <= 200) {
-            // calcelAnim(); 
-        //}
-        // else if(keenSliderImageContainer.getBoundingClientRect().top >= 705) {
-            // putInPlaceAnim(); 
-        //}
     });
 
     function move(e) {
-        /*
-            if there is prioritize for the swiping to the right/left/top/down , then play that animation:
-
-            targetX > 0 ? startSwipeRightAnim() : startSwipeLeftAnim()
-
-            function rotateHorizontal() {
-                increase the degrees in rotation as long as the targetX is increasing: 
-                let rotationStrength = targetX; 
-                keenSliderImageContainer.style.transform = `scale(${rotationStrength}deg)`;
-            }
-
-            function increaseBy(increasedNum) {
-                const rotateTheCard = {
-                    transform: rotate(${increasedNum}deg)
-                } 
-                
-                keenSliderImageContainer.animate(rotateTheCard)
-            }
-        */
         if(isDragging) {
             const deltaCoordinate = {
                 x: e.clientX - previousMouseX, 
@@ -216,8 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /////////////////////////////////////////////////////////////////////////////
-    // make the image container rotate when swiping left / right:
-    console.log(keenSliderImageContainer.getBoundingClientRect()); 
+    // make the image container rotate when swiping left / right:  
     function rotateCard() {
         keenSliderImageContainer.style.transform = `rotate(${getCustomRotateValue()}deg)`; 
         console.log(getCustomRotateValue()); 
@@ -229,41 +203,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function displayStamp() {
-        if(targetY < 0 && (targetX <=90 && targetX >= -90 || targetX === 0)) {
-            animateStamp(stampArr[2]); 
+        stampArr.forEach((stamp) => {
+            stamp.style.opacity = "0"; 
+        }); 
+        if(targetY < -5 && inBetween(targetX, -110, 110)) {
+            handleStampY(stampArr[2]); 
         }
-        else if(targetX < 0 && (targetY >= -20 || targetY <= 20)) {
-            animateStamp(stampArr[0]) 
+        else if(targetX < 0 && inBetween(targetY, -200, 200)) {
+            handleStampX(stampArr[0], targetX) 
         }
-        else if(targetX > 0 && (targetY >= -20 || targetY <= 20)) {
-            animateStamp(stampArr[1]);
+        else if(targetX > 0 && inBetween(targetY, -200, 200)) {
+            handleStampX(stampArr[1], targetX);
         }  
     }
-
     
-    function animateStamp(stamp) {
-        stampArr.forEach((value) => {
-            value === stamp ? value.style.opacity = `0.${Math.abs(targetX) * 1.5}` : value.style.opacity = "0" ;  
-        }); 
+    function handleStampX(stamp) { 
+        let fadeValue = Math.abs(targetX/1000).toFixed(3);
+        inBetween(Number(fadeValue), pageMinWidth_format, pageMaxWidth_format) ? stamp.style.opacity = "1" : stamp.style.opacity = fadeValue; 
     }
-    
-    /*
-        function displayAction() {
-            if(isMoved) {        
-                const rejectStamp = keenSliderImageContainer.querySelector('.js-reject-stamp'); 
-                const likeStamp = keenSliderImageContainer.querySelector('.js-like-stamp'); 
-                const superLikeStamp = keenSliderImageContainer.querySelector('.js-super-like-stamp'); 
+
+    function handleStampY(stamp) { 
+        let fadeValue = Math.abs(targetY/1000 * 1.5).toFixed(3);
+        inBetween(fadeValue, pageMinHeight_format, pageMaxHeight_format) ? stamp.style.opacity = "1" : stamp.style.opacity = fadeValue;  
+    }
+
+    function inBetween(val, min, max) {
+        return val > min && val < max; 
+    }
+    /*  
+
+        stamp[2] ? inBetween(fadeValue, pageHeightMin, pageHeightMax) : inBetween(fadeValue, ) 
+        fadeValue = Math.floor(Math.abs(coord) * 1.5); 
+        inBetween(fadeValue, pageSizeMin, pageSizeMax) ? stamp.style.opacity = "1" : stamp.style.opacity = fadeValue; 
 
 
-                targetY > 0 ? superLikeStamp.style.display = "inline" : superLikeStamp.style.display = "none"; 
-                targetX < 0 ? rejectStamp.style.display = "inline" : acceptStamp.style.display = "inline";
-            } 
+
+        
+        setToOne ? stamp.style.opacity = "1" : stamp.style.opacity = fadevalue; 
+        overlaps(fadeValue) ? setOpacityToOne() : setOpacityToDifferent()
+
+
+        function setOpacityToOne() {
+            fadeValue = "1"; 
+            setToOne = true; 
+        }
+
+        function setOpacityToDifferent() {
+            fadeValue = `0.${Math.floor(Math.abs(coord) * 1.5)}`; 
         }
 
 
 
-        function showOneStamp() {
-            if
-        } 
+        let wasChanged = false; 
+        
+        if(overlaps(fadeValue)) {
+            fadeValue = "1"; 
+            wasChanged = true; 
+        }
+        if(!wasChanged) {
+            fadeValue = 0.math.floor(...); 
+        }
+
+
+
+        overlaps(fadeValue) ? isOverlapped = true : isOverlaped = false; 
+        isOverlapped ? fadeValue = "1" : fadeValue = 0.Math.floor(..l.)
     */
 }); 

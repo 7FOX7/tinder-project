@@ -155,6 +155,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
     const stampArr = document.querySelectorAll('.js-stamp'); 
 
+    const fadeReject_btn = document.querySelector('.js-reject-fade-button'); 
+    const fadeSuperLike_btn = document.querySelector('.js-superLike-fade-button'); 
+    const fadeSuperLike_icon = document.querySelector('.js-fade')
+    const fadeLike_btn = document.querySelector('.js-like-fade-button'); 
 
     keenSliderImageContainer.addEventListener('mousedown', e => {
         isDragging = true; 
@@ -219,55 +223,44 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function handleStampX(stamp) { 
         let fadeValue = Math.abs(targetX/1000).toFixed(3);
-        console.log(fadeValue); 
         inBetween(fadeValue, pageMinWidth_format, pageMaxWidth_format) ? stamp.style.opacity = "1" : stamp.style.opacity = `${fadeValue * 2}`; 
     }
 
     function handleStampY(stamp) { 
         let fadeValue = Math.abs(targetY/1000).toFixed(3);
-        inBetween(fadeValue, pageMinHeight_format, pageMaxHeight_format) ? stamp.style.opacity = "1" : stamp.style.opacity = `${fadeValue * 5}`;  
+        if(inBetween(fadeValue, pageMinHeight_format, pageMaxHeight_format)) {
+            stamp.style.opacity = "1";
+            fadeSuperLike_btn.style.opacity = "0"; 
+
+        }
+        else {        
+            stamp.style.opacity = `${fadeValue * 5}`
+            fadeSuperLike_btn.style.opacity = `${fadeValue * 5}`; 
+            console.log(fadeValue); 
+        }
+        // inBetween(fadeValue, pageMinHeight_format, pageMaxHeight_format) ? stamp.style.opacity = "1" : stamp.style.opacity = `${fadeValue * 5}`;  
     }
 
     function inBetween(val, min, max) {
         return val > min && val < max; 
     }
     /*  
-
-        stamp[2] ? inBetween(fadeValue, pageHeightMin, pageHeightMax) : inBetween(fadeValue, ) 
-        fadeValue = Math.floor(Math.abs(coord) * 1.5); 
-        inBetween(fadeValue, pageSizeMin, pageSizeMax) ? stamp.style.opacity = "1" : stamp.style.opacity = fadeValue; 
-
-
-
-        
-        setToOne ? stamp.style.opacity = "1" : stamp.style.opacity = fadevalue; 
-        overlaps(fadeValue) ? setOpacityToOne() : setOpacityToDifferent()
-
-
-        function setOpacityToOne() {
-            fadeValue = "1"; 
-            setToOne = true; 
-        }
-
-        function setOpacityToDifferent() {
-            fadeValue = `0.${Math.floor(Math.abs(coord) * 1.5)}`; 
-        }
-
-
-
-        let wasChanged = false; 
-        
-        if(overlaps(fadeValue)) {
-            fadeValue = "1"; 
-            wasChanged = true; 
-        }
-        if(!wasChanged) {
-            fadeValue = 0.math.floor(...); 
-        }
-
-
-
-        overlaps(fadeValue) ? isOverlapped = true : isOverlaped = false; 
-        isOverlapped ? fadeValue = "1" : fadeValue = 0.Math.floor(..l.)
+    function toggleIcons(id)
+        const interactionIconContainer = interactiveBtns.getElementById(id);
+        if(replaced) {
+            
+        }  
+        interactionIconContainer.firstChildElement.classList.replace(defaultIcon, whiteIcon); 
+        replaced = true; 
     */
 }); 
+
+
+/*
+    fadeButtons = document.querySelectorAll('.js-fade-button'); 
+    fadeButtons[0].style.opacity = '...'; 
+
+    function toggleIcons() {
+
+    }
+*/

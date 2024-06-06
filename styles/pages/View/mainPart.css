@@ -1,3 +1,9 @@
+:root {
+    --fade-reject-button-color: rgb(255, 77, 77); 
+    --fade-superLike-button-color: rgb(56, 175, 255); 
+    --fade-like-button-color: rgb(63, 255, 191); 
+}
+
 main {
     position: fixed;
     top: 0%; 
@@ -59,6 +65,15 @@ main .image-cards-container .button-section {
     justify-content: space-between; 
 }
 
+.button-container .interactive-button .fade-button {
+    z-index: -1; 
+    position: absolute; 
+    width: 63px; 
+    height: 60px; 
+    border-radius: 50%; 
+    opacity: 0; 
+}
+
 .image-cards-container .keen-slider-container {
     position: absolute; 
     width: 100%; 
@@ -111,6 +126,7 @@ main .image-cards-container .button-section {
 }
 
 .button-section .button-container .interactive-button {
+    position: relative; 
     cursor: pointer; 
 }
 

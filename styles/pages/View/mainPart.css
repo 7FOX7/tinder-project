@@ -4,6 +4,7 @@
     --fade-like-button-color: rgb(63, 255, 191); 
 }
 
+
 main {
     position: fixed;
     top: 0%; 
@@ -123,6 +124,25 @@ main .image-cards-container .button-section {
     display: flex; 
     align-items: center; 
     justify-content: space-around;
+}
+
+.button-container .reject-button-icon {
+    outline: solid rgb(255, 49, 49) 1px; 
+    outline-offset: 13px;
+}
+
+.button-container .superLike-button-icon {
+    outline: solid rgb(0, 133, 222) 1px;
+    outline-offset: 10px;
+}
+
+.button-container .like-button-icon {
+    outline: solid rgb(0, 202, 134) 1px;
+    outline-offset: 13px;
+}
+
+.button-container .button-icon.outline-hidden {
+    outline: none; 
 }
 
 .button-section .button-container .interactive-button {

@@ -19,6 +19,21 @@ interactiveBtns.forEach((button) => {
 const keenSlider = document.querySelector('.js-keen-slider'); 
 const keenSliderContainer = document.querySelector('.js-keen-slider-button-container'); 
 
+/*
+    1. assuming only the interactive buttons hava the data attribute: 
+    interactiveBtns.forEach(interactiveBtn => {
+        if(interactiveBtn.dataset.iconType === "star") {
+            starIcon_Arr.push(interactiveBtn); 
+        }    
+        else if(interactiveBtn.dataset.iconType === "heart") {
+            heartIcon_Arr.push(interactiveBtn); 
+        }
+        else if(interactiveBtn.dataset.icoonType === "rejection") {
+            rejectionIcon_Arr.push(interactiveBtn); 
+        }
+    })
+*/
+
 keenSlider.addEventListener('mouseenter', () => {
     const animationPromise = keenSliderContainer.animate(makeSmoothButtonAppearance, keenSliderContainer_timing).finished; 
     animationPromise.then(() => {
@@ -154,11 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
     const stampArr = document.querySelectorAll('.js-stamp'); 
-
-    const fadeReject_btn = document.querySelector('.js-reject-fade-button'); 
-    const fadeSuperLike_btn = document.querySelector('.js-superLike-fade-button'); 
-    const fadeSuperLike_icon = document.querySelector('.js-fade')
-    const fadeLike_btn = document.querySelector('.js-like-fade-button'); 
+    const superLikeAction_Arr = document.querySelectorAll('[data-action-type="superLike"]'); 
+    const rejectAction_Arr = document.querySelectorAll('[data-action-type="reject"]'); 
+    const likeAction_Arr = document.querySelectorAll('[data-action-type="like"]'); 
+    const actionBtns = document.querySelectorAll('.js-fade-button'); 
 
     keenSliderImageContainer.addEventListener('mousedown', e => {
         isDragging = true; 
@@ -206,61 +220,123 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(targetX / maxAngleForContainer); 
     }
 
+    let fadeValue = 0; 
+    let stopFading = false; 
+
     function displayStamp() {
         stampArr.forEach((stamp) => {
             stamp.style.opacity = "0"; 
         }); 
         if(targetY < -5 && inBetween(targetX, -110, 110)) {
-            handleStampY(stampArr[2]); 
+            handleStamp(stampArr[2], targetY, pageMinHeight_format, pageMaxHeight_format); 
+            fadeActionBtn(superLikeAction_Arr, targetY); 
         }
         else if(targetX < 0 && inBetween(targetY, -200, 200)) {
-            handleStampX(stampArr[0], targetX) 
+            handleStamp(stampArr[0], targetX, pageMinWidth_format, pageMaxWidth_format); 
+            fadeActionBtn(rejectAction_Arr, targetX); 
         }
         else if(targetX > 0 && inBetween(targetY, -200, 200)) {
-            handleStampX(stampArr[1], targetX);
+            handleStamp(stampArr[1], targetX, pageMinWidth_format, pageMaxWidth_format);
+            fadeActionBtn(likeAction_Arr, targetX); 
         }  
     }
-    
-    function handleStampX(stamp) { 
-        let fadeValue = Math.abs(targetX/1000).toFixed(3);
-        inBetween(fadeValue, pageMinWidth_format, pageMaxWidth_format) ? stamp.style.opacity = "1" : stamp.style.opacity = `${fadeValue * 2}`; 
+    // function 
+    // function handleStamp(stamp) { 
+    //     let fadeValue = Math.abs(targetX/1000).toFixed(3);
+    //     inBetween(fadeValue, pageMinWidth_format, pageMaxWidth_format) ? stamp.style.opacity = "1" : stamp.style.opacity = `${fadeValue * 2}`; 
+    // }
+    // 
+    /*
+        
+        function stopFadingForAllButtons() {
+            document.
+        }
+
+        function handleStamp(stamp, min_format, max_format) {  
+            stopFading = false;
+            fadeValue = getCustomFadeValue(targetX); 
+            if(inBetween(fadeValue, min_format, max_format)) {
+                stamp.style.opacity = "1";
+                stopFading = true;  
+            }
+            else {        
+                stamp.style.opacity = `${fadeValue * 5}`
+            }
+        }
+
+        function fadeActionBtn(actionArr) {
+        fadeValue = getCustomFadeValue(targetY); 
+        stopFading ? (actionArr[0].style.display = "inline", actionArr[1].style.display = "none", actionArr[2].style.opacity = "0")
+                   : (actionArr[0].style.display = "none", actionArr[1].style.display = "inline", actionArr[2].style.opacity = `${fadeValue * 5}`); 
+        }
+
+        function getCustomFadeValue(coord) {
+            return Math.abs(coord/1000).toFixed(3); 
+        }
+    */
+    function handleStamp(stamp, coord, min_format, max_format) {  
+        fadeValue = getCustomFadeValue(coord); 
+        if(inBetween(fadeValue, min_format, max_format)) {
+            stopFading = true; 
+            stamp.style.opacity = "1"; 
+        }
+        else {        
+            stopFading = false; 
+            stamp.style.opacity = `${fadeValue * 5}`; 
+            console.log(fadeValue)
+        }
     }
 
-    function handleStampY(stamp) { 
+    function inBetween(val, min, max) {
+        return val > min && val < max; 
+    }
+    
+    function getCustomFadeValue(coord) {
+        return Math.abs(coord/1000).toFixed(3); 
+    }
+
+    function fadeActionBtn(actionArr, coord) {
+        actionBtns.forEach((actionBtn) => {
+            actionBtn.style.opacity = "0"; 
+        })
+        fadeValue = getCustomFadeValue(coord); 
+        const scaleVal = coord === targetX ? 3 : 5.2; 
+        stopFading ? (actionArr[0].classList.remove('outline-hidden'), actionArr[1].style.display = "inline", actionArr[2].style.display = "none", actionArr[3].style.opacity = "0")
+                   : (actionArr[0].classList.add('outline-hidden'), actionArr[1].style.display = "none", actionArr[2].style.display = "inline", actionArr[3].style.opacity = `${fadeValue * 5}`, actionArr[3].style.transform = `scale(${fadeValue * scaleVal})`); 
+    }
+}); 
+/*
+    make stopFading value a true, each time, there is a switch to either direction; 
+
+    actionButton.style.outlineColor = "none"; 
+    actionButton.style.outlineColor = "(var)"
+
+    1. What do we want to toggle? we want to toggle WHITE image whose display property is either inline or none
+    2. When do we want to toggle it? we want to toggle in two stages. First stage: when it reaches the point where the stamp fully 
+    reveals (its display should be none), or,  when it reaches the bottom 
+    Second stage: while the image container is dragged and moving, the WHITE image should always be visible. 
+    3. 
+
+    function handleStampY(stamp) {
+
         let fadeValue = Math.abs(targetY/1000).toFixed(3);
         if(inBetween(fadeValue, pageMinHeight_format, pageMaxHeight_format)) {
             stamp.style.opacity = "1";
             fadeSuperLike_btn.style.opacity = "0"; 
-
+            
         }
         else {        
             stamp.style.opacity = `${fadeValue * 5}`
             fadeSuperLike_btn.style.opacity = `${fadeValue * 5}`; 
             console.log(fadeValue); 
         }
-        // inBetween(fadeValue, pageMinHeight_format, pageMaxHeight_format) ? stamp.style.opacity = "1" : stamp.style.opacity = `${fadeValue * 5}`;  
     }
 
-    function inBetween(val, min, max) {
-        return val > min && val < max; 
+    function fadeActionBtn(actionArr) {
+        actionArr[0].style.display = "inline"; 
+        actionArr[1].style.display = "none"
+        actionArr[2].style.opacity = "0"; 
     }
-    /*  
-    function toggleIcons(id)
-        const interactionIconContainer = interactiveBtns.getElementById(id);
-        if(replaced) {
-            
-        }  
-        interactionIconContainer.firstChildElement.classList.replace(defaultIcon, whiteIcon); 
-        replaced = true; 
-    */
-}); 
 
 
-/*
-    fadeButtons = document.querySelectorAll('.js-fade-button'); 
-    fadeButtons[0].style.opacity = '...'; 
-
-    function toggleIcons() {
-
-    }
 */

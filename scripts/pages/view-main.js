@@ -18,30 +18,17 @@ interactiveBtns.forEach((button) => {
 // make the slider buttons appear/disappear on hover:
 const keenSlider = document.querySelector('.js-keen-slider'); 
 const keenSliderContainer = document.querySelector('.js-keen-slider-button-container'); 
+const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
 
-/*
-    1. assuming only the interactive buttons hava the data attribute: 
-    interactiveBtns.forEach(interactiveBtn => {
-        if(interactiveBtn.dataset.iconType === "star") {
-            starIcon_Arr.push(interactiveBtn); 
-        }    
-        else if(interactiveBtn.dataset.iconType === "heart") {
-            heartIcon_Arr.push(interactiveBtn); 
-        }
-        else if(interactiveBtn.dataset.icoonType === "rejection") {
-            rejectionIcon_Arr.push(interactiveBtn); 
-        }
-    })
-*/
-
-keenSlider.addEventListener('mouseenter', () => {
+keenSliderImageContainer.addEventListener('mouseenter', () => {
     const animationPromise = keenSliderContainer.animate(makeSmoothButtonAppearance, keenSliderContainer_timing).finished; 
     animationPromise.then(() => {
         keenSliderContainer.classList.add('active');
+        console.log('you are inside the keen slider'); 
     })
 }); 
 
-keenSlider.addEventListener('mouseleave', () => {
+keenSliderImageContainer.addEventListener('mouseleave', () => {
     const animationPromise = keenSliderContainer.animate(makeSmoothButtonDisappearance, keenSliderContainer_timing).finished; 
     animationPromise.then(() => {
         keenSliderContainer.classList.remove('active');
@@ -155,6 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let targetY = 0; 
     let previousMouseX = 0; 
     let previousMouseY = 0; 
+    let fadeValue = 0;
+    let fadeValueFor_X = 0;  
+    let fadeValueFor_Y = 0; 
+
     const pageMaxWidth = document.querySelector('.js-main').clientWidth; 
     const pageMinWidth = Math.floor(pageMaxWidth/4); 
     const pageMaxWidth_format = Number((pageMaxWidth/1000).toFixed(3)); 
@@ -167,12 +158,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageMinHeight_format = Number((pageMinHeight/1000).toFixed(3));
     console.log(pageMinHeight_format); 
 
-    const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
     const stampArr = document.querySelectorAll('.js-stamp'); 
     const superLikeAction_Arr = document.querySelectorAll('[data-action-type="superLike"]'); 
     const rejectAction_Arr = document.querySelectorAll('[data-action-type="reject"]'); 
     const likeAction_Arr = document.querySelectorAll('[data-action-type="like"]'); 
-    const actionBtns = document.querySelectorAll('.js-fade-button'); 
+
+    const action_Arr = [superLikeAction_Arr, rejectAction_Arr, likeAction_Arr];
 
     keenSliderImageContainer.addEventListener('mousedown', e => {
         isDragging = true; 
@@ -183,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     keenSliderImageContainer.addEventListener('mouseup', () => {
-        console.log('image was removed'); 
+        inBetween(Number(fadeValueFor_X), pageMinWidth_format, pageMaxWidth_format) || inBetween(Number(fadeValueFor_Y), pageMinHeight_format, pageMaxHeight_format) ? keenSliderImageContainer.remove() : (setToDefaultPos()); 
         isDragging = false; 
         keenSliderImageContainer.removeEventListener('mousemove', move);
     });
@@ -220,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(targetX / maxAngleForContainer); 
     }
 
-    let fadeValue = 0; 
     let stopFading = false; 
 
     function displayStamp() {
@@ -275,15 +265,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     */
     function handleStamp(stamp, coord, min_format, max_format) {  
-        fadeValue = getCustomFadeValue(coord); 
+        fadeValue = getCustomFadeValue(coord);
+
+        coord === targetX ? fadeValueFor_X = fadeValue : fadeValueFor_Y = fadeValue;  
         if(inBetween(fadeValue, min_format, max_format)) {
             stopFading = true; 
             stamp.style.opacity = "1"; 
+            console.log('I reached the point!')
         }
         else {        
             stopFading = false; 
             stamp.style.opacity = `${fadeValue * 5}`; 
-            console.log(fadeValue)
         }
     }
 
@@ -296,14 +288,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function fadeActionBtn(actionArr, coord) {
-        actionBtns.forEach((actionBtn) => {
-            actionBtn.style.opacity = "0"; 
+        action_Arr.forEach((action) => {
+            action[0].classList.remove('outline-hidden');
+            action[1].style.display = "inline";
+            action[2].style.display = "none"; 
+            action[3].style.opacity = "0"; 
         })
         fadeValue = getCustomFadeValue(coord); 
         const scaleVal = coord === targetX ? 3 : 5.2; 
         stopFading ? (actionArr[0].classList.remove('outline-hidden'), actionArr[1].style.display = "inline", actionArr[2].style.display = "none", actionArr[3].style.opacity = "0")
                    : (actionArr[0].classList.add('outline-hidden'), actionArr[1].style.display = "none", actionArr[2].style.display = "inline", actionArr[3].style.opacity = `${fadeValue * 5}`, actionArr[3].style.transform = `scale(${fadeValue * scaleVal})`); 
     }
+
+    function setToDefaultPos() {
+        targetX = 0; 
+        targetY = 0; 
+        keenSliderImageContainer.style.left = 0; 
+        keenSliderImageContainer.style.top = 0; 
+        keenSliderImageContainer.style.transform = "rotate(0)"; 
+        stampArr.forEach((stamp) => {
+            stamp.style.opacity = "0"; 
+        }); 
+        action_Arr.forEach((action) => {
+            action[0].classList.remove('outline-hidden'); 
+            action[1].style.display = "inline";
+            action[2].style.display = "none"; 
+            action[3].style.opacity = "0";  
+        })
+    }
+    // const arr = superLikeActionArr,  
 }); 
 /*
     make stopFading value a true, each time, there is a switch to either direction; 

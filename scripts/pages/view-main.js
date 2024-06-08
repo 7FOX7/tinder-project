@@ -1,67 +1,147 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // make the buttons increase/decrease the size on hover:
-
-const interactiveBtns = document.querySelectorAll('.js-interactive-button'); 
-
-interactiveBtns.forEach((button) => {
-    const interactionIcon = button.querySelector('.js-interaction-icon');
-    interactionIcon.style.transition = "0.3s"; 
-    button.addEventListener('mouseenter', () => { 
-        interactionIcon.style.transform = "scale(1.2)"; 
-    });
-    button.addEventListener('mouseleave', () => {
-        interactionIcon.style.transform = "none"; 
-    }); 
-})
-
-/////////////////////////////////////////////////////////////////////////////////////
-// make the slider buttons appear/disappear on hover:
-const keenSlider = document.querySelector('.js-keen-slider'); 
-const keenSliderContainer = document.querySelector('.js-keen-slider-button-container'); 
-const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
-
-keenSliderImageContainer.addEventListener('mouseenter', () => {
-    const animationPromise = keenSliderContainer.animate(makeSmoothButtonAppearance, keenSliderContainer_timing).finished; 
-    animationPromise.then(() => {
-        keenSliderContainer.classList.add('active');
-        console.log('you are inside the keen slider'); 
-    })
-}); 
-
-keenSliderImageContainer.addEventListener('mouseleave', () => {
-    const animationPromise = keenSliderContainer.animate(makeSmoothButtonDisappearance, keenSliderContainer_timing).finished; 
-    animationPromise.then(() => {
-        keenSliderContainer.classList.remove('active');
-    })
-});
-
-const makeSmoothButtonAppearance = [
-    {opacity: "0"},
-    {opacity: "0.5"},
-    {opacity: "1"}
-];
-const makeSmoothButtonDisappearance = [
-    {opacity: "1"},
-    {opacity: "0.5"},
-    {opacity: "0"} 
-];
-
-const keenSliderContainer_timing = {
-    duration: 200
-};
+import {profiles} from './profiles/profiles.js'; 
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    const pageMaxWidth = document.querySelector('.js-main').clientWidth; 
+    const pageMinWidth = Math.floor(pageMaxWidth/4); 
+    const pageMaxWidth_format = Number((pageMaxWidth/1000).toFixed(3)); 
+    const pageMinWidth_format = Number((pageMinWidth/1000).toFixed(3)); 
+    console.log(pageMinWidth_format); 
 
-    /////////////////////////////////////////////////////////////////////////////
-    // make the slider buttons interactive and handle the dots: 
+    const pageMaxHeight = document.querySelector('.js-main').clientHeight; 
+    const pageMinHeight = Math.floor(pageMaxHeight/5);  
+    const pageMaxHeight_format = Number((pageMaxHeight/1000).toFixed(3)); 
+    const pageMinHeight_format = Number((pageMinHeight/1000).toFixed(3));
+    console.log(pageMinHeight_format); 
+
+    const stampArr = document.querySelectorAll('.js-stamp'); 
+    const superLikeAction_Arr = document.querySelectorAll('[data-action-type="superLike"]'); 
+    const rejectAction_Arr = document.querySelectorAll('[data-action-type="reject"]'); 
+    const likeAction_Arr = document.querySelectorAll('[data-action-type="like"]'); 
+    const action_Arr = [superLikeAction_Arr, rejectAction_Arr, likeAction_Arr];
+
+    const keenSliderContainer = document.querySelector('.js-keen-slider-button-container'); 
+    const interactiveBtns = document.querySelectorAll('.js-interactive-button'); 
+    const keenSlider = document.querySelector('.js-keen-slider'); 
+    const keenSliderImageContainer = document.querySelector('.js-keen-slider-container');
+
     let sliderPosition = 0; 
     let dotPosition = -1; 
     const sliderImageArr = [];
     const sliderDotArr = []; 
-
     const nextSlide_Button = document.querySelector('.js-next-slider-button');
     const previousSlide_Button = document.querySelector('.js-previous-slider-button'); 
+
+
+    let isDragging = false; 
+    let targetX = 0; 
+    let targetY = 0; 
+    let previousMouseX = 0; 
+    let previousMouseY = 0; 
+    let fadeValue = 0;
+    let fadeValueFor_X = 0;  
+    let fadeValueFor_Y = 0; 
+
+    interactiveBtns.forEach((button) => {
+        const interactionIcon = button.querySelector('.js-interaction-icon');
+        interactionIcon.style.transition = "0.3s"; 
+        button.addEventListener('mouseenter', () => { 
+            interactionIcon.style.transform = "scale(1.2)"; 
+        });
+        button.addEventListener('mouseleave', () => {
+            interactionIcon.style.transform = "none"; 
+        }); 
+    })
+
+    const profileContainers = document.querySelectorAll('.js-profile-container'); 
+    profileContainers.forEach((profileContainer) => {
+        var move = function move(e) {
+            if(isDragging) {
+                const deltaCoordinate = {
+                    x: e.clientX - previousMouseX, 
+                    y: e.clientY - previousMouseY
+                }
+                targetX += deltaCoordinate.x; 
+                targetY += deltaCoordinate.y; 
+    
+                previousMouseX = e.clientX; 
+                previousMouseY = e.clientY; 
+                profileContainer.style.left = `${targetX}px`; 
+                profileContainer.style.top = `${targetY}px`;
+                console.log(`targetY: ${targetY}, targetX: ${targetX}`);
+                
+                rotateCard(profileContainer); 
+                displayStamp(); 
+            }
+        }
+
+        profileContainer.addEventListener('mouseenter', () => {
+            const animationPromise = keenSliderContainer.animate(makeSmoothButtonAppearance, keenSliderContainer_timing).finished; 
+            animationPromise.then(() => {
+                keenSliderContainer.classList.add('active');
+                console.log('you are inside the keen slider'); 
+            })
+        }); 
+
+        profileContainer.addEventListener('mouseleave', () => {
+            const animationPromise = keenSliderContainer.animate(makeSmoothButtonDisappearance, keenSliderContainer_timing).finished; 
+            animationPromise.then(() => {
+                keenSliderContainer.classList.remove('active');
+            })
+        }); 
+
+        profileContainer.addEventListener('mousedown', e => {
+            isDragging = true; 
+            previousMouseX = e.clientX; 
+            previousMouseY = e.clientY; 
+            profileContainer.addEventListener('mousemove', move); 
+        });        
+
+        profileContainer.addEventListener('mouseup', () => {
+            inBetween(Number(fadeValueFor_X), pageMinWidth_format, pageMaxWidth_format) || inBetween(Number(fadeValueFor_Y), pageMinHeight_format, pageMaxHeight_format) ? profileContainer.remove() : (setToDefaultPos(profileContainer)); 
+            isDragging = false; 
+            profileContainer.removeEventListener('mousemove', move);
+        });
+    })
+
+    /////////////////////////////////////////////////////////////////////////////////////
+    // make the slider buttons appear/disappear on hover:
+    
+
+    // keenSliderImageContainer.addEventListener('mouseenter', () => {
+    //     const animationPromise = keenSliderContainer.animate(makeSmoothButtonAppearance, keenSliderContainer_timing).finished; 
+    //         animationPromise.then(() => {
+    //             keenSliderContainer.classList.add('active');
+    //             console.log('you are inside the keen slider'); 
+    //     })
+    // }); 
+
+    // keenSliderImageContainer.addEventListener('mouseleave', () => {
+    //     const animationPromise = keenSliderContainer.animate(makeSmoothButtonDisappearance, keenSliderContainer_timing).finished; 
+    //     animationPromise.then(() => {
+    //         keenSliderContainer.classList.remove('active');
+    //     })
+    // });
+
+    const makeSmoothButtonAppearance = [
+        {opacity: "0"},
+        {opacity: "0.5"},
+        {opacity: "1"}
+    ];
+    const makeSmoothButtonDisappearance = [
+        {opacity: "1"},
+        {opacity: "0.5"},
+        {opacity: "0"} 
+    ];
+
+    const keenSliderContainer_timing = {
+        duration: 200
+    };
+
+    /////////////////////////////////////////////////////////////////////////////
+    // make the slider buttons interactive and handle the dots: 
 
     function setDefault() {
         nextSlide_Button.style.visibility = "visible"; 
@@ -137,73 +217,47 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /////////////////////////////////////////////////////////////////////////////
     // make the image container draggable and show the stamp: 
-    let isDragging = false; 
-    let targetX = 0; 
-    let targetY = 0; 
-    let previousMouseX = 0; 
-    let previousMouseY = 0; 
-    let fadeValue = 0;
-    let fadeValueFor_X = 0;  
-    let fadeValueFor_Y = 0; 
-
-    const pageMaxWidth = document.querySelector('.js-main').clientWidth; 
-    const pageMinWidth = Math.floor(pageMaxWidth/4); 
-    const pageMaxWidth_format = Number((pageMaxWidth/1000).toFixed(3)); 
-    const pageMinWidth_format = Number((pageMinWidth/1000).toFixed(3)); 
-    console.log(pageMinWidth_format); 
-
-    const pageMaxHeight = document.querySelector('.js-main').clientHeight; 
-    const pageMinHeight = Math.floor(pageMaxHeight/5);  
-    const pageMaxHeight_format = Number((pageMaxHeight/1000).toFixed(3)); 
-    const pageMinHeight_format = Number((pageMinHeight/1000).toFixed(3));
-    console.log(pageMinHeight_format); 
-
-    const stampArr = document.querySelectorAll('.js-stamp'); 
-    const superLikeAction_Arr = document.querySelectorAll('[data-action-type="superLike"]'); 
-    const rejectAction_Arr = document.querySelectorAll('[data-action-type="reject"]'); 
-    const likeAction_Arr = document.querySelectorAll('[data-action-type="like"]'); 
-
-    const action_Arr = [superLikeAction_Arr, rejectAction_Arr, likeAction_Arr];
-
-    keenSliderImageContainer.addEventListener('mousedown', e => {
-        isDragging = true; 
-        previousMouseX = e.clientX; 
-        previousMouseY = e.clientY; 
-        keenSliderImageContainer.addEventListener('mousemove', move); 
-    });
 
 
-    keenSliderImageContainer.addEventListener('mouseup', () => {
-        inBetween(Number(fadeValueFor_X), pageMinWidth_format, pageMaxWidth_format) || inBetween(Number(fadeValueFor_Y), pageMinHeight_format, pageMaxHeight_format) ? keenSliderImageContainer.remove() : (setToDefaultPos()); 
-        isDragging = false; 
-        keenSliderImageContainer.removeEventListener('mousemove', move);
-    });
 
-    function move(e) {
-        if(isDragging) {
-            const deltaCoordinate = {
-                x: e.clientX - previousMouseX, 
-                y: e.clientY - previousMouseY
-            }
-            targetX += deltaCoordinate.x; 
-            targetY += deltaCoordinate.y; 
+    // keenSliderImageContainer.addEventListener('mousedown', e => {
+    //     isDragging = true; 
+    //     previousMouseX = e.clientX; 
+    //     previousMouseY = e.clientY; 
+    //     keenSliderImageContainer.addEventListener('mousemove', move); 
+    // });
 
-            previousMouseX = e.clientX; 
-            previousMouseY = e.clientY; 
-            keenSliderImageContainer.style.left = `${targetX}px`; 
-            keenSliderImageContainer.style.top = `${targetY}px`;
-            console.log(`targetY: ${targetY}, targetX: ${targetX}`);
+
+    // keenSliderImageContainer.addEventListener('mouseup', () => {
+    //     inBetween(Number(fadeValueFor_X), pageMinWidth_format, pageMaxWidth_format) || inBetween(Number(fadeValueFor_Y), pageMinHeight_format, pageMaxHeight_format) ? keenSliderImageContainer.remove() : (setToDefaultPos()); 
+    //     isDragging = false; 
+    //     keenSliderImageContainer.removeEventListener('mousemove', move);
+    // });
+
+    // function move(e) {
+    //     if(isDragging) {
+    //         const deltaCoordinate = {
+    //             x: e.clientX - previousMouseX, 
+    //             y: e.clientY - previousMouseY
+    //         }
+    //         targetX += deltaCoordinate.x; 
+    //         targetY += deltaCoordinate.y; 
+
+    //         previousMouseX = e.clientX; 
+    //         previousMouseY = e.clientY; 
+    //         profileImageContainer.style.left = `${targetX}px`; 
+    //         profileImageContainer.style.top = `${targetY}px`;
+    //         console.log(`targetY: ${targetY}, targetX: ${targetX}`);
             
-            rotateCard(); 
-            displayStamp(); 
-        }
-    }
+    //         rotateCard(); 
+    //         displayStamp(); 
+    //     }
+    // }
 
     /////////////////////////////////////////////////////////////////////////////
     // make the image container rotate when swiping left / right:  
-    function rotateCard() {
-        keenSliderImageContainer.style.transform = `rotate(${getCustomRotateValue()}deg)`; 
-        console.log(getCustomRotateValue()); 
+    function rotateCard(profileContainer) {
+        profileContainer.style.transform = `rotate(${getCustomRotateValue()}deg)`; 
     }
 
     function getCustomRotateValue() {
@@ -230,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fadeActionBtn(likeAction_Arr, targetX); 
         }  
     }
+
     // function 
     // function handleStamp(stamp) { 
     //     let fadeValue = Math.abs(targetX/1000).toFixed(3);
@@ -300,12 +355,12 @@ document.addEventListener('DOMContentLoaded', () => {
                    : (actionArr[0].classList.add('outline-hidden'), actionArr[1].style.display = "none", actionArr[2].style.display = "inline", actionArr[3].style.opacity = `${fadeValue * 5}`, actionArr[3].style.transform = `scale(${fadeValue * scaleVal})`); 
     }
 
-    function setToDefaultPos() {
+    function setToDefaultPos(profileContainer) {
         targetX = 0; 
         targetY = 0; 
-        keenSliderImageContainer.style.left = 0; 
-        keenSliderImageContainer.style.top = 0; 
-        keenSliderImageContainer.style.transform = "rotate(0)"; 
+        profileContainer.style.left = 0; 
+        profileContainer.style.top = 0; 
+        profileContainer.style.transform = "rotate(0)"; 
         stampArr.forEach((stamp) => {
             stamp.style.opacity = "0"; 
         }); 

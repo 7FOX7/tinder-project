@@ -51,7 +51,7 @@ aside {
     align-items: center;
 }
 
-.profile-container {
+.navigation .profile-container {
     color: #fff; 
     display: flex; 
     width: 30%; 

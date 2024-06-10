@@ -27,7 +27,7 @@ main .image-cards-container {
 }
 
 main .image-cards-container .user-info-container {
-    z-index: 7; 
+    z-index: 3; 
     position: absolute; 
     width: 100%; 
     height: 25%; 
@@ -52,6 +52,7 @@ main .image-cards-container .button-section {
     width: 100%; 
     height: 15%; 
     background-color: transparent;  
+    z-index: 12; 
 }
 
 .button-section .button-container {
@@ -83,6 +84,7 @@ main .image-cards-container .button-section {
     position: absolute; 
     width: 100%; 
     height: 100%;  
+    overflow: hidden; 
 }
 
 .image-cards-container .keen-slider-container .profile-container .keen-slider {
@@ -164,7 +166,7 @@ main .image-cards-container .button-section {
     transform: translateY(-50%);
     visibility: visible;
     opacity: 0; 
-    z-index: 20;
+    z-index: 5;
 }
 
 .keen-slider .keen-slider-button-container .keen-slider-button {
@@ -175,16 +177,16 @@ main .image-cards-container .button-section {
     opacity: 1; 
 }
 
-.keen-slider-container .stamp {
+.keen-slider-container .profile-container .stamp {
     position: absolute; 
-    z-index: 15; 
+    z-index: 4; 
     width: 320px; 
     height: 320px;
     opacity: 0; 
 }
 
 .image-cards-container .keen-slider-container .profile-container .slide-dot-container {
-    z-index: 20; 
+    z-index: 5; 
     position: absolute; 
     display: flex; 
     align-items: center; 

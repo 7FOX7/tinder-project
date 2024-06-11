@@ -1,0 +1,59 @@
+.low-level-content {
+    cursor: default;  
+    height: 10%; 
+    width: 55%; 
+    position: absolute; 
+    top: 89%; 
+    left: 23.5%; 
+}
+
+.low-level-content .container {
+    width: 100%; 
+    height: 100%;  
+    display: flex; 
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: space-between;
+    padding-inline: 15px;
+    text-wrap: nowrap;
+    font-weight: 600;
+    color: rgb(41, 41, 41);
+    font-size: 0.8em; 
+}
+
+.container .hide-button-container {
+    width: auto; 
+}
+
+.low-level-content .container .key-container {
+    display: flex; 
+    align-items: center; 
+}
+
+.low-level-content .container .key-container span {
+    display: flex; 
+    margin-inline: 1px;
+}
+
+.low-level-content .container img {
+    width: 23px;
+} 
+
+.container .hide-button-container button {
+    color: #fff; 
+    background-color: rgb(41, 41, 41);
+    border: none; 
+    border-radius: 20px; 
+    padding: 3px 16px; 
+    transition: 0.2s; 
+}
+
+
+.container .hide-button-container button:hover {
+    background-color:  rgb(21, 21, 21);
+}
+
+.container .enter-key-container {
+    position: relative; 
+    top: 2px;
+}

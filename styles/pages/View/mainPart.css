@@ -63,6 +63,7 @@ main .image-cards-container .button-section {
     height: 100%; 
     align-items: center;
     justify-content: space-between; 
+
 }
 
 .button-container .interactive-button .fade-button {

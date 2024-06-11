@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageMinWidth = Math.floor(pageMaxWidth/4); 
     const pageMaxWidth_format = Number((pageMaxWidth/1000).toFixed(3)); 
     const pageMinWidth_format = Number((pageMinWidth/1000).toFixed(3)); 
+    const profileRotateOnReject = -185; 
+    const profileRotateOnLike = 185; 
 
     const pageMaxHeight = document.querySelector('.js-main').clientHeight; 
     const pageMinHeight = Math.floor(pageMaxHeight/5);  
@@ -22,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }); 
     });
 
+    /*
+        the problem: when clicking on the reject / supelike / like button, the card should go to the corresponding angle.
+        what we need to have: the button source and the image card we want add animation to. 
+    */
+
     console.log(pageMinHeight_format)
     console.log(pageMinHeight); 
     const profiles = Array.from(document.querySelectorAll('.js-profile-container')); 
@@ -29,6 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const rejectAction_Arr = document.querySelectorAll(`[data-action-type="reject"]`); 
     const likeAction_Arr = document.querySelectorAll(`[data-action-type="like"]`); 
     const action_Arr = [superLikeAction_Arr, rejectAction_Arr, likeAction_Arr];
+    const rejectBtn = document.querySelector('button[data-action-type="reject"]'); 
+    const likeBtn = document.querySelector('button[data-action-type="like"]'); 
+    const superLikeBtn = document.querySelector('button[data-action-type="superLike"]'); 
+
+    
+    likeBtn.addEventListener('click', () => {
+        console.log('you clicked on the like button'); 
+    }); 
+    superLikeBtn.addEventListener('click', () => {
+        console.log('you clicked on the super like button'); 
+    }); 
 
     let targetX = 0; 
     let targetY = 0; 
@@ -83,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         profileContainer.addEventListener('mouseup', onMouseUp);
 
         function onMouseEnter() {
-            const animationPromise = keenSliderContainer.animate(makeSmoothButtonAppearance, keenSliderContainer_timing).finished; 
+            const animationPromise = keenSliderContainer.animate(makeSmoothAppearance, keenSliderContainer_timing).finished; 
             animationPromise.then(() => {
                 keenSliderContainer.classList.add('active');
                 console.log('you are inside the keen slider');  
@@ -91,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function onMouseLeave() {
-            const animationPromise = keenSliderContainer.animate(makeSmoothButtonDisappearance, keenSliderContainer_timing).finished; 
+            const animationPromise = keenSliderContainer.animate(makeSmoothDisappearance, keenSliderContainer_timing).finished; 
             animationPromise.then(() => {
                 keenSliderContainer.classList.remove('active');
             }); 
@@ -108,25 +126,73 @@ document.addEventListener('DOMContentLoaded', () => {
             profileContainer.addEventListener('mousemove', move); 
         }
 
-        function onMouseUp() {
+        function onMouseUp(e) {
             isDragging = false;
-            profileContainer.removeEventListener('mousemove', move);
+            profileContainer.removeEventListener('mousemove', move); 
             if(inBetween(Number(fadeValueFor_X), pageMinWidth_format, pageMaxWidth_format) || inBetween(Number(fadeValueFor_Y), pageMinHeight_format, pageMaxHeight_format)) { 
-                profiles.shift(); 
-                // for some reason, to the end of the profiles, (on 5th round), profile1 is appended instead of profile2 
-                profileContainer.removeEventListener('mouseup', onMouseUp); 
-                profileContainer.removeEventListener('mousedown', onMouseDown); 
-                profileContainer.removeEventListener('mouseenter', onMouseEnter); 
-                profileContainer.removeEventListener('mouseenter', onMouseLeave); 
+                showNextProfile(e); 
                 handleImageCardAnimation(profileContainer).then(() => {
-                    profileContainer.style.zIndex = "0"; 
-                    nextProfile.style.zIndex = "0";          
-                    setToDefaultPos(profileContainer);
-                    profiles.push(currentProfile); 
-                    renderProfileCards(); 
+                    onCardReplacement(); 
                 }); 
             }
             else setToDefaultPos(profileContainer);
+        }
+
+        function showNextProfile(e) {
+            profileContainer.removeEventListener('mouseup', onMouseUp); 
+            profileContainer.removeEventListener('mousedown', onMouseDown); 
+            profileContainer.removeEventListener('mouseenter', onMouseEnter); 
+            profileContainer.removeEventListener('mouseenter', onMouseLeave); 
+
+            if (e.currentTarget !== (rejectBtn || likeBtn || superLikeBtn)) return;  
+            else if (e.currentTarget === rejectBtn) {
+                stampArr[0].style.display = "inline"; 
+                stampArr[0].animate(makeSmoothAppearance, 300).finished.then(() => {
+                    profileContainer.animate(
+                        {
+                            left: [`${targetX}px`, `-${pageMaxWidth}px`], 
+                            transform: `rotate(${getCustomRotateValue(profileRotateOnReject)}deg)`
+                        }, 5000
+                    ).finished.then(() => {
+                        onCardReplacement();
+                    }); 
+                })
+            }
+            else if (e.currentTarget === likeBtn) {
+                stampArr[1].style.display = "inline"; 
+                stampArr[1].animate(makeSmoothAppearance, 300).finished.then(() => {
+                    profileContainer.animate(
+                        {
+                            left: [`${targetX}px`, `${pageMaxWidth}px`], 
+                            transform: `rotate(${getCustomRotateValue(profileRotateOnLike)}deg)`
+                        }, 200
+                    ).finished.then(() => {
+                        onCardReplacement(); 
+                    }); 
+                }); 
+            }
+            else if (e.currentTarget === superLikeBtn) {
+                stampArr[2].style.display = "inline"; 
+                stampArr[2].animate(makeSmoothAppearance, 300).finished.then(() => {
+                    profileContainer.animate(
+                        {
+                            top: [`${targetY}px`, `${pageMaxHeight}px`]
+                        }, 100
+                    )
+                    onCardReplacement(); 
+                })
+            }
+
+            removeEventListener('click', showNextProfile); 
+        }
+
+        function onCardReplacement() {
+            profiles.shift(); 
+            profileContainer.style.zIndex = "0"; 
+            nextProfile.style.zIndex = "0";          
+            setToDefaultPos(profileContainer);
+            profiles.push(currentProfile); 
+            renderProfileCards(); 
         }
 
         function handleImageCardAnimation(profileContainer) {
@@ -156,7 +222,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             dotContainer.childElementCount !== (sliderDotArr.length) ? dotContainer.append(dot) : 0; 
         }); 
-    
+        
+        rejectBtn.addEventListener('click', showNextProfile); 
+
         nextSlide_Button.addEventListener('click', () => {
             sliderPosition++; 
             updateSlide(); 
@@ -223,11 +291,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function rotateCard(profileContainer) {
             profileContainer.style.transform = `rotate(${getCustomRotateValue(targetX)}deg)`; 
-        }
-    
-        function getCustomRotateValue(coord) {
-            const maxAngleForContainer = 27; 
-            return Math.floor(coord / maxAngleForContainer); 
         }
     
         let stopFading = false; 
@@ -308,14 +371,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return; 
     }
 
-    const makeSmoothButtonAppearance = [
+    const makeSmoothAppearance = [
         {opacity: "0"},
-        {opacity: "0.5"},
         {opacity: "1"}
     ];
-    const makeSmoothButtonDisappearance = [
+
+    const makeSmoothDisappearance = [
         {opacity: "1"},
-        {opacity: "0.5"},
         {opacity: "0"} 
     ];
 
@@ -329,6 +391,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function getCustomFadeValue(coord) {
         return Math.abs(coord/1000).toFixed(3); 
+    }
+        
+    function getCustomRotateValue(coord) {
+        const maxAngleForContainer = 27; 
+        return Math.floor(coord / maxAngleForContainer); 
     }
 }); 
 

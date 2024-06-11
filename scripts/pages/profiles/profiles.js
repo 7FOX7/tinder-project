@@ -21,7 +21,7 @@ export const profiles = [
                 <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item" data-type="profileContainer1">
                     <div class="image sampleImg3"></div>
                 </span>
-                <div class="keen-slider-button-container js-keen-slider-button-container">
+                <div class="keen-slider-button-container js-keen-slider-button-container unselectable">
                     <button class="js-previous-slider-button keen-slider-button">
                         <span>
                             <img src="../images/arrow_previous.png" draggable="false">
@@ -35,7 +35,7 @@ export const profiles = [
                 </div>
             </div>
             <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 61%;"></div>
-            <div class="js-user-info-container user-info-container">
+            <div class="js-user-info-container user-info-container unselectable">
                 <div class="user-info-content">
                     <div style="display: flex; align-items: center;">
                         <div style="width: 10px; height: 10px; background-color: rgb(48, 255, 48); margin-right: 5px; border-radius: 50%;"></div>
@@ -94,7 +94,7 @@ export const profiles = [
                 <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item" data-type="profileContainer2">
                     <div class="image sampleImg3"></div>
                 </span>
-                <div class="keen-slider-button-container js-keen-slider-button-container">
+                <div class="keen-slider-button-container js-keen-slider-button-container unselectable">
                     <button class="js-previous-slider-button keen-slider-button">
                         <span>
                             <img src="../images/arrow_previous.png" draggable="false">
@@ -108,7 +108,7 @@ export const profiles = [
                 </div>
             </div>
             <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 61%;"></div>
-            <div class="js-user-info-container user-info-container">
+            <div class="js-user-info-container user-info-container unselectable">
                 <div class="user-info-content">
                     <div style="display: flex; align-items: center;">
                         <div style="width: 10px; height: 10px; background-color: rgb(48, 255, 48); margin-right: 5px; border-radius: 50%;"></div>
@@ -167,7 +167,7 @@ export const profiles = [
                 <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item" data-type="profileContainer3">
                     <div class="image sampleImg3"></div>
                 </span>
-                <div class="keen-slider-button-container js-keen-slider-button-container">
+                <div class="keen-slider-button-container js-keen-slider-button-container unselectable">
                     <button class="js-previous-slider-button keen-slider-button">
                         <span>
                             <img src="../images/arrow_previous.png" draggable="false">
@@ -181,7 +181,7 @@ export const profiles = [
                 </div>
             </div>
             <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 61%;"></div>
-            <div class="js-user-info-container user-info-container">
+            <div class="js-user-info-container user-info-container unselectable">
                 <div class="user-info-content">
                     <div style="display: flex; align-items: center;">
                         <div style="width: 10px; height: 10px; background-color: rgb(48, 255, 48); margin-right: 5px; border-radius: 50%;"></div>
@@ -240,7 +240,7 @@ export const profiles = [
                 <span class="keen-slider-item keen-slider-item--hidden js-keen-slider-item" data-type="profileContainer4">
                     <div class="image sampleImg3"></div>
                 </span>
-                <div class="keen-slider-button-container js-keen-slider-button-container">
+                <div class="keen-slider-button-container js-keen-slider-button-container unselectable">
                     <button class="js-previous-slider-button keen-slider-button">
                         <span>
                             <img src="../images/arrow_previous.png" draggable="false">
@@ -254,7 +254,7 @@ export const profiles = [
                 </div>
             </div>
             <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 61%;"></div>
-            <div class="js-user-info-container user-info-container">
+            <div class="js-user-info-container user-info-container unselectable">
                 <div class="user-info-content">
                     <div style="display: flex; align-items: center;">
                         <div style="width: 10px; height: 10px; background-color: rgb(48, 255, 48); margin-right: 5px; border-radius: 50%;"></div>

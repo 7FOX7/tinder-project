@@ -22,15 +22,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }); 
     });
 
+    console.log(pageMinHeight_format)
+    console.log(pageMinHeight); 
     const profiles = Array.from(document.querySelectorAll('.js-profile-container')); 
     const superLikeAction_Arr = document.querySelectorAll(`[data-action-type="superLike"]`); 
     const rejectAction_Arr = document.querySelectorAll(`[data-action-type="reject"]`); 
     const likeAction_Arr = document.querySelectorAll(`[data-action-type="like"]`); 
     const action_Arr = [superLikeAction_Arr, rejectAction_Arr, likeAction_Arr];
 
-    // const keenSliderContainer = document.querySelector('.js-keen-slider-container'); 
-    // console.log(keenSliderContainer.children[0]); 
-    // console.log(keenSliderContainer.lastElementChild)
+    let targetX = 0; 
+    let targetY = 0; 
+    let fadeValue = 0;
+    let fadeValueFor_X = 0;  
+    let fadeValueFor_Y = 0;  
 
     function renderProfileCards() {
         const currentProfile = getCurrentFrom(profiles); 
@@ -52,13 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let sliderPosition = 0; 
         let dotPosition = -1; 
         let isDragging = false; 
-        let targetX = 0; 
-        let targetY = 0; 
         let previousMouseX = 0; 
         let previousMouseY = 0; 
-        let fadeValue = 0;
-        let fadeValueFor_X = 0;  
-        let fadeValueFor_Y = 0;  
 
         images.forEach((image) => {
             dotPosition++; 
@@ -78,40 +77,24 @@ document.addEventListener('DOMContentLoaded', () => {
     
         setDefault(); 
 
-        profileContainer.addEventListener('mouseenter', () => {
+        profileContainer.addEventListener('mouseenter', onMouseEnter); 
+        profileContainer.addEventListener('mouseleave', onMouseLeave); 
+        profileContainer.addEventListener('mousedown', onMouseDown);        
+        profileContainer.addEventListener('mouseup', onMouseUp);
+
+        function onMouseEnter() {
             const animationPromise = keenSliderContainer.animate(makeSmoothButtonAppearance, keenSliderContainer_timing).finished; 
             animationPromise.then(() => {
                 keenSliderContainer.classList.add('active');
                 console.log('you are inside the keen slider');  
             })
-        }); 
+        }
 
-        profileContainer.addEventListener('mouseleave', () => {
+        function onMouseLeave() {
             const animationPromise = keenSliderContainer.animate(makeSmoothButtonDisappearance, keenSliderContainer_timing).finished; 
             animationPromise.then(() => {
                 keenSliderContainer.classList.remove('active');
-            })
-        }); 
-
-        profileContainer.addEventListener('mousedown', onMouseDown);        
-
-        profileContainer.addEventListener('mouseup', onMouseUp);
-
-        function onMouseUp() {
-            isDragging = false;
-            profileContainer.removeEventListener('mousemove', move);
-            if(inBetween(Number(fadeValueFor_X), pageMinWidth_format, pageMaxWidth_format) || inBetween(Number(fadeValueFor_Y), pageMinHeight_format, pageMaxHeight_format)) {
-                profiles.shift(); 
-                // for some reason, to the end of the profiles, (on 5th round), profile1 is appended instead of profile2 
-                profileContainer.removeEventListener('mouseup', onMouseUp); 
-                profileContainer.removeEventListener('mousedown', onMouseDown); 
-                profiles.push(currentProfile); 
-                profileContainer.style.zIndex = "0"; 
-                nextProfile.style.zIndex = "0"; 
-                setToDefaultPos(profileContainer); 
-                renderProfileCards(); 
-            }
-            else setToDefaultPos(profileContainer);
+            }); 
         }
 
         function onMouseDown(e) {
@@ -123,6 +106,45 @@ document.addEventListener('DOMContentLoaded', () => {
             previousMouseY = e.clientY; 
             console.log(`you pressed on ${data} profile container`); 
             profileContainer.addEventListener('mousemove', move); 
+        }
+
+        function onMouseUp() {
+            isDragging = false;
+            profileContainer.removeEventListener('mousemove', move);
+            if(inBetween(Number(fadeValueFor_X), pageMinWidth_format, pageMaxWidth_format) || inBetween(Number(fadeValueFor_Y), pageMinHeight_format, pageMaxHeight_format)) { 
+                profiles.shift(); 
+                // for some reason, to the end of the profiles, (on 5th round), profile1 is appended instead of profile2 
+                profileContainer.removeEventListener('mouseup', onMouseUp); 
+                profileContainer.removeEventListener('mousedown', onMouseDown); 
+                profileContainer.removeEventListener('mouseenter', onMouseEnter); 
+                profileContainer.removeEventListener('mouseenter', onMouseLeave); 
+                handleImageCardAnimation(profileContainer).then(() => {
+                    profileContainer.style.zIndex = "0"; 
+                    nextProfile.style.zIndex = "0";          
+                    setToDefaultPos(profileContainer);
+                    profiles.push(currentProfile); 
+                    renderProfileCards(); 
+                }); 
+            }
+            else setToDefaultPos(profileContainer);
+        }
+
+        function handleImageCardAnimation(profileContainer) {
+            return new Promise((resolve) => {
+                inBetween(Math.abs(targetY), pageMinHeight, pageMaxHeight) ? profileContainer.animate(
+                    {
+                         top: [`${targetY}px`, `${targetY * 3}px`]
+                    }, 
+                    300
+                 ).finished.then(resolve)
+                 : profileContainer.animate(
+                     {
+                         left: [`${targetX}px`, `${targetX * 3.5}px`], 
+                         transform: [`rotate(${getCustomRotateValue(targetX)}deg)`]
+                     }, 
+                     300
+                 ).finished.then(resolve) 
+            })
         }
         
         sliderDotArr[0].classList.add('active'); 
@@ -200,12 +222,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function rotateCard(profileContainer) {
-            profileContainer.style.transform = `rotate(${getCustomRotateValue()}deg)`; 
+            profileContainer.style.transform = `rotate(${getCustomRotateValue(targetX)}deg)`; 
         }
     
-        function getCustomRotateValue() {
+        function getCustomRotateValue(coord) {
             const maxAngleForContainer = 27; 
-            return Math.floor(targetX / maxAngleForContainer); 
+            return Math.floor(coord / maxAngleForContainer); 
         }
     
         let stopFading = false; 
@@ -230,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function handleStamp(stamp, coord, min_format, max_format) {  
             fadeValue = getCustomFadeValue(coord);
-    
             coord === targetX ? fadeValueFor_X = fadeValue : fadeValueFor_Y = fadeValue;  
             if(inBetween(fadeValue, min_format, max_format)) {
                 stopFading = true; 

@@ -45,25 +45,25 @@ export const profiles = [
                         <span style="font-weight: bold">Evgenii</span>
                         <span>19</span>
                         <span style="margin-left: 2px;">
-                            <img style="width: 26px;" src="../images/verified_icon.png">
+                            <img style="width: 26px;" src="../images/verified_icon.png" draggable="false">
                         </span>
                         <div class="js-interactive-button" role="button" style="float: right;">
                             <button style="display: flex; align-items: center; padding: 0; background: transparent;">
                                 <span class="js-interaction-icon">
-                                    <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;">
+                                    <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;" draggable="false">
                                 </span>
                             </button>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; font-size: 15px;">
                         <span style="margin-right: 5px;">
-                            <img style="width: 17px;" src="../images/home_icon.png">
+                            <img style="width: 17px;" src="../images/home_icon.png" draggable="false">
                         </span>
                         <span>Lives in Toronto</span>
                     </div>
                     <div style="display: flex; align-items: center; font-size: 15px;">
                         <span style="margin-right: 5px;">
-                            <img style="width: 17px;" src="../images/location_icon.png">
+                            <img style="width: 17px;" src="../images/location_icon.png" draggable="false">
                         </span>
                         <span>4 kilometers away</span>
                     </div>
@@ -118,25 +118,25 @@ export const profiles = [
                         <span style="font-weight: bold">Evgenii</span>
                         <span>20</span>
                         <span style="margin-left: 2px;">
-                            <img style="width: 26px;" src="../images/verified_icon.png">
+                            <img style="width: 26px;" src="../images/verified_icon.png" draggable="false">
                         </span>
                         <div class="js-interactive-button" role="button" style="float: right;">
                             <button style="display: flex; align-items: center; padding: 0; background-color: transparent;">
                                 <span class="js-interaction-icon">
-                                    <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;">
+                                    <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;" draggable="false">
                                 </span>
                             </button>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; font-size: 15px;">
                         <span style="margin-right: 5px;">
-                            <img style="width: 17px;" src="../images/home_icon.png">
+                            <img style="width: 17px;" src="../images/home_icon.png" draggable="false">
                         </span>
                         <span>Lives in Toronto</span>
                     </div>
                     <div style="display: flex; align-items: center; font-size: 15px;">
                         <span style="margin-right: 5px;">
-                            <img style="width: 17px;" src="../images/location_icon.png">
+                            <img style="width: 17px;" src="../images/location_icon.png" draggable="false">
                         </span>
                         <span>4 kilometers away</span>
                     </div>
@@ -191,25 +191,25 @@ export const profiles = [
                         <span style="font-weight: bold">Evgenii</span>
                         <span>21</span>
                         <span style="margin-left: 2px;">
-                            <img style="width: 26px;" src="../images/verified_icon.png">
+                            <img style="width: 26px;" src="../images/verified_icon.png" draggable="false">
                         </span>
                         <div class="js-interactive-button" role="button" style="float: right;">
                             <button style="display: flex; align-items: center; padding: 0; background-color: transparent;">
                                 <span class="js-interaction-icon">
-                                    <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;">
+                                    <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;" draggable="false">
                                 </span>
                             </button>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; font-size: 15px;">
                         <span style="margin-right: 5px;">
-                            <img style="width: 17px;" src="../images/home_icon.png">
+                            <img style="width: 17px;" src="../images/home_icon.png" draggable="false">
                         </span>
                         <span>Lives in Toronto</span>
                     </div>
                     <div style="display: flex; align-items: center; font-size: 15px;">
                         <span style="margin-right: 5px;">
-                            <img style="width: 17px;" src="../images/location_icon.png">
+                            <img style="width: 17px;" src="../images/location_icon.png" draggable="false">
                         </span>
                         <span>4 kilometers away</span>
                     </div>
@@ -264,25 +264,25 @@ export const profiles = [
                         <span style="font-weight: bold">Evgenii</span>
                         <span>22</span>
                         <span style="margin-left: 2px;">
-                            <img style="width: 26px;" src="../images/verified_icon.png">
+                            <img style="width: 26px;" src="../images/verified_icon.png" draggable="false">
                         </span>
                         <div class="js-interactive-button" role="button" style="float: right;">
                             <button style="display: flex; align-items: center; padding: 0; background-color: transparent;">
                                 <span class="js-interaction-icon">
-                                    <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;">
+                                    <img src="../images/more_info_icon.png" style="width: 30px; height: 30px;" draggable="false">
                                 </span>
                             </button>
                         </div>
                     </div>
                     <div style="display: flex; align-items: center; font-size: 15px;">
                         <span style="margin-right: 5px;">
-                            <img style="width: 17px;" src="../images/home_icon.png">
+                            <img style="width: 17px;" src="../images/home_icon.png" draggable="false">
                         </span>
                         <span>Lives in Toronto</span>
                     </div>
                     <div style="display: flex; align-items: center; font-size: 15px;">
                         <span style="margin-right: 5px;">
-                            <img style="width: 17px;" src="../images/location_icon.png">
+                            <img style="width: 17px;" src="../images/location_icon.png" draggable="false">
                         </span>
                         <span>4 kilometers away</span>
                     </div>

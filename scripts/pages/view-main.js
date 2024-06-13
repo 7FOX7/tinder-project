@@ -24,11 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }); 
     });
 
-    /*
-        the problem: when clicking on the reject / supelike / like button, the card should go to the corresponding angle.
-        what we need to have: the button source and the image card we want add animation to. 
-    */
-
     const profiles = Array.from(document.querySelectorAll('.js-profile-container')); 
     const superLikeAction_Arr = document.querySelectorAll(`[data-action-type="superLike"]`); 
     const rejectAction_Arr = document.querySelectorAll(`[data-action-type="reject"]`); 
@@ -80,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 stamp.style.display = "none"; 
             })
         }
-    
+
         setDefault(); 
 
         document.addEventListener('keydown', onKeyDown);
@@ -178,13 +173,15 @@ document.addEventListener('DOMContentLoaded', () => {
         function onCardReplacement() {
             profiles.shift(); 
             profileContainer.style.zIndex = "0"; 
-            nextProfile.style.zIndex = "0";      
+            nextProfile.style.zIndex = "0";  
+            while(dotContainer.firstChild) {
+                dotContainer.removeChild(dotContainer.lastChild); 
+            }
             sliderPosition = 0; 
             showSliderButtons(); 
-            updateSlide();    
+            updateSlide(); 
             setToDefaultPos(profileContainer);
             profiles.push(currentProfile);  
-            console.log(`renderProfileCards will be called soon. sliderPosition: ${sliderPosition}`)
             renderProfileCards(); 
         }
 
@@ -217,7 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 showSliderButtons(); 
                 updateSlide(); 
             });
-            dotContainer.childElementCount !== (sliderDotArr.length) ? dotContainer.append(dot) : 0; 
+            // dotContainer.childElementCount !== (sliderDotArr.length) ? dotContainer.append(dot) : 0; 
+            dotContainer.append(dot); 
         }); 
 
         
@@ -239,15 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
             showSliderButtons(); 
             updateSlide(); 
         }
-    
-        // function updateSlide() {
-        //     sliderImageArr.forEach((image, index) => { 
-        //         updateSlideImage(image, index); 
-        //     })
-        //     sliderDotArr.forEach((dot, index) => {
-        //         updateProgressDot(dot, index); 
-        //     }) 
-        // } 
 
         function updateSlide() {
             sliderImageArr.forEach((image, index) => {

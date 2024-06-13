@@ -45,6 +45,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let fadeValueFor_Y = 0;  
 
     function renderProfileCards() {
+        let sliderPosition = 0;
+        let isDragging = false; 
+        let previousMouseX = 0; 
+        let previousMouseY = 0;
+        console.log(`renderProfileCards func has just been called. sliderPosition: ${sliderPosition}`);  
+
         const currentProfile = getCurrentFrom(profiles); 
         currentProfile.style.zIndex = "10"; 
         const nextProfile = getNextFrom(profiles); 
@@ -61,18 +67,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const sliderImageArr = [];
         const sliderDotArr = []; 
 
-        let sliderPosition = 0; 
-        let isDragging = false; 
-        let previousMouseX = 0; 
-        let previousMouseY = 0; 
-
         images.forEach((image) => {
             const dot = document.createElement('button'); 
             sliderDotArr.push(dot); 
             sliderImageArr.push(image);
         }); 
 
-        function setDefault() {
+        function setDefault() { 
             showSliderButtons(); 
             updateSlide(); 
             stampArr.forEach((stamp) => {
@@ -177,12 +178,13 @@ document.addEventListener('DOMContentLoaded', () => {
         function onCardReplacement() {
             profiles.shift(); 
             profileContainer.style.zIndex = "0"; 
-            nextProfile.style.zIndex = "0";          
-            setToDefaultPos(profileContainer);
-            profiles.push(currentProfile); 
+            nextProfile.style.zIndex = "0";      
             sliderPosition = 0; 
             showSliderButtons(); 
-            updateSlide(); 
+            updateSlide();    
+            setToDefaultPos(profileContainer);
+            profiles.push(currentProfile);  
+            console.log(`renderProfileCards will be called soon. sliderPosition: ${sliderPosition}`)
             renderProfileCards(); 
         }
 
@@ -252,6 +254,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateSlideImage(image, index); 
                 updateDots(index); 
             })
+
+            /*
+                sliderImageArr.forEach(image, index) => {
+                    updateSlideImage(image, index); 
+                }
+                sliderDotArr.find(() => {
+                    const progressButton = sliderDotArr[sliderPosition]; 
+                    progressButton.classList.add('active');     
+                }); 
+
+                selectedDot() {
+                    const progressButton = sliderDotArr[sliderPosition]; 
+                    progressButton.classList.add('active'); 
+                }
+            */
         } 
 
         function showSliderButtons() {

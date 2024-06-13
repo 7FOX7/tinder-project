@@ -29,8 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         what we need to have: the button source and the image card we want add animation to. 
     */
 
-    console.log(pageMinHeight_format)
-    console.log(pageMinHeight); 
     const profiles = Array.from(document.querySelectorAll('.js-profile-container')); 
     const superLikeAction_Arr = document.querySelectorAll(`[data-action-type="superLike"]`); 
     const rejectAction_Arr = document.querySelectorAll(`[data-action-type="reject"]`); 
@@ -39,14 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const rejectBtn = document.querySelector('button[data-action-type="reject"]'); 
     const likeBtn = document.querySelector('button[data-action-type="like"]'); 
     const superLikeBtn = document.querySelector('button[data-action-type="superLike"]'); 
-
-    
-    likeBtn.addEventListener('click', () => {
-        console.log('you clicked on the like button'); 
-    }); 
-    superLikeBtn.addEventListener('click', () => {
-        console.log('you clicked on the super like button'); 
-    }); 
 
     let targetX = 0; 
     let targetY = 0; 
@@ -62,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = currentProfile.dataset.type;
 
         const profileContainer = document.querySelector(`[data-type="${data}"]`); 
-        const dotContainer = profileContainer.querySelector('.js-slide-dot-container')
+        const dotContainer = document.querySelector(`[data-type=${data}] .js-slide-dot-container`)
         const stampArr = document.querySelectorAll(`[data-type="${data}"] .js-stamp`); 
         const keenSliderContainer = document.querySelector(`[data-type="${data}"] .js-keen-slider-button-container`); 
         const nextSlide_Button = document.querySelector(`[data-type="${data}"] .js-next-slider-button`);
@@ -72,22 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const sliderDotArr = []; 
 
         let sliderPosition = 0; 
-        let dotPosition = -1; 
         let isDragging = false; 
         let previousMouseX = 0; 
         let previousMouseY = 0; 
 
         images.forEach((image) => {
-            dotPosition++; 
             const dot = document.createElement('button'); 
-            dot.setAttribute('id', `${dotPosition}`);
             sliderDotArr.push(dot); 
             sliderImageArr.push(image);
         }); 
 
         function setDefault() {
-            nextSlide_Button.style.visibility = "visible"; 
-            previousSlide_Button.style.visibility = "hidden"; 
+            showSliderButtons(); 
+            updateSlide(); 
             stampArr.forEach((stamp) => {
                 stamp.style.display = "none"; 
             })
@@ -95,16 +82,21 @@ document.addEventListener('DOMContentLoaded', () => {
     
         setDefault(); 
 
+        document.addEventListener('keydown', onKeyDown);
         profileContainer.addEventListener('mouseenter', onMouseEnter); 
         profileContainer.addEventListener('mouseleave', onMouseLeave); 
         profileContainer.addEventListener('mousedown', onMouseDown);        
-        profileContainer.addEventListener('mouseup', onMouseUp);
+        profileContainer.addEventListener('mouseup', onMouseUp); 
+
+        function onKeyDown(e) {
+            if(e.repeat) return;
+            (e.key === "ArrowLeft" || e.key === "ArrowRight" || e.key === "Enter") ? showNextProfile(e) : console.log(`${e.key} key is not acceptable`); 
+        }
 
         function onMouseEnter() {
             const animationPromise = keenSliderContainer.animate(makeSmoothAppearance, keenSliderContainer_timing).finished; 
             animationPromise.then(() => {
                 keenSliderContainer.classList.add('active');
-                console.log('you are inside the keen slider');  
             })
         }
 
@@ -122,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             previousMouseX = e.clientX; 
             previousMouseY = e.clientY; 
-            console.log(`you pressed on ${data} profile container`); 
             profileContainer.addEventListener('mousemove', move); 
         }
 
@@ -130,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isDragging = false;
             profileContainer.removeEventListener('mousemove', move); 
             if(inBetween(Number(fadeValueFor_X), pageMinWidth_format, pageMaxWidth_format) || inBetween(Number(fadeValueFor_Y), pageMinHeight_format, pageMaxHeight_format)) { 
+                removeEventListeners(); 
                 showNextProfile(e); 
                 handleImageCardAnimation(profileContainer).then(() => {
                     onCardReplacement(); 
@@ -138,52 +130,48 @@ document.addEventListener('DOMContentLoaded', () => {
             else setToDefaultPos(profileContainer);
         }
 
-        function showNextProfile(e) {
-            profileContainer.removeEventListener('mouseup', onMouseUp); 
-            profileContainer.removeEventListener('mousedown', onMouseDown); 
-            profileContainer.removeEventListener('mouseenter', onMouseEnter); 
-            profileContainer.removeEventListener('mouseenter', onMouseLeave); 
+        
 
-            if (e.currentTarget !== (rejectBtn || likeBtn || superLikeBtn)) return;  
-            else if (e.currentTarget === rejectBtn) {
+        function showNextProfile(e) {
+            removeEventListeners(); 
+            if (e.currentTarget === rejectBtn || e.key === "ArrowLeft") {
                 stampArr[0].style.display = "inline"; 
                 stampArr[0].animate(makeSmoothAppearance, 300).finished.then(() => {
                     profileContainer.animate(
                         {
                             left: [`${targetX}px`, `-${pageMaxWidth}px`], 
                             transform: `rotate(${getCustomRotateValue(profileRotateOnReject)}deg)`
-                        }, 5000
+                        }, 400
                     ).finished.then(() => {
                         onCardReplacement();
                     }); 
                 })
             }
-            else if (e.currentTarget === likeBtn) {
+            else if (e.currentTarget === likeBtn || e.key === "ArrowRight") {
                 stampArr[1].style.display = "inline"; 
                 stampArr[1].animate(makeSmoothAppearance, 300).finished.then(() => {
                     profileContainer.animate(
                         {
                             left: [`${targetX}px`, `${pageMaxWidth}px`], 
                             transform: `rotate(${getCustomRotateValue(profileRotateOnLike)}deg)`
-                        }, 200
+                        }, 400
                     ).finished.then(() => {
                         onCardReplacement(); 
                     }); 
                 }); 
             }
-            else if (e.currentTarget === superLikeBtn) {
+            else if (e.currentTarget === superLikeBtn || e.key === "Enter") {
                 stampArr[2].style.display = "inline"; 
                 stampArr[2].animate(makeSmoothAppearance, 300).finished.then(() => {
                     profileContainer.animate(
                         {
-                            top: [`${targetY}px`, `${pageMaxHeight}px`]
-                        }, 100
-                    )
-                    onCardReplacement(); 
+                            top: [`${targetY}px`, `-${pageMaxHeight}px`]
+                        }, 300
+                    ).finished.then(() => {
+                        onCardReplacement(); 
+                    })
                 })
             }
-
-            removeEventListener('click', showNextProfile); 
         }
 
         function onCardReplacement() {
@@ -192,6 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
             nextProfile.style.zIndex = "0";          
             setToDefaultPos(profileContainer);
             profiles.push(currentProfile); 
+            sliderPosition = 0; 
+            showSliderButtons(); 
+            updateSlide(); 
             renderProfileCards(); 
         }
 
@@ -213,38 +204,57 @@ document.addEventListener('DOMContentLoaded', () => {
             })
         }
         
-        sliderDotArr[0].classList.add('active'); 
-        sliderDotArr.forEach((dot) => {
+        sliderDotArr.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                const index = dot.getAttribute('id'); 
-                sliderPosition = Number(index); 
+                // const currentDot = e.currentTarget;   
+                // for(let i = 0; i < arr.length; i++) {
+                //     arr[i] === currentDot ? (arr[i].classList.add('active'), sliderPosition = i) : arr[i].classList.remove('active'); 
+                // }
+                // console.log('you clicked on the dot!'); 
+                sliderPosition = index; 
+                showSliderButtons(); 
                 updateSlide(); 
             });
             dotContainer.childElementCount !== (sliderDotArr.length) ? dotContainer.append(dot) : 0; 
         }); 
+
+        
         
         rejectBtn.addEventListener('click', showNextProfile); 
+        likeBtn.addEventListener('click', showNextProfile); 
+        superLikeBtn.addEventListener('click', showNextProfile); 
+        nextSlide_Button.addEventListener('click', onNextSlideButton)
+        previousSlide_Button.addEventListener('click', onPreviousSlideButton); 
 
-        nextSlide_Button.addEventListener('click', () => {
+        function onNextSlideButton() {
             sliderPosition++; 
+            showSliderButtons(); 
             updateSlide(); 
-        })
-    
-        previousSlide_Button.addEventListener('click', () => {
-            sliderPosition --; 
+        }
+
+        function onPreviousSlideButton() {
+            sliderPosition--; 
+            showSliderButtons(); 
             updateSlide(); 
-        }); 
+        }
     
+        // function updateSlide() {
+        //     sliderImageArr.forEach((image, index) => { 
+        //         updateSlideImage(image, index); 
+        //     })
+        //     sliderDotArr.forEach((dot, index) => {
+        //         updateProgressDot(dot, index); 
+        //     }) 
+        // } 
+
         function updateSlide() {
-            handleKeenSliderButtons(); 
-            sliderImageArr.forEach((image) => {
-                const index = sliderImageArr.indexOf(image); 
-                updateSlideImage(index); 
+            sliderImageArr.forEach((image, index) => {
+                updateSlideImage(image, index); 
                 updateDots(index); 
             })
         } 
-    
-        function handleKeenSliderButtons() {
+
+        function showSliderButtons() {
             if(sliderPosition === 0) {
                 nextSlide_Button.style.visibility = "visible"; 
                 previousSlide_Button.style.visibility = "hidden"; 
@@ -259,11 +269,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     
-        function updateSlideImage(index) {
-            const image = sliderImageArr[index]; 
+        function updateSlideImage(image, index) {
             index === sliderPosition ? image.style.display = "block" : image.style.display = "none"; 
         }
-    
+
         function updateDots(index) {
             const progressButton = sliderDotArr[index]; 
             index === sliderPosition ? progressButton.classList.add('active') : progressButton.classList.remove('active'); 
@@ -356,6 +365,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 action[2].style.display = "none"; 
                 action[3].style.opacity = "0";  
             })
+        }
+
+        function removeEventListeners() {
+            document.removeEventListener('keydown', onKeyDown); 
+            profileContainer.removeEventListener('mouseup', onMouseUp); 
+            profileContainer.removeEventListener('mousedown', onMouseDown); 
+            profileContainer.removeEventListener('mouseenter', onMouseEnter); 
+            profileContainer.removeEventListener('mouseleave', onMouseLeave); 
+            rejectBtn.removeEventListener('click', showNextProfile); 
+            likeBtn.removeEventListener('click', showNextProfile); 
+            superLikeBtn.removeEventListener('click', showNextProfile);
+            nextSlide_Button.removeEventListener('click', onNextSlideButton); 
+            previousSlide_Button.removeEventListener('click', onPreviousSlideButton)
         }
     }
 

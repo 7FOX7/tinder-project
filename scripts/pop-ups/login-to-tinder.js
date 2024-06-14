@@ -1,4 +1,4 @@
-let loginToTinderHTML;
+let loginToTinderHTML = '';
 
 loginToTinderHTML += `
 <div class="container-popup registration-container modal js-modal" data-modal="Create-Account" id="786y">
@@ -44,6 +44,8 @@ loginToTinderHTML += `
 </div>
 `
 
-$(document).ready(function() {
-    $('.js-login-to-tinder-popup').html(loginToTinderHTML); 
-})
+document.onreadystatechange = () => {
+    if(document.readyState === "complete") {
+        document.body.querySelector('.js-login-to-tinder-popup').innerHTML = loginToTinderHTML;  
+    }
+}

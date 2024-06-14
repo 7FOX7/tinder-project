@@ -15,8 +15,8 @@
     <body>
         <div class="overlay js-overlay"></div>
         <div class="js-show-genders-popup"></div>
-        <div class="js-welcome-popup welcome-popup"></div>
         <div class="js-login-to-tinder-popup"></div>
+        <div class="js-welcome-popup welcome-popup"></div>
         <div class="create-account-format">
             <div class="header">
                 <div class="header-left-section">
@@ -30,8 +30,8 @@
                         Language
                     </button>
                 </div>
+                <div class="line"></div>
             </div>
-            <div class="line"></div>
             <div class="title">
                 <h2>Create Account</h2>
             </div>
@@ -329,66 +329,10 @@
                 </div>
             </div>
         </div>
-        <!--
-        <script>
-            const inputFileArr = [
-                {
-                    imageInput: document.getElementById('image-input1'),
-                    profilePic: document.querySelector('.js-profile-pic1')
-                },
-
-                {
-                    imageInput: document.getElementById('image-input2'),
-                    profilePic: document.querySelector('.js-profile-pic2')
-                },
-
-                {
-                    imageInput: document.getElementById('image-input3'), 
-                    profilePic: document.querySelector('.js-profile-pic3')
-                }, 
-
-                {
-                    imageInput: document.getElementById('image-input4'), 
-                    profilePic: document.querySelector('.js-profile-pic4')
-                },
-
-                {
-                    imageInput: document.getElementById('image-input5'), 
-                    profilePic: document.querySelector('.js-profile-pic5')
-                }, 
-
-                {
-                    imageInput: document.getElementById('image-input6'), 
-                    profilePic: document.querySelector('.js-profile-pic6')
-                }
-            ]; 
-
-
-            // let profilePic1 = document.querySelector('.js-profile-pic1');
-            // let profilePic2 = document.querySelector('.js-profile-pic2'); 
-            // let profilePic3 = document.querySelector('.js-profile-pic3'); 
-            // let profilePic4 = document.querySelector('.js-profile-pic4');
-            // let profilePic5 = document.querySelector('.js-profile-pic5'); 
-            // let profilePic6 = document.querySelector('.js-profile-pic6');
-
-            // const inputFile1 = document.getElementById('image-input1'); 
-            // const inputFile2 = document.getElementById('image-input2'); 
-            // const inputFile3 = document.getElementById('image-input3'); 
-            // const inputFile4 = document.getElementById('image-input4'); 
-            // const inputFile5 = document.getElementById('image-input5'); 
-            // const inputFile6 = document.getElementById('image-input6'); 
-
-            inputFileArr.forEach((object) => {
-                object.imageInput.onchange = function() {
-                    object.profilePic.src = URL.createObjectURL(object.imageInput.files[0]); 
-                }
-            }); 
-        </script>
-    -->
+        <script src="../scripts/pop-ups/login-to-tinder.js"></script>
         <script src="../scripts/pop-ups/choose-gender-popup.js"></script>
         <script src="../scripts/pages/createAccount.js"></script>
         <script src="../scripts/pop-ups/welcome-to-tinder.js"></script>
-        <script src="../scripts/pop-ups/login-to-tinder.js"></script>
-        <script src="../scripts/tinder.js"></script>
+        <script src="../scripts/pages/tinder.js"></script>
     </body>
 </html>

@@ -1,69 +1,8 @@
-/*
-function togglePopup() {
-    document.querySelector('.js-registration-popup').classList.toggle("active"); 
-    document.querySelector('.js-tinder-background').classList.toggle("active");  
-}
-
-// const buttonList = document.querySelectorAll('.js-button'); 
-const popupHeader = document.querySelector('.js-header-title'); 
-buttonList.forEach((button) => {
-    let id = button.getAttribute('id'); 
-    button.addEventListener('click', () => {
-        if(id === 'login') {
-            popupHeader.innerHTML = 'Get Started';
-        }
-        else if(id === 'create-account') {
-            popupHeader.innerHTML = 'Create account'
-        }
-        togglePopup(); 
-    })
-});
-*/
-/*
-const buttonList = document.querySelectorAll('.js-button'); 
-
-const registrationHeaderTitle = document.querySelector('.js-header-title'); 
-const registrationPopup = document.querySelector('.js-registration-popup'); 
-const loginWithPhoneNumberPopup = document.querySelector('.js-login-with-phone-number-popup');
-const tinderBackground = document.querySelector('.js-tinder-background'); 
-
-
-buttonList.forEach((button) => {
-    let id = button.getAttribute('id'); 
-    button.addEventListener('click', () => {
-        if(id === 'create-account') {
-            registrationHeaderTitle.innerHTML = 'Create account'; 
-            toggle(registrationPopup); 
-            toggle(tinderBackground); 
-        }
-        else if(id === 'login') {
-            registrationHeaderTitle.innerHTML = 'Get Started'; 
-            toggle(registrationPopup); 
-            toggle(tinderBackground); 
-        }
-        else {
-            toggle(registrationPopup); 
-            toggle(tinderBackground); 
-        }
-    })
-})
-
-function toggle(popup) {
-    popup.classList.toggle("active"); 
-}
-*/
-
-
-
 $(document).ready(function() {
-    //const registrationHeaderTitle = document.querySelector('.js-header-title'); 
     const registrationHeaderTitle = $('.js-header-title'); 
-    $('.js-button').click(function(event) {
-        event.preventDefault(); 
+    $('.js-button').click(function() {
         var modalName = $(this).attr('data-modal');
         if(modalName === 'Create-Account') {
-            // handle Create account / Login cases
-    
             if($(this).attr('data-modal-type')) {
                 registrationHeaderTitle.text('Get Started'); 
             }
@@ -73,11 +12,10 @@ $(document).ready(function() {
         }
         
         closePreviousPopups(modalName); 
-        // var modal = $('.js-modal[data-modal="'+modalName+'"]');
-        // modal.addClass('active'); 
     });
     
     $('.js-close-modal').click(function() {
+        console.log('you are about to close the modal window')
         var closeId = $(this).attr('id');
         var modalObj = $('.js-modal[id="'+closeId+'"]');   
         var modalId = modalObj.attr('id');
@@ -101,10 +39,6 @@ $(document).ready(function() {
     }
     
     $('.js-overlay').click(function() {
-        $(this).removeClass('active'); 
-        $('.js-modal').removeClass('active'); 
+        $('.js-popup').hasClass('active') ? 0 : ($(this).removeClass('active'), $('.js-modal').removeClass('active')); 
     })
-    
-    /*{event.preventDefault(); 
-        $(this).parent('.js-modal').removeClass('active');}*/
 })

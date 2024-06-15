@@ -1,8 +1,7 @@
 let loginToTinderHTML = '';
 
 loginToTinderHTML += `
-<div class="container-popup registration-container modal js-modal" data-modal="Create-Account" id="786y">
-    <div class="shared-popup login-to-tinder-popup">
+    <div class="modal js-modal login-to-tinder" data-modal="Create-Account" id="786y">
         <div class="header">
             <div class="header-upper-section">
                 <img src="../../images/favicon.ico">
@@ -41,11 +40,21 @@ loginToTinderHTML += `
             <a href="#" class="link-in-text">Trouble Logging In?</a>
         </div>
     </div>
-</div>
 `
 
-document.onreadystatechange = () => {
-    if(document.readyState === "complete") {
-        document.body.querySelector('.js-login-to-tinder-popup').innerHTML = loginToTinderHTML;  
+document.addEventListener("readystatechange", (e) => {
+    if(e.target.readyState === "interactive") {
+        addStylesheet_loginToTinder(); 
+        const container = document.querySelector('.js-login-to-tinder-popup'); 
+        container.innerHTML = loginToTinderHTML;  
     }
+});
+
+function addStylesheet_loginToTinder() {
+    const head = document.getElementsByTagName('HEAD')[0]; 
+    const link = document.createElement('link'); 
+    link.rel = "stylesheet"; 
+    link.type = "text/css"; 
+    link.href = "../../styles/pop-ups/login-to-tinder.css"; 
+    head.append(link); 
 }

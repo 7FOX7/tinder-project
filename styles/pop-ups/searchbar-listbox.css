@@ -1,24 +1,14 @@
-.popup-container {
-    display: none;
-}
 
-.popup-container .main-body {
-    display: flex; 
+
+.choose-gender {
     flex-direction: column; 
     align-items: center; 
-    position: fixed; 
-    left: 50%; 
-    top: 50%; 
     width: 40%; 
-    height: 99%; 
-    transform: translate(-50%, -50%); 
-    background: #fff;
+    height: 90%; 
     padding: 35px; 
-    border-radius: 10px; 
-    z-index: 20; 
 }
 
-.popup-container .header-container{
+.choose-gender .header-container{
     display: flex; 
     width: 60%; 
     height: 220px; 
@@ -26,7 +16,7 @@
     overflow: hidden; 
 }
 
-.popup-container .header {
+.choose-gender .header {
     background: transparent; 
     padding: 4px; 
     flex-grow: 1; 
@@ -35,7 +25,7 @@
     align-items: center; 
 }
 
-.popup-container .search-input-container {
+.choose-gender .search-input-container {
     display: inline-flex; 
     align-items: center; 
     width: 100%; 
@@ -44,7 +34,7 @@
     border-radius: 8px; 
 }
 
-.popup-container .search-input {
+.choose-gender .search-input {
     font-size: 18px; 
     background: transparent;
     flex-grow: 1; 
@@ -54,14 +44,14 @@
     outline: none; 
 }
 
-.popup-container .search-results-container {
+.choose-gender .search-results-container {
     width: 100%; 
     list-style: none;
     overflow-y: scroll; 
     height: 600px; 
 }
 
-.popup-container .search-inner-content {
+.choose-gender .search-inner-content {
     display: inline-flex; 
     justify-content: space-between;
     align-items: center; 
@@ -72,17 +62,17 @@
     font-weight: normal;
 }
 
-.popup-container .menu-option {
+.choose-gender .menu-option {
     width: 100%; 
     height: 65px; 
     cursor: pointer; 
 }
 
-.popup-container .search-result:not(:last-of-type) {
+.choose-gender .search-result:not(:last-of-type) {
     border-bottom: 1px solid rgb(200, 200, 200); 
 }
 
-.popup-container .checkbox-container {
+.choose-gender .checkbox-container {
     display: inline-flex; 
     align-items: center;
     font-size: 18px; 
@@ -93,7 +83,7 @@
     top: -20px; 
 }
 
-.popup-container .checkbox-container2 {
+.choose-gender .checkbox-container2 {
     display: none; 
     align-items: center;
     justify-content: center; 
@@ -102,12 +92,12 @@
     height: 23px;  
 }
 
-.popup-container svg {
+.choose-gender svg {
     width: 100%; 
     height: 100%;  
 }
 
-.popup-container .checkbox-container .custom-checkbox {
+.choose-gender .checkbox-container .custom-checkbox {
     display: flex;  
     margin-right: 5px; 
     width: 30px; 
@@ -115,7 +105,7 @@
     cursor: pointer; 
 }
 
-.popup-container .custom-checkbox .checkmark {
+.choose-gender .custom-checkbox .checkmark {
     width: 100%; 
     height: 100%; 
     display: inline-block; 
@@ -125,28 +115,28 @@
     background-color: #fff; 
 }
 
-.popup-container .custom-checkbox:hover {
+.choose-gender .custom-checkbox:hover {
     filter: brightness(85%); 
 }
 
 /*TODO: make it also trigger the checkmark on the page*/
 
-.popup-container .custom-checkbox-input:checked + .checkmark {
+.choose-gender .custom-checkbox-input:checked + .checkmark {
     background: rgb(255, 23, 93)
     url(../../images/checkmark.png) center/70% no-repeat;
     transition: 0.3s; 
     border: none; 
 }
 
-.popup-container .custom-checkbox-input {
+.choose-gender .custom-checkbox-input {
     display: none; 
 }
 
-.popup-container .search-results-container::-webkit-scrollbar {
+.choose-gender .search-results-container::-webkit-scrollbar {
     display: none; 
 }
 
-.popup-container .button-container {
+.choose-gender .button-container {
     width: 100%; 
     height: 200px; 
     display: flex; 
@@ -154,7 +144,7 @@
     justify-content: center; 
 }
 
-.popup-container .save-button {
+.choose-gender .save-button {
     color: #fff; 
     font-size: 25px; 
     font-weight: bold; 
@@ -166,41 +156,27 @@
     align-items: center; 
     height: 60px; 
     border-radius: 50px; 
-    border: none; 
-    cursor: pointer; 
 }
 
-.popup-container .save-button:hover {
+.choose-gender .save-button:hover {
     filter: brightness(88%); 
 }
 
-.overlay {
-    display: none; 
-    position: fixed; 
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0, 0, 0, 0.45); 
-    z-index: 10; 
-    top: 0; 
-    left: 0; 
-}
 
-.overlay.active,
-.checkbox-container2.active,
-.popup-container.active {
+.checkbox-container2.active {
     display: flex; 
 }
 
-.label-gender {
+.choose-gender .search-result .label-gender {
     cursor: pointer; 
 }
 
-.popup-container .label-gender.font-light {
+.choose-gender .search-result .label-gender.font-light {
     font-weight: normal; 
     transition: font-weight 0.2s ease; 
 }
 
-.popup-container .label-gender.font-bold {
+.choose-gender .search-result .label-gender.font-bold {
     color: #000;
     font-weight: bold;
     transition: font-weight 0.2s ease;

@@ -7,7 +7,6 @@
         <link rel="stylesheet" href="../styles/pages/Create-Account/shared.css"/>
         <link rel="stylesheet" href="../styles/pages/Create-Account/left-section.css"/>
         <link rel="stylesheet" href="../styles/pop-ups/shared.css"/>
-        <link rel="stylesheet" href="../styles/pop-ups/registration.css"/>
         <link rel="stylesheet" href="../styles/pages/Create-Account/right-section.css"/>
         <link rel="stylesheet" href="../styles/pages/Create-Account/footage.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -16,7 +15,8 @@
         <div class="overlay js-overlay"></div>
         <div class="js-show-genders-popup"></div>
         <div class="js-login-to-tinder-popup"></div>
-        <div class="js-welcome-popup welcome-popup"></div>
+        <div class="js-welcome-to-tinder-popup"></div>
+        <div class="js-add-relationship-intent"></div>
         <div class="create-account-format">
             <div class="header">
                 <div class="header-left-section">
@@ -80,7 +80,7 @@
                             <button class="left-section-button">
                                 Woman
                             </button>
-                            <button class="js-gender-button left-section-button">
+                            <button class="js-button left-section-button" data-modal="More Genders">
                                 More > 
                             </button>
                         </div>
@@ -108,7 +108,7 @@
                     </div>
                     <div class="input-section js-input-section">
                         <label class="relationship-intent-label">Looking for</label>
-                        <button class="left-section-button relationship-intent-button">
+                        <button class="left-section-button relationship-intent-button js-button" data-modal="Relationship-Intent">
                             <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">
                                 <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
                                     <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
@@ -333,6 +333,7 @@
         <script src="../scripts/pop-ups/choose-gender-popup.js"></script>
         <script src="../scripts/pages/createAccount.js"></script>
         <script src="../scripts/pop-ups/welcome-to-tinder.js"></script>
+        <script src="../scripts/pop-ups/add-relationship-intent.js"></script>
         <script src="../scripts/pages/tinder.js"></script>
     </body>
 </html>

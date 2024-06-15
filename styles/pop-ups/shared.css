@@ -1,44 +1,10 @@
-
-.container-popup {
-    cursor: default;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 20px;
-    padding: 20px;
-    align-items: center;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -45%);
-}
-
-.shared-popup button {
-    border: none; 
-    cursor: pointer; 
-}
-
-.shared-popup .header {
-    display: flex;
-    width: 100%;
-    font-size: 20px;
-    flex-direction: column;
-}
-
-.shared-popup .header-upper-section {
-    display: flex; 
-    flex-direction: row; 
-    justify-content: space-between; 
-    margin-left: 47%; 
-}
-
-.shared-popup .header-lower-section {
-    display: flex; 
-    justify-content: center; 
-    margin-top: -3%; 
-}
-
 .close-modal {
     background-color: transparent;
+}
+
+button, input[type="submit"] {
+    border: none; 
+    cursor: pointer; 
 }
 
 .overlay {
@@ -53,9 +19,15 @@
 }
 
 .modal {
+    cursor: default;
+    border-radius: 10px; 
     position: fixed;
     z-index: 15;
-    display: none;
+    display: none; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: rgb(250, 250, 250);
 }
 
 .modal.active,

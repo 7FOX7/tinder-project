@@ -1,16 +1,17 @@
 * {
-    font-family: "Poppins", sans-serif; 
+    font-family: sans-serif; 
     box-sizing: border-box; 
 }
 
 body {
     margin: 0; 
+    padding: 0; 
     cursor: default; 
 }
 
-.create-account-format button {
+button {
     cursor: pointer; 
-    font-weight: bold; 
+    border: none; 
 }
 
 .create-account-format button:hover {

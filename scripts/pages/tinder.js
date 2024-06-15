@@ -36,9 +36,23 @@ $(document).ready(function() {
                 $('.js-overlay').addClass('active'); 
             }
         });
+        $("body").css({"overflow": "hidden"}); 
     }
     
     $('.js-overlay').click(function() {
-        $('.js-popup').hasClass('active') ? 0 : ($(this).removeClass('active'), $('.js-modal').removeClass('active')); 
+        /*$('.js-popup').hasClass('active') ? 0 : */($(this).removeClass('active'), $('.js-modal').removeClass('active'), $("body").css({"overflow": "auto"})); 
     })
 })
+
+// document.addEventListener('readystatechange', (e) => {
+//     if(e.target.readyState === "interactive") {
+//         const modalButtons = document.querySelectorAll('.js-button');
+//         modalButtons.forEach((modalButton) => {
+//             modalButton.addEventListener('click', (e) => {
+//                 const modalName = e.target.dataset.modal; 
+                
+//             })
+//         }) 
+//     }
+// })
+

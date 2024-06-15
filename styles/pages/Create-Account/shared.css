@@ -41,6 +41,7 @@ button {
     height: 1px; 
     width: 100%;
     top: 124px; 
+    left: 0; 
 }
 
 .create-account-format .header-left-section {

@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    const welcomeToTinderPopup = $('.js-modal[id="888j"]'); 
+    welcomeToTinderPopup.addClass('active'); 
+    $('.js-overlay').addClass('active'); 
+    $("body").css({"overflow": "hidden"});
+
     const registrationHeaderTitle = $('.js-header-title'); 
     $('.js-button').click(function() {
         var modalName = $(this).attr('data-modal');
@@ -23,6 +28,7 @@ $(document).ready(function() {
             var modal = $('.js-modal[id="'+modalId+'"]'); 
             modal.removeClass('active'); 
             $('.js-overlay').removeClass('active'); 
+            $("body").css({"overflow": "auto"});
         }
     });
     
@@ -40,7 +46,7 @@ $(document).ready(function() {
     }
     
     $('.js-overlay').click(function() {
-        /*$('.js-popup').hasClass('active') ? 0 : */($(this).removeClass('active'), $('.js-modal').removeClass('active'), $("body").css({"overflow": "auto"})); 
+        welcomeToTinderPopup.hasClass('active') ? 0 : ($(this).removeClass('active'), $('.js-modal').removeClass('active'), $("body").css({"overflow": "auto"})); 
     })
 })
 

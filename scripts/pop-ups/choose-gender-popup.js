@@ -1,7 +1,7 @@
 let chooseGenderHTML = ''; 
 
 chooseGenderHTML = `
-    <div class="choose-gender modal js-modal" data-modal="More Genders">
+    <div class="choose-gender modal js-modal" data-modal="More-Genders">
         <div class="header-container">
             <div class="header">
                 <label style="font-size: 23px; font-weight: bold;">What's your gender?</label>
@@ -247,10 +247,15 @@ chooseGenderHTML = `
 $('head').append('<link rel="stylesheet" type="text/css" href="../../styles/pop-ups/searchbar-listbox.css"/>'); 
 $('head').append('<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />'); 
 
-$(document).ready(function() {
-    document.querySelector('.js-show-genders-popup')
-        .innerHTML = chooseGenderHTML; 
+$(document).ready(function() { 
+    // there was a problem with selecting the <div> with the data ['More-Genders']
+    // what caused the problem: I defined it BEFORE I initialized 'chooseGenderHTML' to the HTML. 
+    // I solved this by putting the declaration of 'chooseGenderPopup'   after   'document.querySelector('.js-choose-gender-popup').innerHTML = chooseGenderHTML; 
 
+    
+    document.querySelector('.js-choose-gender-popup')
+        .innerHTML = chooseGenderHTML; 
+    const chooseGenderPopup = $('.js-modal[data-modal="More-Genders"]'); 
     // $('.js-gender-button').click(function() {
     //     document.body.style.overflow = 'hidden'; 
     //     $('.js-popup-container').addClass('active');
@@ -271,7 +276,7 @@ $(document).ready(function() {
             if(isChecked($(this))) {
                 var parent = getParentOf($(this)); 
                 var gender = parent.find('.js-label-gender').attr("data-gender"); 
-                $('.js-gender-button').text(`${gender} >`); 
+                $('.js-button[data-modal="More-Genders"]').text(`${gender} >`); 
                 console.log(gender); 
             }
             else {
@@ -298,13 +303,13 @@ $(document).ready(function() {
         return value.closest('.js-menu-option'); 
     }
 
-    // function closePopup() {
-    //     if($('.js-popup-container').hasClass('active')) {
-    //         $('.js-popup-container').removeClass('active'); 
-    //         $('.js-overlay').removeClass('active'); 
-    //         document.body.style.overflow = 'auto';
-    //     } 
-    // }
+    function closePopup() {
+        if(chooseGenderPopup.hasClass('active')) {
+            chooseGenderPopup.removeClass('active'); 
+            $('.js-overlay').removeClass('active'); 
+            document.body.style.overflow = 'auto';
+        } 
+    }
 
     function enableSingleCheck() {
         $('.js-checkbox-container2').each(function() {
@@ -314,6 +319,12 @@ $(document).ready(function() {
             $(this).removeClass('font-bold'); 
         })
     }
+
+    // function findChooseGenderPopup() {
+    //     return $('.js-modal').data('modal', 'More Genders'); 
+    // }
+
+    // console.log(findChooseGenderPopup()); 
 });
 
 

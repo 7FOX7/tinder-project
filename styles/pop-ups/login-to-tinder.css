@@ -1,0 +1,95 @@
+.login-to-tinder {
+    flex-direction: column;
+    border-radius: 20px;
+    padding: 20px;
+    align-items: center;
+    width: 45vw; 
+    height: 80vh; 
+}
+
+.login-to-tinder .header {
+    display: flex;
+    width: 100%;
+    font-size: 20px;
+    flex-direction: column;
+}
+
+.login-to-tinder .header .header-upper-section {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    margin-left: 47%; 
+}
+
+.login-to-tinder .header .header-lower-section {
+    display: flex; 
+    justify-content: center; 
+    margin-top: -3%; 
+}
+
+.login-to-tinder .main-body {
+    display: flex; 
+    flex-direction: column; 
+    margin-top: 3%; 
+    text-align: center; 
+}
+
+.login-to-tinder .main-body-buttons {
+    margin-top: 11%; 
+    display: flex; 
+    flex-direction: column;
+    height: 27vh;   
+    justify-content: space-between; 
+}
+
+.login-to-tinder .login-text {
+    position: relative; 
+    top: 12px; 
+    left: 17px; 
+}
+
+.login-to-tinder .footage {
+    display: flex; 
+    margin-top: 40px; 
+    align-items: center;
+    justify-content: center;
+}
+
+.login-to-tinder .btn {
+    font-weight: bold;
+    border-radius: 25px; 
+    font-size: 22px;    
+    transition: 0.25s; 
+    padding: 4px; 
+}
+
+.login-to-tinder .btn:hover {
+    filter: brightness(90%); 
+}
+
+.login-to-tinder .google-lgn-button {
+    background-color: #acffb7; 
+}
+
+.login-to-tinder .facebook-lgn-button {
+    background-color: #6877ff; 
+}
+
+.login-to-tinder .phone-lgn-button {
+    background-color: rgb(234, 234, 234)
+}
+
+.login-to-tinder .link-in-text {
+    transition: 0.1s; 
+}
+
+.login-to-tinder .link-in-text:hover {
+    text-decoration: none; 
+}
+
+.login-to-tinder .img {
+    width: 50px; 
+    height: 50px;
+    float: right; 
+    margin-right: 18px; 
+}

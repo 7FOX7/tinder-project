@@ -28,14 +28,31 @@
     justify-content: center;
     background-color: #fff; 
     /* border: 2px solid rgba(0, 0, 0, 0.4); */
-    border-image-source: var(--main-color); 
+    /* border-image-source: var(--main-color); 
     border-image-width: 2px;
-    border-image-slice: 1%; 
+    border-image-slice: 1;   */
     font-size: 18px; 
     width: 32.5%; 
     padding: 10px; 
     border-radius: 50px; 
-    transition: 0.2s; 
+    transition: 0.2s;
+    position: relative; 
+}
+
+.create-account-format .main-body .left-section-button::after {
+    position: absolute;  
+    content: ''; 
+    inset: 0; 
+    z-index: -1;
+    border-radius: 50px; 
+    -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+    background: var(--main-color);  
+    padding: 2px; 
+    pointer-events: none;
 }
 
 .create-account-format .main-body .first-name-label,

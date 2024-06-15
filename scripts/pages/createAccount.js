@@ -14,10 +14,11 @@ $(document).ready(function() {
     const interestGroupButtons = $('.js-interest-group-button'); 
     console.log(interestGroupButtons); 
 
-    genderButtons.each('click', (e) => {
-        e.preventDefault; 
-        e.target.css("border-color")
-    })
+    // genderButtons.each('click', (e) => {
+    //     e.preventDefault; 
+    //     e.target.css("border-color")
+    // })
+    
     inputFile.addEventListener('change', (e) => {
         const imageUrl = URL.createObjectURL(e.target.files[0]); 
         if(!imageUrl) {

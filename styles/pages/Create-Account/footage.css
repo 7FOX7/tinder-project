@@ -1,4 +1,4 @@
-.footage-left-section {
+.create-account-format .footage .footage-left-section {
     margin-block: 30px;
     display: flex;
     flex-direction: column;
@@ -7,7 +7,7 @@
     padding-right: 2%;
 }
 
-.footage-button {
+.create-account-format .footage .footage-button {
     display: flex; 
     justify-content: center; 
     align-items: center;
@@ -18,7 +18,7 @@
     transition: 0.3s; 
 }
 
-.footage-bottom-section {
+.create-account-format .footage .footage-bottom-section {
     margin-block: 30px;
     display: flex;
     flex-direction: column;
@@ -29,7 +29,7 @@
     padding-right: 2%;
 }
 
-.footage-left-section-button {
+.create-account-format .footage .footage-left-section-button {
     display: flex; 
     flex-direction: row; 
     align-items: center; 
@@ -43,6 +43,6 @@
     background-color: #fff; 
 }
 
-button:disabled {
+.create-account-format .footage button:disabled {
     opacity: 0.5; 
 }

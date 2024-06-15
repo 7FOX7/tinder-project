@@ -1,4 +1,4 @@
-.main-body-left-section {
+.create-account-format .main-body .main-body-left-section {
     display: flex; 
     flex-direction: column; 
     width: 54%; 
@@ -16,18 +16,21 @@
     padding-right: 10%; 
 } */
 
-.input-section {
+.create-account-format .main-body .input-section {
     display: flex; 
     flex-direction: column; 
     padding-right: 10%;
 }
 
-.left-section-button {
+.create-account-format .main-body .left-section-button {
     display: flex; 
     align-items: center;
     justify-content: center;
     background-color: #fff; 
-    border: 2px solid rgba(0, 0, 0, 0.4); 
+    /* border: 2px solid rgba(0, 0, 0, 0.4); */
+    border-image-source: var(--main-color); 
+    border-image-width: 2px;
+    border-image-slice: 1%; 
     font-size: 18px; 
     width: 32.5%; 
     padding: 10px; 
@@ -35,12 +38,12 @@
     transition: 0.2s; 
 }
 
-.first-name-label,
-.email-label,
-.birthday-label,
-.gender-label,
-.interested-in-label,
-.relationship-intent-label {
+.create-account-format .main-body .first-name-label,
+.create-account-format .main-body .email-label,
+.create-account-format .main-body .birthday-label,
+.create-account-format .main-body .gender-label,
+.create-account-format .main-body .interested-in-label,
+.create-account-format .main-body .relationship-intent-label {
     margin-block: 15px 10px; 
 }
 
@@ -48,7 +51,7 @@
     outline: 1px solid rgb(70, 70, 255);     
 }
 
-input[type=text] {
+.create-account-format .main-body input[type=text] {
     font-size: 20px; 
     font-weight: 300; 
     width: 100%; 
@@ -59,49 +62,49 @@ input[type=text] {
     border-radius: 10px; 
 }
 
-.birthday-data {
+.create-account-format .main-body .birthday-data {
     display: flex; 
     flex-direction: row; 
     justify-content: space-between; 
     width: 50%; 
 }
 
-.month-input-field,
-.day-input-field, 
-.year-input-field {
+.create-account-format .main-body .month-input-field,
+.create-account-format .main-body .day-input-field, 
+.create-account-format .main-body .year-input-field {
     width: 90%; 
 }
 
-.month-input-field > input,
-.day-input-field > input, 
-.year-input-field > input {
+.create-account-format .main-body .month-input-field > input,
+.create-account-format .main-body .day-input-field > input, 
+.create-account-format .main-body .year-input-field > input {
     text-align: center; 
 }
 
-.gender-selection,
-.interest-group {
+.create-account-format .main-body .gender-selection,
+.create-account-format .main-body .interest-group {
     display: flex; 
     justify-content: space-between; 
 }
 
-.relationship-intent-button {
+.create-account-format .main-body .relationship-intent-button {
     width: 48%; 
 }
 
-.checkbox-section {
+.create-account-format .main-body .checkbox-section {
     display: flex; 
     margin-top: 20px; 
     align-items: center; 
 }
 
-.custom-checkbox {
+.create-account-format .main-body .custom-checkbox {
     margin-right: 5px; 
     width: 35px; 
     height: 35px; 
     cursor: pointer; 
 }
 
-.custom-checkbox .checkmark {
+.create-account-format .main-body .custom-checkbox .checkmark {
     width: 100%; 
     height: 100%; 
     border: 1px solid rgba(0, 0, 0, 0.6); 
@@ -111,18 +114,18 @@ input[type=text] {
     background-color: #fff; 
 }
 
-.custom-checkbox:hover {
+.create-account-format .main-body .custom-checkbox:hover {
     filter: brightness(85%); 
 }
 
-.custom-checkbox input:checked + .checkmark {
+.create-account-format .main-body .custom-checkbox input:checked + .checkmark {
     background: rgb(255, 23, 93)
     url(../../../images/checkmark.png) center/70% no-repeat;
     transition: 0.3s; 
     border: none; 
 }
 
-.custom-checkbox input {
+.create-account-format .main-body .custom-checkbox input {
     display: none; 
 }
 

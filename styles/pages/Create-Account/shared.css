@@ -1,3 +1,7 @@
+:root {
+    --main-color: linear-gradient(to bottom right, red, hotpink);
+}
+
 * {
     font-family: sans-serif; 
     box-sizing: border-box; 

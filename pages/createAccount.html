@@ -35,299 +35,301 @@
             <div class="title">
                 <h2>Create Account</h2>
             </div>
-            <div class="main-body">
-                <div class="main-body-left-section">
-                    <div class="input-section js-input-section">
-                        <label class="first-name-label">First Name</label>
-                        <input type="text" class="js-required-field" placeholder="First Name" id="firstName">
-                        <span class="error-message js-error-message">This field must be between 1 - 22 characters.</span>
-                    </div>
-                    <div class="input-section js-input-section">
-                        <label class="email-label">Email</label>
-                        <input type="text" class="js-required-field" placeholder="Email" id="emailAddress">
-                        <span class="error-message js-error-message">Please enter a valid email.</span>
-                    </div>
-                    <div class="input-section js-input-section">
-                        <label class="birthday-label">Birthday</label>
-                        <div class="birthday-data">
-                            <div>
-                                <label class="month-birth-label">Month</label>
-                                <div class="month-input-field">
-                                    <input type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="MM" id="monthOfBirth">
+            <form>
+                <div class="main-body">
+                    <div class="main-body-left-section">
+                        <div class="input-section js-input-section">
+                            <label class="first-name-label">First Name</label>
+                            <input type="text" class="js-required-field" placeholder="First Name" id="firstName">
+                            <span class="error-message js-error-message">This field must be between 1 - 22 characters.</span>
+                        </div>
+                        <div class="input-section js-input-section">
+                            <label class="email-label">Email</label>
+                            <input type="text" class="js-required-field" placeholder="Email" id="emailAddress">
+                            <span class="error-message js-error-message">Please enter a valid email.</span>
+                        </div>
+                        <div class="input-section js-input-section">
+                            <label class="birthday-label">Birthday</label>
+                            <div class="birthday-data">
+                                <div>
+                                    <label class="month-birth-label">Month</label>
+                                    <div class="month-input-field">
+                                        <input type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="MM" id="monthOfBirth">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="day-birth-label">Day</label>
+                                    <div class="day-input-field">
+                                        <input type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="DD" id="dayOfBirth">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="year-birth-label">Year</label>
+                                    <div class="year-input-field">
+                                        <input type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="YYYY" id="yearOfBirth">
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <label class="day-birth-label">Day</label>
-                                <div class="day-input-field">
-                                    <input type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="DD" id="dayOfBirth">
-                                </div>
+                            <span class="error-message js-error-message">Please enter a valid date.</span>
+                        </div>
+                        <div class="input-section js-input-section">
+                            <label class="gender-label">Gender</label>
+                            <div class="gender-selection">
+                                <button class="left-section-button js-gender-orientation-button">
+                                    Man
+                                </button>
+                                <button class="left-section-button js-gender-orientation-button">
+                                    Woman
+                                </button>
+                                <button class="js-button left-section-button js-gender-orientation-button" data-modal="More-Genders">
+                                    More > 
+                                </button>
                             </div>
-                            <div>
-                                <label class="year-birth-label">Year</label>
-                                <div class="year-input-field">
-                                    <input type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="YYYY" id="yearOfBirth">
-                                </div>
+                            <div class="checkbox-section">
+                                <label class="custom-checkbox" for="checkboxInput">
+                                    <input class="js-checkbox" type="checkbox" id="checkboxInput">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <span>Show my gender on my profile</span>
                             </div>
                         </div>
-                        <span class="error-message js-error-message">Please enter a valid date.</span>
-                    </div>
-                    <div class="input-section js-input-section">
-                        <label class="gender-label">Gender</label>
-                        <div class="gender-selection">
-                            <button class="left-section-button">
-                                Man
-                            </button>
-                            <button class="left-section-button">
-                                Woman
-                            </button>
-                            <button class="js-button left-section-button" data-modal="More-Genders">
-                                More > 
-                            </button>
+                        <div class="input-section js-input-section">
+                            <label class="interested-in-label">Interested in</label>
+                            <div class="interest-group">
+                                <button class="left-section-button js-interest-group-button">
+                                    Men
+                                </button>
+                                <button class="left-section-button js-interest-group-button">
+                                    Women
+                                </button>
+                                <button class="left-section-button js-interest-group-button">
+                                    Everyone
+                                </button>
+                            </div>
                         </div>
-                        <div class="checkbox-section">
-                            <label class="custom-checkbox" for="checkboxInput">
-                                <input class="js-checkbox" type="checkbox" id="checkboxInput">
-                                <span class="checkmark"></span>
-                            </label>
-                            <span>Show my gender on my profile</span>
-                        </div>
-                    </div>
-                    <div class="input-section js-input-section">
-                        <label class="interested-in-label">Interested in</label>
-                        <div class="interest-group">
-                            <button class="left-section-button">
-                                Men
-                            </button>
-                            <button class="left-section-button">
-                                Women
-                            </button>
-                            <button class="left-section-button">
-                                Everyone
+                        <div class="input-section js-input-section">
+                            <label class="relationship-intent-label">Looking for</label>
+                            <button class="left-section-button relationship-intent-button js-button" data-modal="Relationship-Intent">
+                                <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">
+                                    <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                        <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                    </svg>
+                                </span>
+                                Add Relationship Intent
                             </button>
                         </div>
                     </div>
-                    <div class="input-section js-input-section">
-                        <label class="relationship-intent-label">Looking for</label>
-                        <button class="left-section-button relationship-intent-button js-button" data-modal="Relationship-Intent">
+                    <div class="main-body-right-section">
+                        <div class="upload-images-section">
+                            <label class="profile-photos-label">Profile photos</label>
+                            <section aria-label="Profile photo management" style="width: 100%">
+                                <ul class="js-image-field-list" aria-label="Add or Remove Profile Photos" style="margin: 0; width: 100%; overflow: hidden; padding: 4px; height: 405px">
+                                    <li class="upload-image-field"> 
+                                        <div style="position: relative; height: 100%; color: #ffffff">
+                                            <span class="cursor" style="cursor: pointer" role="button" tabindex="0">
+                                                <div class="stretchbox js-stretchbox">
+                                                    <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border: dashed; border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158);">
+                                                        <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
+                                                    </div>
+                                                    <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
+                                                        <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background: var(--main-color)" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                        <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </li>
+        
+                                    <li class="upload-image-field" style="left: 33%; top: -200px;"> 
+                                        <div style="position: relative; height: 100%; color: #ffffff;">
+                                            <span class="cursor" style="cursor: pointer;" role="button" tabindex="0">
+                                                <div class="stretchbox js-stretchbox">
+                                                    <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed; border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158)">
+                                                        <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
+                                                    </div>
+                                                    <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
+                                                        <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background: var(--main-color);" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                        <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="upload-image-field" style="left: 66%; top: -400px;">
+                                        <div style="height: 100%; position: relative; color: #ffffff">
+                                            <span class="cursor" style="cursor: pointer" tabindex="0" role="button">
+                                                <div class="stretchbox js-stretchbox">
+                                                    <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed; border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158)">
+                                                        <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
+                                                    </div>
+                                                    <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
+                                                        <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background: var(--main-color);" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                        <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="upload-image-field" style="top: -400px">
+                                        <div style="height: 100%; position: relative; color: #ffffff">
+                                            <span class="cursor" style="cursor: pointer;" tabindex="0" role="button">
+                                                <div class="stretchbox js-stretchbox">
+                                                    <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed;border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158);">
+                                                        <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
+                                                    </div>
+                                                    <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
+                                                        <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background: var(--main-color);" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                        <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="upload-image-field" style="left: 33%; top: -600px">
+                                        <div style="height: 100%; position: relative; color: #ffffff">
+                                            <span class="cursor" style="cursor: pointer;" tabindex="0" role="button">
+                                                <div class="stretchbox js-stretchbox">
+                                                    <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed;border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158);">
+                                                        <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
+                                                    </div>
+                                                    <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
+                                                        <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background: var(--main-color);" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                        <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </li>
+                                    <li class="upload-image-field" style="left: 66%; top: -800px">
+                                        <div style="height: 100%; position: relative; color: #ffffff">
+                                            <span class="cursor" style="cursor: pointer;" tabindex="0" role="button">
+                                                <div class="stretchbox js-stretchbox">
+                                                    <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed;border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158);">
+                                                        <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
+                                                    </div>
+                                                    <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
+                                                        <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background: var(--main-color);" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                        <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
+                                                            <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
+                                                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                                                    <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
+                                                                </svg>
+                                                            </span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </section>
+                            <input class="js-file-input" type="file" accept="image/*" style="display: none;">
+                            <div class="upload-image-message">
+                                <span>Upload 2 photos to start. Add 4 or more to make your profile stand out.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footage">
+                    <div style="width: 100%; display: flex; flex-direction: row; align-items: center;">
+                        <div class="line"></div>
+                        <label style="margin: 8px;">Optional</label>
+                        <div class="line"></div>
+                    </div>
+                    <div class="footage-left-section">
+                        <label style="margin: 8px;">Interests</label>
+                        <button class="footage-left-section-button">
                             <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">
                                 <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
                                     <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
                                 </svg>
                             </span>
-                            Add Relationship Intent
+                            Add interests
+                        </button>
+                        <label style="margin: 8px;">Sexual Orientation</label>
+                        <button class="footage-left-section-button">
+                            <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">
+                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                    <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                </svg>
+                            </span>
+                            Add Sexual Orientation
+                        </button>
+                    </div>
+                    <div class="footage-bottom-section">
+                        <button class="footage-button create-account-continue-button js-create-account-continue-button" style="width: 15%; background: var(--main-color); color: #fff;" id="createAccountContinueButton">Continue</button>
+                        <button class="js-button footage-button" style="margin-block: 45px; color: rgb(59, 59, 255); background-color: #fff;" data-modal="Create-Account" data-modal-type="Login">
+                            Already have an account? Log in.
                         </button>
                     </div>
                 </div>
-                <div class="main-body-right-section">
-                    <div class="upload-images-section">
-                        <label class="profile-photos-label">Profile photos</label>
-                        <section aria-label="Profile photo management" style="width: 100%">
-                            <ul class="js-image-field-list" aria-label="Add or Remove Profile Photos" style="margin: 0; width: 100%; overflow: hidden; padding: 4px; height: 405px">
-                                <li class="upload-image-field"> 
-                                    <div style="position: relative; height: 100%; color: #ffffff">
-                                        <span class="cursor" style="cursor: pointer" role="button" tabindex="0">
-                                            <div class="stretchbox js-stretchbox">
-                                                <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border: dashed; border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158);">
-                                                    <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
-                                                </div>
-                                                <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
-                                                    <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background-image: linear-gradient(to bottom right, red, hotpink);" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                    <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </li>
-    
-                                <li class="upload-image-field" style="left: 33%; top: -200px;"> 
-                                    <div style="position: relative; height: 100%; color: #ffffff;">
-                                        <span class="cursor" style="cursor: pointer;" role="button" tabindex="0">
-                                            <div class="stretchbox js-stretchbox">
-                                                <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed; border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158)">
-                                                    <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
-                                                </div>
-                                                <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
-                                                    <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background-image: linear-gradient(to bottom right, red, hotpink);" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                    <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="upload-image-field" style="left: 66%; top: -400px;">
-                                    <div style="height: 100%; position: relative; color: #ffffff">
-                                        <span class="cursor" style="cursor: pointer" tabindex="0" role="button">
-                                            <div class="stretchbox js-stretchbox">
-                                                <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed; border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158)">
-                                                    <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
-                                                </div>
-                                                <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
-                                                    <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background-image: linear-gradient(to bottom right, red, hotpink);" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                    <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="upload-image-field" style="top: -400px">
-                                    <div style="height: 100%; position: relative; color: #ffffff">
-                                        <span class="cursor" style="cursor: pointer;" tabindex="0" role="button">
-                                            <div class="stretchbox js-stretchbox">
-                                                <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed;border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158);">
-                                                    <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
-                                                </div>
-                                                <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
-                                                    <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background-image: linear-gradient(to bottom right, red, hotpink);" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                    <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="upload-image-field" style="left: 33%; top: -600px">
-                                    <div style="height: 100%; position: relative; color: #ffffff">
-                                        <span class="cursor" style="cursor: pointer;" tabindex="0" role="button">
-                                            <div class="stretchbox js-stretchbox">
-                                                <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed;border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158);">
-                                                    <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
-                                                </div>
-                                                <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
-                                                    <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background-image: linear-gradient(to bottom right, red, hotpink);" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                    <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </li>
-                                <li class="upload-image-field" style="left: 66%; top: -800px">
-                                    <div style="height: 100%; position: relative; color: #ffffff">
-                                        <span class="cursor" style="cursor: pointer;" tabindex="0" role="button">
-                                            <div class="stretchbox js-stretchbox">
-                                                <div class="stretchbox cursor" style="overflow: hidden; background-color: lightgray; border-style: dashed;border-width: 4px; border-radius: 8px; border-color: rgb(158, 158, 158);">
-                                                    <div class="js-image-field" style="background-image: none; background-position: center; background-repeat: no-repeat; background-size: cover; width: 100%; height: 100%;"></div>
-                                                </div>
-                                                <div style="opacity: 1; z-index: 2; margin: 2px; position: absolute; transform: translate(16%, 18%); right: 0; bottom: 0;">
-                                                    <button class="js-add-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; border: none; padding: 9px 2px 9px 2px; background-image: linear-gradient(to bottom right, red, hotpink);" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="#fff" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                    <button class="js-remove-image-button" style="max-width: 100%; overflow: hidden; z-index: 0; position: relative; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; width: 40px; border-radius: 50%; padding: 9px 2px 9px 2px; border: 1px solid rgba(0, 0, 0, 0.5)" draggable="false">
-                                                        <span style="width: 100%; display: flex; justify-content: center; align-items: center; z-index: -1; height: 100%; position: relative;">
-                                                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                                                <path fill="black" d="m15.44 12 4.768 4.708c1.056.977 1.056 2.441 0 3.499-.813 1.057-2.438 1.057-3.413 0L12 15.52l-4.713 4.605c-.975 1.058-2.438 1.058-3.495 0-1.056-.813-1.056-2.44 0-3.417L8.47 12 3.874 7.271c-1.138-.976-1.138-2.44 0-3.417a1.973 1.973 0 0 1 3.25 0L12 8.421l4.713-4.567c.975-1.139 2.438-1.139 3.413 0 1.057.814 1.057 2.44 0 3.417L15.44 12Z"></path>
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </section>
-                        <input class="js-file-input" type="file" accept="image/*" style="display: none;">
-                        <div class="upload-image-message">
-                            <span>Upload 2 photos to start. Add 4 or more to make your profile stand out.</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footage">
-                <div style="width: 100%; display: flex; flex-direction: row; align-items: center;">
-                    <div class="line"></div>
-                    <label style="margin: 8px;">Optional</label>
-                    <div class="line"></div>
-                </div>
-                <div class="footage-left-section">
-                    <label style="margin: 8px;">Interests</label>
-                    <button class="footage-left-section-button">
-                        <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">
-                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                            </svg>
-                        </span>
-                        Add interests
-                    </button>
-                    <label style="margin: 8px;">Sexual Orientation</label>
-                    <button class="footage-left-section-button">
-                        <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">
-                            <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                            </svg>
-                        </span>
-                        Add Sexual Orientation
-                    </button>
-                </div>
-                <div class="footage-bottom-section">
-                    <button class="footage-button create-account-continue-button js-create-account-continue-button" style="width: 15%; background-image: linear-gradient(to bottom right, red, hotpink); color: #fff;" id="createAccountContinueButton">Continue</button>
-                    <button class="js-button footage-button" style="margin-block: 45px; color: rgb(59, 59, 255); background-color: #fff;" data-modal="Create-Account" data-modal-type="Login">
-                        Already have an account? Log in.
-                    </button>
-                </div>
-            </div>
+            </form>
         </div>
         <script src="../scripts/pop-ups/login-to-tinder.js"></script>
         <script src="../scripts/pop-ups/choose-gender-popup.js"></script>

@@ -9,8 +9,15 @@ $(document).ready(function() {
         .prop('disabled', true)
         .css({'background-image': 'none', 'background-color': 'rgba(0, 0, 0, 0.2)'}); 
 
-    
-    
+    const genderButtons = $('.js-gender-orientation-button'); 
+    console.log(genderButtons); 
+    const interestGroupButtons = $('.js-interest-group-button'); 
+    console.log(interestGroupButtons); 
+
+    genderButtons.each('click', (e) => {
+        e.preventDefault; 
+        e.target.css("border-color")
+    })
     inputFile.addEventListener('change', (e) => {
         const imageUrl = URL.createObjectURL(e.target.files[0]); 
         if(!imageUrl) {

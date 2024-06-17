@@ -13,7 +13,7 @@ addRelationshipIntentHTML += `
             </div>
             <div class="main-body">
                 <div class="button-container">
-                    <button>
+                    <button class="js-inner-button--relationship-intent">
                         <span>
                             <img src="../images/relationship-intent-heart-arrow.png" style="width: 35px;">
                         </span>
@@ -21,7 +21,7 @@ addRelationshipIntentHTML += `
                             Long-term partner
                         </span>
                     </button>
-                    <button>
+                    <button class="js-inner-button--relationship-intent">
                         <span>
                             <img src="../images/relationship-intent-heart-eyes.png" style="width: 35px;">
                         </span>
@@ -29,7 +29,7 @@ addRelationshipIntentHTML += `
                             Long-term, open to short
                         </span>
                     </button>
-                    <button>
+                    <button class="js-inner-button--relationship-intent">
                         <span>
                             <img src="../images/relationship-intent-drinking.png" style="width: 35px;">
                         </span>
@@ -37,7 +37,7 @@ addRelationshipIntentHTML += `
                             Short-term, open to long
                         </span>
                     </button>
-                    <button>
+                    <button class="js-inner-button--relationship-intent">
                         <span>
                             <img src="../images/relationship-intent-tada.png" style="width: 35px;">
                         </span>
@@ -45,7 +45,7 @@ addRelationshipIntentHTML += `
                             Short-term fun
                         </span>
                     </button>
-                    <button>
+                    <button class="js-inner-button--relationship-intent">
                         <span>
                             <img src="../images/relationship-intent-wave.png" style="width: 35px;">
                         </span>
@@ -53,7 +53,7 @@ addRelationshipIntentHTML += `
                             New friends
                         </span>
                     </button>
-                    <button>
+                    <button class="js-inner-button--relationship-intent">
                         <span>
                             <img src="../images/relationship-intent-thinking-face.png" style="width: 35px;">
                         </span>

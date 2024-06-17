@@ -1,13 +1,3 @@
-* {
-    box-sizing: border-box; 
-    font-family: sans-serif;
-}
-
-body {
-    padding: 0; 
-    margin: 0; 
-}
-
 .add-relationship-intent { 
     width: 23%; 
     height: 500px; 

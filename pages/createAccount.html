@@ -75,15 +75,21 @@
                         <div class="input-section js-input-section">
                             <label class="gender-label">Gender</label>
                             <div class="gender-selection">
-                                <button class="left-section-button js-gender-orientation-button">
-                                    Man
-                                </button>
-                                <button class="left-section-button js-gender-orientation-button">
-                                    Woman
-                                </button>
-                                <button class="js-button left-section-button js-gender-orientation-button" data-modal="More-Genders">
-                                    More > 
-                                </button>
+                                <div class="left-section-button--unselected js-left-section-button--gender js-left-section-button" role="button">
+                                    <button class="js-button--gender">
+                                        Man
+                                    </button>
+                                </div>
+                                <div class="left-section-button--unselected js-left-section-button--gender js-left-section-button" role="button">
+                                    <button class="js-button--gender">
+                                        Woman
+                                    </button>
+                                </div>
+                                <div class="left-section-button--unselected js-left-section-button--gender js-left-section-button" role="button">
+                                    <button class="js-button js-button--gender" data-modal="More-Genders">
+                                        More > 
+                                    </button>
+                                </div>
                             </div>
                             <div class="checkbox-section">
                                 <label class="custom-checkbox" for="checkboxInput">
@@ -96,27 +102,43 @@
                         <div class="input-section js-input-section">
                             <label class="interested-in-label">Interested in</label>
                             <div class="interest-group">
-                                <button class="left-section-button js-interest-group-button">
-                                    Men
-                                </button>
-                                <button class="left-section-button js-interest-group-button">
-                                    Women
-                                </button>
-                                <button class="left-section-button js-interest-group-button">
-                                    Everyone
-                                </button>
+                                <div class="left-section-button--unselected js-left-section-button--interest-group js-left-section-button" role="button">
+                                    <button class="js-button--interest-group">
+                                        Men
+                                    </button>
+                                </div>
+                                <div class="left-section-button--unselected js-left-section-button--interest-group js-left-section-button" role="button">
+                                    <button class="js-button--interest-group">
+                                        Women
+                                    </button>
+                                </div>
+                                <div class="left-section-button--unselected js-left-section-button--interest-group js-left-section-button" role="button">
+                                    <button class="js-button--interest-group">
+                                        Everyone
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <div class="input-section js-input-section">
                             <label class="relationship-intent-label">Looking for</label>
-                            <button class="left-section-button relationship-intent-button js-button" data-modal="Relationship-Intent">
-                                <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">
-                                    <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
-                                        <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                                    </svg>
+                            <div class="left-section-button--unselected js-left-section-button--relationship-intent js-left-section-button" role="button" style="width: 48%;">
+                                <button class="js-button js-button--relationship-intent" data-modal="Relationship-Intent">
+                                    <span style="width: 15%; display: flex; justify-content: center; align-items: center; z-index: 2; height: 100%; position: relative;">
+                                        <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24" style="width: 16px; height: 16px;">
+                                            <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                        </svg>
+                                    </span>
+                                    Add Relationship Intent
+                                </button>
+                            </div>
+                            <div class="js-relationship-intent--reflection" style="display: flex; align-items: center; justify-content: center; margin-top: 20px; background: rgb(250, 250, 250); width: 43%; height: 35px; border: 2px solid rgba(0, 0, 0, 0.4); border-radius: 50px;">
+                                <span>
+                                    <img>
                                 </span>
-                                Add Relationship Intent
-                            </button>
+                                <span style="font-size: 16px; ">
+                                    long term, open to short
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="main-body-right-section">

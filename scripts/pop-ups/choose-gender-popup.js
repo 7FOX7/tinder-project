@@ -100,18 +100,6 @@ chooseGenderHTML = `
             <li class="search-result">
                 <div class="js-menu-option menu-option">
                     <div class="search-inner-content">
-                        <label class="js-label-gender label-gender" data-gender="Gender Nonconfirming">Gender Nonconfirming</label>
-                        <div class="js-checkbox-container2 checkbox-container2">
-                            <svg>
-                                <path fill="red" d="M23.1 2.348a2.174 2.174 0 0 1 .358 3.198L8.925 22.061.63 13.745a2.161 2.161 0 0 1 3.06-3.053l5.018 5.031 11.484-13.05a2.174 2.174 0 0 1 2.907-.325"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li class="search-result">
-                <div class="js-menu-option menu-option">
-                    <div class="search-inner-content">
                         <label class="js-label-gender label-gender" data-gender="Genderqueer">Genderqueer</label>
                         <div class="js-checkbox-container2 checkbox-container2">
                             <svg>

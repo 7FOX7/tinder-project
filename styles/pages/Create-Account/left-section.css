@@ -5,55 +5,55 @@
     height: 850px; 
 }
 
-/* .input-section1,
-.input-section2,
-.input-section3,
-.input-section4,
-.input-section5,
-.input-section6 {
-    display: flex; 
-    flex-direction: column; 
-    padding-right: 10%; 
-} */
-
 .create-account-format .main-body .input-section {
     display: flex; 
     flex-direction: column; 
     padding-right: 10%;
 }
 
-.create-account-format .main-body .left-section-button {
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    background-color: #fff; 
-    /* border: 2px solid rgba(0, 0, 0, 0.4); */
-    /* border-image-source: var(--main-color); 
-    border-image-width: 2px;
-    border-image-slice: 1;   */
-    font-size: 18px; 
+.create-account-format .main-body .left-section-button--unselected {
+    /* 
+    the style with 'background' property is commented out, because it was giving us undesired result with
+    toggling the classes where the bottom of the 'unselected' border was noticeably THICKER
+
+    background: rgba(0, 0, 0, 0.5); 
+    background-origin: border-box;
+    */
+    border-radius: 50px;
     width: 32.5%; 
-    padding: 10px; 
-    border-radius: 50px; 
-    transition: 0.2s;
-    position: relative; 
+    border: 2px solid rgba(0, 0, 0, 0.4); 
+} 
+
+.create-account-format .main-body .left-section-button--selected {
+    background: var(--main-color); 
+    background-origin: border-box;  
+    border-radius: 50px;
+    width: 32.5%; 
+    border: 2px solid transparent; 
 }
 
-.create-account-format .main-body .left-section-button::after {
-    position: absolute;  
-    content: ''; 
-    inset: 0; 
-    z-index: -1;
-    border-radius: 50px; 
-    -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-    background: var(--main-color);  
-    padding: 2px; 
-    pointer-events: none;
+.create-account-format .main-body .input-section button{
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    background: rgb(250, 250, 250); 
+    font-size: 18px; 
+    transition: 0.2s;
+    padding: 10px; 
+    width: 100%; 
+    border-radius: inherit;
 }
+
+/* .create-account-format .main-body .left-section-button::after {
+    position: absolute;  
+    border: 2px solid; 
+    border-image-source: var(--main-color); 
+    border-image-width: 1; 
+    z-index: 5; 
+    content: ''; 
+    width: 100%; 
+    height: 100%; 
+} */
 
 .create-account-format .main-body .first-name-label,
 .create-account-format .main-body .email-label,
@@ -102,10 +102,6 @@
 .create-account-format .main-body .interest-group {
     display: flex; 
     justify-content: space-between; 
-}
-
-.create-account-format .main-body .relationship-intent-button {
-    width: 48%; 
 }
 
 .create-account-format .main-body .checkbox-section {

@@ -1,25 +1,15 @@
-const inputFile = document.querySelector('.js-file-input'); 
-$('.js-stretchbox').click(function() {
-    inputFile.click(); 
-});
-
 $(document).ready(function() {
+    const inputFile = $('.js-file-input'); 
+    $('.js-stretchbox').click(function() {
+        inputFile.click(); 
+    });
+
     $('.js-remove-image-button').css("display", "none");
     $('#createAccountContinueButton')
         .prop('disabled', true)
         .css({'background-image': 'none', 'background-color': 'rgba(0, 0, 0, 0.2)'}); 
-
-    const genderButtons = $('.js-gender-orientation-button'); 
-    console.log(genderButtons); 
-    const interestGroupButtons = $('.js-interest-group-button'); 
-    console.log(interestGroupButtons); 
-
-    // genderButtons.each('click', (e) => {
-    //     e.preventDefault; 
-    //     e.target.css("border-color")
-    // })
     
-    inputFile.addEventListener('change', (e) => {
+    inputFile.on("change", (e) => {
         const imageUrl = URL.createObjectURL(e.target.files[0]); 
         if(!imageUrl) {
             return; 
@@ -35,7 +25,7 @@ $(document).ready(function() {
                 }
             })
         }
-    });
+    }); 
 
     $('.js-remove-image-button').click(function() {
         var parent = $(this).closest('.js-stretchbox'); 
@@ -45,12 +35,7 @@ $(document).ready(function() {
         image.css("backgroundImage", "none");
         toggleButton(removeImageButton, addImageButton);  
     })
-     
-    function toggleButton(element1, element2) {
-        element1.css("display", "none"); 
-        element2.css("display", "flex"); 
-    }
-
+    
     const nameField = $('#firstName'); 
     const emailField = $('#emailAddress'); 
     const monthField = $('#monthOfBirth'); 
@@ -263,9 +248,110 @@ $(document).ready(function() {
         }); 
     }
 
-    document.querySelector('.js-create-account-continue-button')
-        .addEventListener('click', (event) => {
-            event.preventDefault(); 
-            window.location.replace('../pages/captcha.html'); 
-        })
+    function toggleButton(element1, element2) {
+        element1.css("display", "none"); 
+        element2.css("display", "flex"); 
+    }
 }); 
+
+document.addEventListener('readystatechange', (e) => {
+    if(e.target.readyState === "complete") {
+        const leftSectionButtons_Gender = document.querySelectorAll('.js-left-section-button--gender'); 
+        const leftSectionButtons_InterestGroup = document.querySelectorAll('.js-left-section-button--interest-group'); 
+        const leftSectionButtons_RelationshipIntent = document.querySelectorAll('.js-left-section-button--relationship-intent'); 
+
+        const genderButtons = document.querySelectorAll('.js-button--gender'); 
+        handleLeftSectionButtonClick(genderButtons, leftSectionButtons_Gender); 
+
+        const interestGroupButtons = document.querySelectorAll('.js-button--interest-group');  
+        handleLeftSectionButtonClick(interestGroupButtons, leftSectionButtons_InterestGroup); 
+
+        const relationshipIntentButtons = document.querySelectorAll('.js-button--relationship-intent')
+        handleLeftSectionButtonClick(relationshipIntentButtons, leftSectionButtons_RelationshipIntent);  
+
+        const relationhipIntent_innerButtons = document.querySelectorAll('.js-inner-button--relationship-intent'); 
+        handleRelationshipIntentButtonClick(relationhipIntent_innerButtons); 
+
+        const form = document.querySelector('form'); 
+        form.addEventListener('submit', e => {
+            e.preventDefault(); 
+        }); 
+    }
+});
+
+function enableSingleSelection(btn, arr) {
+    arr.forEach((val) => {
+        val === btn ? (val.classList.add('left-section-button--selected')) : (val.classList.remove('left-section-button--selected')) ; 
+    })
+}
+
+function handleLeftSectionButtonClick(buttons, leftSectionButtons_Group) {
+    buttons.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            const button_Parent = e.target.closest('.js-left-section-button'); 
+            enableSingleSelection(button_Parent, leftSectionButtons_Group); 
+        }); 
+    })
+}
+
+function handleRelationshipIntentButtonClick(buttons) {
+    const relationshipIntent_Reflection = document.querySelector('.js-relationship-intent--reflection'); 
+    for(const button of buttons) {
+        button.addEventListener('click', (e) => {
+            const currentButton = e.target; 
+            relationshipIntent_Reflection.textContent = currentButton.textContent; 
+        })
+    }
+}
+
+/*
+    in JavaScript, should function declaration be placed inside the code that gets executed on 
+    document fully load, or when it is loading? 
+
+    assume I have got this code: 
+
+    document.addEventListener('onreadystatechange', (e) => {
+        if(e.target.readyState === "complete") {
+            const numbers = [1, 2, 3, 4]; 
+            const initialValue = 0; 
+
+            sumNumbers(numbers); 
+
+            function sumNumbers(arr) {
+                const sumWithInitial = arr.reduce(
+                    (accumulator, currentValue) => accumulator + currentValue,
+                    initialValue,
+                );
+                console.log(sumWithInitial);
+            }
+        }
+    })
+
+    or I just have to declare it separately? 
+
+    document.addEventListener('onreadystatechange', (e) => {
+        if(e.target.readyState === "complete") {
+            const numbers = [1, 2, 3, 4]; 
+            const initialValue = 0; 
+
+            sumNumbers(numbers); 
+        }
+    })
+
+     function sumNumbers(arr) {
+        const sumWithInitial = arr.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            initialValue,
+        );
+        console.log(sumWithInitial);
+    }
+
+    speaking of jQuery, I usually put ALL the relevant code inside the block that gets executed only 
+    on document fully loaded, like this: 
+    
+    $(ducument).ready(function() {
+        // all code including function declarations goes here
+    })
+
+    but was just wondering if functions should be 'run' before the document is fully loaded
+*/

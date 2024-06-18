@@ -302,11 +302,14 @@ document.addEventListener('readystatechange', (e) => {
         reflectImg_Arr.push(tada_Reflection); 
         reflectImg_Arr.push(thinkingFace_Reflection); 
         reflectImg_Arr.push(handWave_Reflection); 
+        reflectImg_Arr.forEach((image) => {
+            image.style.width = "20px"; 
+        })
 
         handleRelationshipIntentButtonClick(relationshipIntent_Arr, saveButton_relationshipIntent, reflectImg_Arr); 
 
         function createImage(source, alt) {
-            const image = new Image; 
+            const image = new Image(); 
             image.src = source; 
             image.alt = alt; 
             return image; 
@@ -335,6 +338,7 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
     const relationshipIntent_Reflection = document.querySelector('.js-relationship-intent--reflection'); 
     for(const button of buttons) {
         button.addEventListener('click', (e) => {
+            relationshipIntent_Reflection.textContent = ""; 
             const selectedButton = e.currentTarget; 
             const textContent = selectedButton.lastElementChild.innerText; 
             const imageToReflect = filterReflectImages(imgArr, selectedButton); 
@@ -347,7 +351,8 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
             handleStyleOfSaveButton(saveButton); 
             changeRelationshipIntentContent(originalContent, changedContent);
 
-            relationshipIntent_Reflection.innerText = textContent; 
+            relationshipIntent_Reflection.append(imageToReflect[0]); 
+            relationshipIntent_Reflection.append(textContent); 
         })
     }
 }

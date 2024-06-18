@@ -1,7 +1,7 @@
 let addRelationshipIntentHTML = ''; 
 
 addRelationshipIntentHTML += `
-    <div class="add-relationship-intent modal js-modal" data-modal="Relationship-Intent">
+    <div class="add-relationship-intent modal js-modal" data-modal="Relationship-Intent" id="444ff111">
         <div class="inner-container">
             <div class="header">
                 <div class="header-top-part">
@@ -65,13 +65,15 @@ addRelationshipIntentHTML += `
             </div>
             <div class="footer-section">
                 <div class="button-container">
-                    <button class="js-save-button--relationship-intent">Save</button>
+                    <button class="save-button--relationship-intent js-save-button--relationship-intent js-close-modal" id="444ff111">Save</button>
                 </div>
             </div>
         </div>
     </div>
 `
 
+// based on what we know about the states: on loading, the elements inside a body should already be available; 
+// when the state is 'interactive' it means that CSS is fully loaded and styles are applied to the elements (it was in my case)
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "interactive") {
         addStylesheet_addRelationshipIntent(); 

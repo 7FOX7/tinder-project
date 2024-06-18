@@ -29,20 +29,6 @@
     padding-right: 2%;
 }
 
-.create-account-format .footage .footage-left-section-button {
-    display: flex; 
-    flex-direction: row; 
-    align-items: center; 
-    border: 2px solid rgba(0, 0, 0, 0.4); 
-    font-size: 18px; 
-    width: 18%; 
-    padding: 10px; 
-    justify-content: space-between; 
-    border-radius: 50px; 
-    transition: 0.2s; 
-    background-color: #fff; 
-}
-
 .create-account-format .footage button:disabled {
     opacity: 0.5; 
 }

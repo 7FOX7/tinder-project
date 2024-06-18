@@ -7,7 +7,7 @@ $(document).ready(function() {
     $('.js-remove-image-button').css("display", "none");
     $('#createAccountContinueButton')
         .prop('disabled', true)
-        .css({'background-image': 'none', 'background-color': 'rgba(0, 0, 0, 0.2)'}); 
+        .css({'background': 'rgba(0, 0, 0, 0.2)', 'cursor': 'default'}); 
     
     inputFile.on("change", (e) => {
         const imageUrl = URL.createObjectURL(e.target.files[0]); 
@@ -68,7 +68,7 @@ $(document).ready(function() {
             if(allFilled()) {
                 $('#createAccountContinueButton')
                     .removeAttr('disabled')
-                    .css({"background-image": "linear-gradient(to bottom right, red, hotpink)"}); 
+                    .css({"background": "var(--main-color)", "cursor": "pointer"})
             }
             else {
                 $('#createAccountContinueButton').prop('disabled', 'disabled'); 
@@ -95,7 +95,7 @@ $(document).ready(function() {
             if(allFilled() && regex.test(stringValue)) {
                 $('#createAccountContinueButton')
                     .removeAttr('disabled')
-                    .css({"background-image": "linear-gradient(to bottom right, red, hotpink)"});  
+                    .css({"background": "var(--main-color)", "cursor": "pointer"}) 
             }
             else {
                 $('#createAccountContinueButton').prop('disabled', 'disabled'); 
@@ -141,7 +141,7 @@ $(document).ready(function() {
             if(allFilled()) {
                 $('#createAccountContinueButton')
                     .removeAttr('disabled')
-                    .css({"background-image": "linear-gradient(to bottom right, red, hotpink)"});  
+                    .css({"background": "var(--main-color)", "cursor": "pointer"}) 
             }
             else {
                 $('#createAccountContinueButton').prop('disabled', 'disabled'); 
@@ -185,7 +185,7 @@ $(document).ready(function() {
 
             allFilled() ? $('#createAccountContinueButton')
                 .removeAttr('disabled')
-                .css({"background-image": "linear-gradient(to bottom right, red, hotpink)"}) 
+                .css({"background": "var(--main-color)", "cursor": "pointer"}) 
                 : 
                 $('#createAccountContinueButton').prop('disabled', 'disabled');
         }); 
@@ -218,9 +218,9 @@ $(document).ready(function() {
 
             allFilled() ?  $('#createAccountContinueButton')
                 .removeAttr('disabled')
-                .css({"background-image": "linear-gradient(to bottom right, red, hotpink)"}) 
+                .css({"background": "var(--main-color)", "cursor": "pointer"})  
                 :
-                 $('#createAccountContinueButton').prop('disabled', 'disabled')
+                $('#createAccountContinueButton').prop('disabled', 'disabled')
         })
     }
 
@@ -267,6 +267,7 @@ document.addEventListener('readystatechange', (e) => {
 
         const saveButton_relationshipIntent = document.querySelector('.js-save-button--relationship-intent'); 
         saveButton_relationshipIntent.setAttribute("disabled", ""); 
+        saveButton_relationshipIntent.style.cursor = "default"; 
         handleStyleOfSaveButton(saveButton_relationshipIntent); 
 
         const genderButtons = document.querySelectorAll('.js-button--gender'); 
@@ -304,6 +305,7 @@ document.addEventListener('readystatechange', (e) => {
         reflectImg_Arr.push(handWave_Reflection); 
         reflectImg_Arr.forEach((image) => {
             image.style.width = "20px"; 
+            image.style.marginRight = "6px"; 
         })
 
         handleRelationshipIntentButtonClick(relationshipIntent_Arr, saveButton_relationshipIntent, reflectImg_Arr); 
@@ -336,8 +338,10 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
     const originalContent = document.querySelector('.js-original-content--relationship-intent'); 
     const changedContent = document.querySelector('.js-changed-content--relationship-intent'); 
     const relationshipIntent_Reflection = document.querySelector('.js-relationship-intent--reflection'); 
+    relationshipIntent_Reflection.style.visibility = "hidden"; 
     for(const button of buttons) {
         button.addEventListener('click', (e) => {
+            relationshipIntent_Reflection.style.visibility = "visible";     // the style is changed everytime there is a click, however I want to change the color once and forever the first click appears, not on each click the style change 
             relationshipIntent_Reflection.textContent = ""; 
             const selectedButton = e.currentTarget; 
             const textContent = selectedButton.lastElementChild.innerText; 
@@ -358,8 +362,7 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
 }
 
 function handleStyleOfSaveButton(saveButton) {
-    saveButton.hasAttribute("disabled") ? (saveButton.style.background = "rgba(0, 0, 0, 0.1)", saveButton.style.color = "rgba(0, 0, 0, 0.3)") 
-    : (saveButton.style.background = "var(--main-color)", saveButton.style.color = "#fff"); 
+    saveButton.hasAttribute("disabled") ? "" : (saveButton.style.cursor = "pointer", saveButton.classList.add('active')); 
 }
 
 function filterUnselectedInnerRelationshipButtons(buttonArr, clickedButton) {

@@ -32,18 +32,6 @@
     border: 2px solid transparent; 
 }
 
-.create-account-format .main-body .input-section button{
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    background: rgb(250, 250, 250); 
-    font-size: 18px; 
-    transition: 0.2s;
-    padding: 10px; 
-    width: 100%; 
-    border-radius: inherit;
-}
-
 /* .create-account-format .main-body .left-section-button::after {
     position: absolute;  
     border: 2px solid; 
@@ -102,6 +90,19 @@
 .create-account-format .main-body .interest-group {
     display: flex; 
     justify-content: space-between; 
+}
+
+.create-account-format .main-body .input-section .gender-selection button, 
+.create-account-format .main-body .input-section .interest-group button {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    background: rgb(250, 250, 250); 
+    font-size: 18px; 
+    transition: 0.2s;
+    padding: 10px; 
+    width: 100%; 
+    border-radius: inherit;
 }
 
 .create-account-format .main-body .checkbox-section {

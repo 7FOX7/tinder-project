@@ -256,9 +256,18 @@ $(document).ready(function() {
 
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "complete") {
+        const reflectImg_Arr = []; 
         const leftSectionButtons_Gender = document.querySelectorAll('.js-left-section-button--gender'); 
         const leftSectionButtons_InterestGroup = document.querySelectorAll('.js-left-section-button--interest-group'); 
-        const leftSectionButtons_RelationshipIntent = document.querySelectorAll('.js-left-section-button--relationship-intent'); 
+
+        const form = document.querySelector('form'); 
+        form.addEventListener('submit', e => {
+            e.preventDefault(); 
+        }); 
+
+        const saveButton_relationshipIntent = document.querySelector('.js-save-button--relationship-intent'); 
+        saveButton_relationshipIntent.setAttribute("disabled", ""); 
+        handleStyleOfSaveButton(saveButton_relationshipIntent); 
 
         const genderButtons = document.querySelectorAll('.js-button--gender'); 
         handleLeftSectionButtonClick(genderButtons, leftSectionButtons_Gender); 
@@ -266,16 +275,42 @@ document.addEventListener('readystatechange', (e) => {
         const interestGroupButtons = document.querySelectorAll('.js-button--interest-group');  
         handleLeftSectionButtonClick(interestGroupButtons, leftSectionButtons_InterestGroup); 
 
-        const relationshipIntentButtons = document.querySelectorAll('.js-button--relationship-intent')
-        handleLeftSectionButtonClick(relationshipIntentButtons, leftSectionButtons_RelationshipIntent);  
-
         const relationhipIntent_innerButtons = document.querySelectorAll('.js-inner-button--relationship-intent'); 
-        handleRelationshipIntentButtonClick(relationhipIntent_innerButtons); 
+        const relationshipIntent_Arr = Array.from(relationhipIntent_innerButtons);
 
-        const form = document.querySelector('form'); 
-        form.addEventListener('submit', e => {
-            e.preventDefault(); 
-        }); 
+        const heartArrow_Reflection = createImage('../../images/relationship-intent-heart-arrow__reflection.png', 'heart arrow'); 
+        heartArrow_Reflection.setAttribute('id', 'heartArrow');
+         
+        const heartEyes_Reflection = createImage('../../images/relationship-intent-heart-eyes__reflection.png', 'heart eyes'); 
+        heartEyes_Reflection.setAttribute('id', 'heartEyes'); 
+
+        const drinking_Reflection = createImage('../../images/relationship-intent-drinking__reflection.png', 'drinking');
+        drinking_Reflection.setAttribute('id', 'drinking'); 
+
+        const tada_Reflection = createImage('../../images/relationship-intent-tada__reflection.png', 'tada');
+        tada_Reflection.setAttribute('id', 'tada'); 
+
+        const thinkingFace_Reflection = createImage('../../images/relationship-intent-thinking-face__reflection.png', 'heart eyes');
+        thinkingFace_Reflection.setAttribute('id', 'thinkingFace'); 
+
+        const handWave_Reflection = createImage('../../images/relationship-intent-wave__reflection.png', 'wave');
+        handWave_Reflection.setAttribute('id', 'handWave'); 
+        
+        reflectImg_Arr.push(heartArrow_Reflection); 
+        reflectImg_Arr.push(heartEyes_Reflection); 
+        reflectImg_Arr.push(drinking_Reflection); 
+        reflectImg_Arr.push(tada_Reflection); 
+        reflectImg_Arr.push(thinkingFace_Reflection); 
+        reflectImg_Arr.push(handWave_Reflection); 
+
+        handleRelationshipIntentButtonClick(relationshipIntent_Arr, saveButton_relationshipIntent, reflectImg_Arr); 
+
+        function createImage(source, alt) {
+            const image = new Image; 
+            image.src = source; 
+            image.alt = alt; 
+            return image; 
+        }
     }
 });
 
@@ -294,15 +329,50 @@ function handleLeftSectionButtonClick(buttons, leftSectionButtons_Group) {
     })
 }
 
-function handleRelationshipIntentButtonClick(buttons) {
+function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
+    const originalContent = document.querySelector('.js-original-content--relationship-intent'); 
+    const changedContent = document.querySelector('.js-changed-content--relationship-intent'); 
     const relationshipIntent_Reflection = document.querySelector('.js-relationship-intent--reflection'); 
     for(const button of buttons) {
         button.addEventListener('click', (e) => {
-            const currentButton = e.target; 
-            relationshipIntent_Reflection.textContent = currentButton.textContent; 
+            const selectedButton = e.currentTarget; 
+            const textContent = selectedButton.lastElementChild.innerText; 
+            const imageToReflect = filterReflectImages(imgArr, selectedButton); 
+            const unselectedButtons = filterUnselectedInnerRelationshipButtons(buttons, selectedButton); 
+            unselectedButtons.forEach((unselectedButton) => {
+                unselectedButton.classList.remove("selected"); 
+            }); 
+            handleStyleOfSelectedButton(selectedButton); 
+            saveButton.removeAttribute("disabled"); 
+            handleStyleOfSaveButton(saveButton); 
+            changeRelationshipIntentContent(originalContent, changedContent);
+
+            relationshipIntent_Reflection.innerText = textContent; 
         })
     }
 }
+
+function handleStyleOfSaveButton(saveButton) {
+    saveButton.hasAttribute("disabled") ? (saveButton.style.background = "rgba(0, 0, 0, 0.1)", saveButton.style.color = "rgba(0, 0, 0, 0.3)") 
+    : (saveButton.style.background = "var(--main-color)", saveButton.style.color = "#fff"); 
+}
+
+function filterUnselectedInnerRelationshipButtons(buttonArr, clickedButton) {
+    return buttonArr.filter((button) => button !== clickedButton); 
+}
+
+function handleStyleOfSelectedButton(selectedButton) {
+    selectedButton.classList.add("selected"); 
+}
+
+function changeRelationshipIntentContent(original, changed) {
+    original.style.display = "none"; 
+    changed.style.display = "flex"; 
+}
+
+function filterReflectImages(imgArr, selectedButton) {
+    return imgArr.filter((img) => img.getAttribute('id') === selectedButton.getAttribute('id')); 
+} 
 
 /*
     in JavaScript, should function declaration be placed inside the code that gets executed on 

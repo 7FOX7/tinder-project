@@ -13,6 +13,11 @@ body {
     cursor: default; 
 }
 
+svg {
+    width: 16px;
+    height: 16px;
+}
+
 button {
     cursor: pointer; 
     border: none; 

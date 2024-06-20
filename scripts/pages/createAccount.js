@@ -256,15 +256,17 @@ $(document).ready(function() {
 
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "complete") {
+        const interest_Arr = []; 
         const reflectImg_Arr = []; 
         const leftSectionButtons_Gender = document.querySelectorAll('.js-left-section-button--gender'); 
         const leftSectionButtons_InterestGroup = document.querySelectorAll('.js-left-section-button--interest-group'); 
-
+        
         const form = document.querySelector('form'); 
         form.addEventListener('submit', e => {
             e.preventDefault(); 
         }); 
 
+        handleInterestFieldClick(interest_Arr); 
         const saveButton_relationshipIntent = document.querySelector('.js-save-button--relationship-intent'); 
         saveButton_relationshipIntent.setAttribute("disabled", ""); 
         saveButton_relationshipIntent.style.cursor = "default"; 
@@ -325,6 +327,18 @@ function enableSingleSelection(btn, arr) {
     })
 }
 
+function handleInterestFieldClick(arr) {
+    const interests = document.querySelectorAll('.js-selection-field--add-interests');
+    interests.forEach((interest) => {
+        interest.addEventListener('click', (e) => {
+            const clickedField = e.currentTarget; 
+            const textContent = clickedField.firstElementChild.innerText;
+            arr.push(textContent); 
+            clickedField.style.border = "2px solid var(--second-color)"; 
+        })
+    }) 
+}
+
 function handleLeftSectionButtonClick(buttons, leftSectionButtons_Group) {
     buttons.forEach((button) => {
         button.addEventListener('click', (e) => {
@@ -360,6 +374,7 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
         })
     }
 }
+
 
 function handleStyleOfSaveButton(saveButton) {
     saveButton.hasAttribute("disabled") ? "" : (saveButton.style.cursor = "pointer", saveButton.classList.add('active')); 

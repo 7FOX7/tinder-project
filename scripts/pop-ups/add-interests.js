@@ -219,7 +219,7 @@ addInterestsHTML += `
                 <div class="js-blur-effect blur-effect"></div>
             </div>
             <div class="footage">
-                <button class="js-save-button--add-interests save-button--add-interests">
+                <button class="js-save-button--add-interests save-button--add-interests active">
                     <span>Save (0/5)</span>
                 </button>
             </div>

@@ -256,8 +256,11 @@ $(document).ready(function() {
 
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "complete") {
-        const interest_Arr = []; 
+        const maxInterests = 5; 
+        const selectedInterests = []; 
         const reflectImg_Arr = []; 
+        const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
+        
         const leftSectionButtons_Gender = document.querySelectorAll('.js-left-section-button--gender'); 
         const leftSectionButtons_InterestGroup = document.querySelectorAll('.js-left-section-button--interest-group'); 
         
@@ -266,7 +269,7 @@ document.addEventListener('readystatechange', (e) => {
             e.preventDefault(); 
         }); 
 
-        handleInterestFieldClick(interest_Arr); 
+        handleInterestFieldClick(selectedInterests, maxInterests); 
         const saveButton_relationshipIntent = document.querySelector('.js-save-button--relationship-intent'); 
         saveButton_relationshipIntent.setAttribute("disabled", ""); 
         saveButton_relationshipIntent.style.cursor = "default"; 
@@ -327,14 +330,15 @@ function enableSingleSelection(btn, arr) {
     })
 }
 
-function handleInterestFieldClick(arr) {
+function handleInterestFieldClick(arr, max) {
     const interests = document.querySelectorAll('.js-selection-field--add-interests');
     interests.forEach((interest) => {
         interest.addEventListener('click', (e) => {
+            if(arr.length === max) return; 
             const clickedField = e.currentTarget; 
             const textContent = clickedField.firstElementChild.innerText;
-            arr.push(textContent); 
-            clickedField.style.border = "2px solid var(--second-color)"; 
+            clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentTextContent(arr, textContent)) : (clickedField.classList.add('active'), arr.push(textContent)); 
+            console.log(arr); 
         })
     }) 
 }
@@ -347,6 +351,13 @@ function handleLeftSectionButtonClick(buttons, leftSectionButtons_Group) {
         }); 
     })
 }
+
+function removeCurrentTextContent(arr, textContent) {
+     arr.forEach((val, index) => {
+        val === textContent ? arr.splice(index, 1) : ''; 
+    })
+    // arr.filter((val) => val !== textContent); 
+} 
 
 function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
     const originalContent = document.querySelector('.js-original-content--relationship-intent'); 

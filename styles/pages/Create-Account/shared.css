@@ -93,7 +93,6 @@ button {
 
 .create-account-format .main-body {
     display: flex; 
-    /* background-color: rgba(0, 0, 0, 0.2);  */
     width: 100%; 
     justify-content: space-around; 
     padding-left: 12%; 
@@ -111,6 +110,22 @@ button {
     padding-right: 12%; 
     font-size: 17px;
     font-weight: 600; 
+}
+
+.create-account-format .reflection-field {
+    visibility: hidden;
+    display: flex; 
+    align-items: center;
+    justify-content: space-evenly;
+    background: rgb(250, 250, 250); 
+    border: 2px solid var(--second-color); 
+    border-radius: 50px; 
+    font-weight: 400; 
+    font-size: 0.8em; 
+    padding: 7px; 
+    text-wrap: nowrap; 
+    width: fit-content; 
+    margin-top: 20px; 
 }
 
 .create-account-format .title {
@@ -134,5 +149,4 @@ button {
 .create-account-format .modal-window-button span {
     font-weight: 600; 
     color: rgb(0, 0, 0); 
-    
 }

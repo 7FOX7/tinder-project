@@ -20,7 +20,6 @@ $(document).ready(function() {
     });
     
     $('.js-close-modal').click(function() {
-        console.log('you are about to close the modal window')
         var closeId = $(this).attr('id');
         var modalObj = $('.js-modal[id="'+closeId+'"]');   
         var modalId = modalObj.attr('id');

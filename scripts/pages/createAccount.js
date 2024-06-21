@@ -256,11 +256,31 @@ $(document).ready(function() {
 
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "complete") {
+        /*
         const maxInterests = 5; 
+        const minInterests = 3; 
         const selectedInterests = []; 
+        */
         const reflectImg_Arr = []; 
-        const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
-        
+        // const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
+        functionality_AddInterests(); 
+
+        /*
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if(mutation.type === 'childList') {
+                    (inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
+                    : saveButton_addInterests.setAttribute("disabled", ""); 
+                    handleStyleOfSaveButton(saveButton_addInterests);     
+                }
+            })
+        })
+
+        observer.observe(saveButton_addInterests, {
+            subtree: true,
+            childList: true
+        }); 
+        */
         const leftSectionButtons_Gender = document.querySelectorAll('.js-left-section-button--gender'); 
         const leftSectionButtons_InterestGroup = document.querySelectorAll('.js-left-section-button--interest-group'); 
         
@@ -268,12 +288,10 @@ document.addEventListener('readystatechange', (e) => {
         form.addEventListener('submit', e => {
             e.preventDefault(); 
         }); 
+        // handleSaveButtonClick_addInterests(saveButton_addInterests, selectedInterests); 
 
-        handleInterestFieldClick(selectedInterests, maxInterests); 
+        // handleInterestFieldClick(selectedInterests, maxInterests); 
         const saveButton_relationshipIntent = document.querySelector('.js-save-button--relationship-intent'); 
-        saveButton_relationshipIntent.setAttribute("disabled", ""); 
-        saveButton_relationshipIntent.style.cursor = "default"; 
-        handleStyleOfSaveButton(saveButton_relationshipIntent); 
 
         const genderButtons = document.querySelectorAll('.js-button--gender'); 
         handleLeftSectionButtonClick(genderButtons, leftSectionButtons_Gender); 
@@ -314,15 +332,15 @@ document.addEventListener('readystatechange', (e) => {
         })
 
         handleRelationshipIntentButtonClick(relationshipIntent_Arr, saveButton_relationshipIntent, reflectImg_Arr); 
-
-        function createImage(source, alt) {
-            const image = new Image(); 
-            image.src = source; 
-            image.alt = alt; 
-            return image; 
-        }
     }
 });
+
+function createImage(source, alt) {
+    const image = new Image(); 
+    image.src = source; 
+    image.alt = alt; 
+    return image; 
+}
 
 function enableSingleSelection(btn, arr) {
     arr.forEach((val) => {
@@ -332,15 +350,42 @@ function enableSingleSelection(btn, arr) {
 
 function handleInterestFieldClick(arr, max) {
     const interests = document.querySelectorAll('.js-selection-field--add-interests');
+    const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');  
     interests.forEach((interest) => {
         interest.addEventListener('click', (e) => {
-            if(arr.length === max) return; 
-            const clickedField = e.currentTarget; 
-            const textContent = clickedField.firstElementChild.innerText;
-            clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentTextContent(arr, textContent)) : (clickedField.classList.add('active'), arr.push(textContent)); 
+            const clickedField = e.currentTarget;  
+        
+            if(clickedField.classList.contains('active')) {
+                clickedField.classList.remove('active'); 
+                // removeCurrentTextContent(arr, textContent); 
+                removeCurrentInterest(arr, clickedField); 
+            }
+            else {
+                arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField)); 
+            }
+            saveButton_Value.innerText = `Save ${arr.length}/5`; 
             console.log(arr); 
         })
     }) 
+}
+
+
+function handleSaveButtonClick_addInterests(saveButton, arr) {
+    const interests_Reflection = document.querySelector('.js-interests--reflection'); 
+    saveButton.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        interests_Reflection.innerText = ""; 
+        const copyArr = getDeepCopyOfArr(arr);   
+        interests_Reflection.style.visibility = "visible"; 
+        copyArr.forEach((val) => {
+            interests_Reflection.append(val); 
+        })
+        sessionStorage.setItem('interests', JSON.stringify(copyArr)); 
+    })
+}
+
+function inBetween(val, max, min) {
+    return val <= max && val >= min; 
 }
 
 function handleLeftSectionButtonClick(buttons, leftSectionButtons_Group) {
@@ -352,22 +397,32 @@ function handleLeftSectionButtonClick(buttons, leftSectionButtons_Group) {
     })
 }
 
-function removeCurrentTextContent(arr, textContent) {
-     arr.forEach((val, index) => {
-        val === textContent ? arr.splice(index, 1) : ''; 
+function getDeepCopyOfArr(arr) {
+    const copyArr = []; 
+    for(val of arr) {
+        const copy = val.cloneNode(true);
+        copyArr.push(copy);  
+    }
+    return copyArr; 
+}
+
+function removeCurrentInterest(arr, interest) {
+    console.log(typeof(interest)); 
+    arr.forEach((val, index) => {
+        val === interest ? arr.splice(index, 1) : ''; 
     })
-    // arr.filter((val) => val !== textContent); 
-} 
+}
 
 function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
     const originalContent = document.querySelector('.js-original-content--relationship-intent'); 
     const changedContent = document.querySelector('.js-changed-content--relationship-intent'); 
     const relationshipIntent_Reflection = document.querySelector('.js-relationship-intent--reflection'); 
-    relationshipIntent_Reflection.style.visibility = "hidden"; 
+    saveButton.setAttribute("disabled", ""); 
+    handleStyleOfSaveButton(saveButton); 
     for(const button of buttons) {
         button.addEventListener('click', (e) => {
             relationshipIntent_Reflection.style.visibility = "visible";     // the style is changed everytime there is a click, however I want to change the color once and forever the first click appears, not on each click the style change 
-            relationshipIntent_Reflection.textContent = ""; 
+            relationshipIntent_Reflection.innerText = ""; 
             const selectedButton = e.currentTarget; 
             const textContent = selectedButton.lastElementChild.innerText; 
             const imageToReflect = filterReflectImages(imgArr, selectedButton); 
@@ -386,9 +441,49 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
     }
 }
 
+function functionality_AddInterests() {
+    const maxInterests = 5; 
+    const minInterests = 3; 
+    let selectedInterests = []; 
+
+    const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
+    const mainContainer = document.querySelector('.js-modal.add-interests'); 
+        const observer = new MutationObserver(() => {
+            if(sessionStorage.getItem("interests")) {
+                selectedInterests = JSON.parse(sessionStorage.getItem("interests")); 
+            }
+            const mainPart = document.querySelector('.add-interests .js-main-part');
+            const blurEffect = document.querySelector('.add-interests .js-blur-effect');  
+            blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
+            mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
+        }) 
+
+        observer.observe(mainContainer, {attributes: true});  // attributes (config) - change to check for. if there are any changes 
+                                                              // related to the attribute list (some attributes were removed or added), 
+                                                              // then, on each such a change they will be displayed in the mutation record list
+
+    const observer_saveButton = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if(mutation.type === 'childList') {
+            (inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
+            : saveButton_addInterests.setAttribute("disabled", ""); 
+            handleStyleOfSaveButton(saveButton_addInterests);     
+        }
+        })
+    })
+
+    observer_saveButton.observe(saveButton_addInterests, {
+        subtree: true,
+        childList: true
+    }); 
+
+    handleSaveButtonClick_addInterests(saveButton_addInterests, selectedInterests); 
+    handleInterestFieldClick(selectedInterests, maxInterests); 
+}
+
 
 function handleStyleOfSaveButton(saveButton) {
-    saveButton.hasAttribute("disabled") ? "" : (saveButton.style.cursor = "pointer", saveButton.classList.add('active')); 
+    saveButton.hasAttribute("disabled") ? (saveButton.style.cursor = "default", saveButton.classList.remove('active')) : (saveButton.style.cursor = "pointer", saveButton.classList.add('active')); 
 }
 
 function filterUnselectedInnerRelationshipButtons(buttonArr, clickedButton) {

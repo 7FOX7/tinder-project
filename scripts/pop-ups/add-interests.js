@@ -220,7 +220,7 @@ addInterestsHTML += `
             </div>
             <div class="footage">
                 <button class="js-save-button--add-interests save-button--add-interests active">
-                    <span>Save (0/5)</span>
+                    <span class="text">Save (0/5)</span>
                 </button>
             </div>
         </div>
@@ -233,18 +233,6 @@ document.addEventListener('readystatechange', (e) => {
         addStylesheet_addInterests(); 
         const container = document.querySelector('.js-add-interests'); 
         container.innerHTML = addInterestsHTML;  
-        const mainContainer = document.querySelector('.js-modal.add-interests'); 
-        const observer = new MutationObserver((mutations) => {
-            console.log(mutations); 
-            const mainPart = document.querySelector('.add-interests .js-main-part');
-            const blurEffect = document.querySelector('.add-interests .js-blur-effect');  
-            blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
-            mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
-        }) 
-
-        observer.observe(mainContainer, {attributes: true});  // attributes (config) - change to check for. if there are any changes 
-                                                              // related to the attribute list (some attributes were removed or added), 
-                                                              // then, on each such a change they will be displayed in the mutation record list
     }
 });
 

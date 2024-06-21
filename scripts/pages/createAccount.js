@@ -355,32 +355,55 @@ function handleInterestFieldClick(arr, max) {
         interest.addEventListener('click', (e) => {
             const clickedField = e.currentTarget;  
         
-            if(clickedField.classList.contains('active')) {
-                clickedField.classList.remove('active'); 
-                // removeCurrentTextContent(arr, textContent); 
-                removeCurrentInterest(arr, clickedField); 
-            }
-            else {
-                arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField)); 
-            }
+            // if(clickedField.classList.contains('active')) {
+            //     clickedField.classList.remove('active'); 
+            //     removeCurrentInterest(arr, clickedField); 
+            // }
+            // else {
+            //     arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField)); 
+            // }
+
+            clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
+            (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
+
             saveButton_Value.innerText = `Save ${arr.length}/5`; 
             console.log(arr); 
         })
     }) 
 }
 
+/*
+    const interests = document.querySelectorAll('.js-selection-field--add-interests');
+    const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');  
+    interests.forEach((interest) => {
+        interest.addEventListener('click', (e) => {
+            handleInterestFieldClick(arr, max, clickedField); 
+        })
+    }
+
+    function handleInterestFieldClick(arr, max, clickedField) {
+        clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
+        (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
+
+        saveButton_Value.innerText = `Save ${arr.length}/5`; 
+        console.log(arr); 
+    }
+*/
 
 function handleSaveButtonClick_addInterests(saveButton, arr) {
     const interests_Reflection = document.querySelector('.js-interests--reflection'); 
     saveButton.addEventListener('click', (e) => {
         e.preventDefault(); 
+        const formatArr = []; 
         interests_Reflection.innerText = ""; 
         const copyArr = getDeepCopyOfArr(arr);   
         interests_Reflection.style.visibility = "visible"; 
         copyArr.forEach((val) => {
-            interests_Reflection.append(val); 
+            interests_Reflection.append(val);
+            formatArr.push(val.outerHTML);  
         })
-        sessionStorage.setItem('interests', JSON.stringify(copyArr)); 
+        // sessionStorage.setItem('interests', JSON.stringify(Object.values(copyArr))); 
+        sessionStorage.setItem("interests", JSON.stringify(formatArr)); 
     })
 }
 
@@ -448,39 +471,48 @@ function functionality_AddInterests() {
 
     const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
     const mainContainer = document.querySelector('.js-modal.add-interests'); 
-        const observer = new MutationObserver(() => {
-            if(sessionStorage.getItem("interests")) {
-                selectedInterests = JSON.parse(sessionStorage.getItem("interests")); 
+    const observer_modalWindow = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if(mutation.type === "attributes") {
+                const modalWindow = mutation.target; 
+                if(modalWindow.classList.contains("active")) {
+                    const mainPart = document.querySelector('.add-interests .js-main-part');
+                    const blurEffect = document.querySelector('.add-interests .js-blur-effect');  
+                    blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
+                    mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
+                    // selectedInterests = sessionStorage.getItem("interests") ? Object.values(JSON.parse(sessionStorage.getItem("interests"))) : selectedInterests; 
+                    if(sessionStorage.getItem("interests")) {
+                        selectedInterests = Object.values(JSON.parse(sessionStorage.getItem("interests")))
+                    }
+                    
+                    handleSaveButtonClick_addInterests(saveButton_addInterests, selectedInterests); 
+                    handleInterestFieldClick(selectedInterests, maxInterests);
+
+                    const observer_saveButton = new MutationObserver((mutations) => {
+                        mutations.forEach((mutation) => {
+                            if(mutation.type === 'childList') {
+                                (inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
+                                : saveButton_addInterests.setAttribute("disabled", ""); 
+                                handleStyleOfSaveButton(saveButton_addInterests);     
+                            }
+                        })
+                    })
+                    
+
+                    
+                    observer_saveButton.observe(saveButton_addInterests, {
+                        subtree: true,
+                        childList: true
+                    }); 
+                }
             }
-            const mainPart = document.querySelector('.add-interests .js-main-part');
-            const blurEffect = document.querySelector('.add-interests .js-blur-effect');  
-            blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
-            mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
-        }) 
-
-        observer.observe(mainContainer, {attributes: true});  // attributes (config) - change to check for. if there are any changes 
-                                                              // related to the attribute list (some attributes were removed or added), 
-                                                              // then, on each such a change they will be displayed in the mutation record list
-
-    const observer_saveButton = new MutationObserver((mutations) => {
-    mutations.forEach((mutation) => {
-        if(mutation.type === 'childList') {
-            (inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
-            : saveButton_addInterests.setAttribute("disabled", ""); 
-            handleStyleOfSaveButton(saveButton_addInterests);     
-        }
         })
-    })
+    }) 
 
-    observer_saveButton.observe(saveButton_addInterests, {
-        subtree: true,
-        childList: true
-    }); 
-
-    handleSaveButtonClick_addInterests(saveButton_addInterests, selectedInterests); 
-    handleInterestFieldClick(selectedInterests, maxInterests); 
+    observer_modalWindow.observe(mainContainer, {attributes: true});  // attributes (config) - change to check for. if there are any changes 
+                                                            // related to the attribute list (some attributes were removed or added), 
+                                                            // then, on each such a change they will be displayed in the mutation record list 
 }
-
 
 function handleStyleOfSaveButton(saveButton) {
     saveButton.hasAttribute("disabled") ? (saveButton.style.cursor = "default", saveButton.classList.remove('active')) : (saveButton.style.cursor = "pointer", saveButton.classList.add('active')); 

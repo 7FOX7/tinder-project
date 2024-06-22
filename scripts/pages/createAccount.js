@@ -352,26 +352,33 @@ function handleInterestFieldClick(arr, max) {
     const interests = document.querySelectorAll('.js-selection-field--add-interests');
     const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');  
     interests.forEach((interest) => {
-        interest.addEventListener('click', (e) => {
-            const clickedField = e.currentTarget;  
+        interest.removeEventListener('click', interestField_onClick(e, arr)); 
+        interest.addEventListener('click', interestField_onClick(e, arr))
+            // const clickedField = e.currentTarget;  
         
-            // if(clickedField.classList.contains('active')) {
-            //     clickedField.classList.remove('active'); 
-            //     removeCurrentInterest(arr, clickedField); 
-            // }
-            // else {
-            //     arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField)); 
-            // }
+            // // if(clickedField.classList.contains('active')) {
+            // //     clickedField.classList.remove('active'); 
+            // //     removeCurrentInterest(arr, clickedField); 
+            // // }
+            // // else {
+            // //     arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField)); 
+            // // }
 
-            clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
-            (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
+            // clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
+            // (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
 
-            saveButton_Value.innerText = `Save ${arr.length}/5`; 
-            console.log(arr); 
-        })
+            // saveButton_Value.innerText = `Save ${arr.length}/5`; 
+            // console.log(arr); 
+        // })
+        saveButton_Value.innerText = `Save ${arr.length}/5`; 
     }) 
 }
 
+function interestField_onClick(e, arr) {
+    const clickedField = e.currentTarget; 
+    clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
+            (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
+}
 /*
     const interests = document.querySelectorAll('.js-selection-field--add-interests');
     const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');  
@@ -480,7 +487,6 @@ function functionality_AddInterests() {
                     const blurEffect = document.querySelector('.add-interests .js-blur-effect');  
                     blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
                     mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
-                    // selectedInterests = sessionStorage.getItem("interests") ? Object.values(JSON.parse(sessionStorage.getItem("interests"))) : selectedInterests; 
                     if(sessionStorage.getItem("interests")) {
                         selectedInterests = Object.values(JSON.parse(sessionStorage.getItem("interests")))
                     }
@@ -513,6 +519,47 @@ function functionality_AddInterests() {
                                                             // related to the attribute list (some attributes were removed or added), 
                                                             // then, on each such a change they will be displayed in the mutation record list 
 }
+
+
+
+// the following is the structure of the code, assuming the problem is related to the event listener (we just basically get the code out of the loop):
+// (this does not work the way we want because it is called only one time. the statement of 'mainContainer.classList.contains('active')' is only checked once)
+// 1: 
+    
+    
+// function functionality_AddInterests() {
+//     const maxInterests = 5; 
+//     const minInterests = 3; 
+//     let selectedInterests = []; 
+//     const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
+//     const mainContainer = document.querySelector('.js-modal.add-interests'); 
+//     const mainPart = document.querySelector('.add-interests .js-main-part');
+//     const blurEffect = document.querySelector('.add-interests .js-blur-effect');  
+
+//     mainContainer.classList.contains('active') ? (blurEffect.style.top = `${mainPart.offsetHeight + 80}px`, mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`) : ""; 
+//     if(sessionStorage.getItem("interests")) {
+//         selectedInterests = Object.values(JSON.parse(sessionStorage.getItem("interests")))
+//     }
+
+//     handleSaveButtonClick_addInterests(saveButton_addInterests, selectedInterests); 
+//     handleInterestFieldClick(selectedInterests, maxInterests);
+//     const observer_saveButton = new MutationObserver((mutations) => {
+//         mutations.forEach((mutation) => {
+//             if(mutation.type === 'childList') {
+//                 (inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
+//                 : saveButton_addInterests.setAttribute("disabled", ""); 
+//                 handleStyleOfSaveButton(saveButton_addInterests);     
+//             }
+//         })
+//     })
+
+//     observer_saveButton.observe(saveButton_addInterests, {
+//         subtree: true,
+//         childList: true
+//     }); 
+// }
+        
+   
 
 function handleStyleOfSaveButton(saveButton) {
     saveButton.hasAttribute("disabled") ? (saveButton.style.cursor = "default", saveButton.classList.remove('active')) : (saveButton.style.cursor = "pointer", saveButton.classList.add('active')); 

@@ -350,35 +350,21 @@ function enableSingleSelection(btn, arr) {
 
 function handleInterestFieldClick(arr, max) {
     const interests = document.querySelectorAll('.js-selection-field--add-interests');
-    const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');  
+    const saveButton_Value = document.querySelector('.js-save-button--add-interests .text'); 
+
     interests.forEach((interest) => {
-        interest.removeEventListener('click', interestField_onClick(e, arr)); 
-        interest.addEventListener('click', interestField_onClick(e, arr))
-            // const clickedField = e.currentTarget;  
-        
-            // // if(clickedField.classList.contains('active')) {
-            // //     clickedField.classList.remove('active'); 
-            // //     removeCurrentInterest(arr, clickedField); 
-            // // }
-            // // else {
-            // //     arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField)); 
-            // // }
-
-            // clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
-            // (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
-
-            // saveButton_Value.innerText = `Save ${arr.length}/5`; 
-            // console.log(arr); 
-        // })
-        saveButton_Value.innerText = `Save ${arr.length}/5`; 
+        if(interest && !interest.hasAttribute("clickListener")) {
+            interest.addEventListener('click', (e) => {
+                const clickedField = e.currentTarget; 
+                clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
+                (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
+                saveButton_Value.innerText = `Save ${arr.length}/5`; 
+            });
+        } 
+        !interest.hasAttribute("clickListener") ? interest.setAttribute("clickListener", "") : ""; 
     }) 
 }
 
-function interestField_onClick(e, arr) {
-    const clickedField = e.currentTarget; 
-    clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
-            (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
-}
 /*
     const interests = document.querySelectorAll('.js-selection-field--add-interests');
     const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');  
@@ -399,19 +385,26 @@ function interestField_onClick(e, arr) {
 
 function handleSaveButtonClick_addInterests(saveButton, arr) {
     const interests_Reflection = document.querySelector('.js-interests--reflection'); 
-    saveButton.addEventListener('click', (e) => {
-        e.preventDefault(); 
-        const formatArr = []; 
-        interests_Reflection.innerText = ""; 
-        const copyArr = getDeepCopyOfArr(arr);   
-        interests_Reflection.style.visibility = "visible"; 
-        copyArr.forEach((val) => {
-            interests_Reflection.append(val);
-            formatArr.push(val.outerHTML);  
+    if(saveButton && !saveButton.hasAttribute('clickEvent')) {
+        saveButton.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            const formatArr = []; 
+            interests_Reflection.innerText = ""; 
+            const copyArr = getDeepCopyOfArr(arr);   
+            interests_Reflection.style.visibility = "visible"; 
+            copyArr.forEach((val) => {
+                interests_Reflection.append(val);
+                formatArr.push(val.outerHTML);  
+            })
+            // sessionStorage.setItem('interests', JSON.stringify(Object.values(copyArr))); 
+            sessionStorage.setItem("interests", JSON.stringify(formatArr)); 
         })
-        // sessionStorage.setItem('interests', JSON.stringify(Object.values(copyArr))); 
-        sessionStorage.setItem("interests", JSON.stringify(formatArr)); 
-    })
+    }
+    // saveButton && !saveButton.hasAttribute('clickEvent') ? saveButton.setAttribute('clickEvent', "") 
+    // : ""; 
+    if(saveButton && !saveButton.hasAttribute('clickEvent')) {
+        saveButton.setAttribute('clickEvent', ""); 
+    }
 }
 
 function inBetween(val, max, min) {
@@ -478,7 +471,10 @@ function functionality_AddInterests() {
 
     const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
     const mainContainer = document.querySelector('.js-modal.add-interests'); 
+    
     const observer_modalWindow = new MutationObserver((mutations) => {
+        // here, each time a new modal window is opened/closed, there is only a single message of 'mutationRecords' (which is good) 
+        console.log(mutations); 
         mutations.forEach((mutation) => {
             if(mutation.type === "attributes") {
                 const modalWindow = mutation.target; 
@@ -488,36 +484,45 @@ function functionality_AddInterests() {
                     blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
                     mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
                     if(sessionStorage.getItem("interests")) {
-                        selectedInterests = Object.values(JSON.parse(sessionStorage.getItem("interests")))
+                        selectedInterests = Object.values(JSON.parse(sessionStorage.getItem("interests"))); 
                     }
                     
                     handleSaveButtonClick_addInterests(saveButton_addInterests, selectedInterests); 
                     handleInterestFieldClick(selectedInterests, maxInterests);
-
-                    const observer_saveButton = new MutationObserver((mutations) => {
-                        mutations.forEach((mutation) => {
-                            if(mutation.type === 'childList') {
-                                (inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
-                                : saveButton_addInterests.setAttribute("disabled", ""); 
-                                handleStyleOfSaveButton(saveButton_addInterests);     
-                            }
-                        })
-                    })
-                    
-
-                    
-                    observer_saveButton.observe(saveButton_addInterests, {
-                        subtree: true,
-                        childList: true
-                    }); 
                 }
             }
         })
-    }) 
+        handleSaveButtonStyling(selectedInterests); 
+    })
+
+    function handleSaveButtonStyling(selectedInterests) {
+        const observer_saveButton = new MutationObserver((mutations) => {
+            console.log(mutations)
+            // CURRENT: with each time we open the modal window, 1+ mutations are added 
+            // console.log(mutations)
+            mutations.forEach((mutation) => {
+                if(mutation.type === 'childList') {
+                    // CURRENT: for some reason, with each time we open the modal window, it is invoked 3 times (if it is 3rd time we open the window) 
+                    if(!saveButton_addInterests.hasAttribute("addedStyle")) {
+                        ((inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
+                        : saveButton_addInterests.setAttribute("disabled", "")); 
+                        handleStyleOfSaveButton(saveButton_addInterests);    
+                    }
+                    (!saveButton_addInterests.hasAttribute("addedStyle")) ? saveButton_addInterests.setAttribute("addedStyle") : "";  
+                }
+            })
+        })
+        observer_saveButton.observe(saveButton_addInterests, {
+            subtree: true,
+            childList: true
+        }); 
+    }
 
     observer_modalWindow.observe(mainContainer, {attributes: true});  // attributes (config) - change to check for. if there are any changes 
-                                                            // related to the attribute list (some attributes were removed or added), 
-                                                            // then, on each such a change they will be displayed in the mutation record list 
+                                                                    // related to the attribute list (some attributes were removed or added), 
+                                                                    // then, on each such a change they will be displayed in the mutation record list 
+                                                                
+    
 }
 
 

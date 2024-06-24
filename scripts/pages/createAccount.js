@@ -256,31 +256,9 @@ $(document).ready(function() {
 
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "complete") {
-        /*
-        const maxInterests = 5; 
-        const minInterests = 3; 
-        const selectedInterests = []; 
-        */
         const reflectImg_Arr = []; 
-        // const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
         functionality_AddInterests(); 
 
-        /*
-        const observer = new MutationObserver((mutations) => {
-            mutations.forEach((mutation) => {
-                if(mutation.type === 'childList') {
-                    (inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
-                    : saveButton_addInterests.setAttribute("disabled", ""); 
-                    handleStyleOfSaveButton(saveButton_addInterests);     
-                }
-            })
-        })
-
-        observer.observe(saveButton_addInterests, {
-            subtree: true,
-            childList: true
-        }); 
-        */
         const leftSectionButtons_Gender = document.querySelectorAll('.js-left-section-button--gender'); 
         const leftSectionButtons_InterestGroup = document.querySelectorAll('.js-left-section-button--interest-group'); 
         
@@ -288,9 +266,7 @@ document.addEventListener('readystatechange', (e) => {
         form.addEventListener('submit', e => {
             e.preventDefault(); 
         }); 
-        // handleSaveButtonClick_addInterests(saveButton_addInterests, selectedInterests); 
 
-        // handleInterestFieldClick(selectedInterests, maxInterests); 
         const saveButton_relationshipIntent = document.querySelector('.js-save-button--relationship-intent'); 
 
         const genderButtons = document.querySelectorAll('.js-button--gender'); 
@@ -335,6 +311,8 @@ document.addEventListener('readystatechange', (e) => {
     }
 });
 
+const parser = new DOMParser(); 
+
 function createImage(source, alt) {
     const image = new Image(); 
     image.src = source; 
@@ -348,17 +326,22 @@ function enableSingleSelection(btn, arr) {
     })
 }
 
-function handleInterestFieldClick(arr, max) {
-    const interests = document.querySelectorAll('.js-selection-field--add-interests');
+function handleInterestFieldClick(/*arr, */interests, saveButton) {
+    let checker = 0; 
+    let firstCall = true; 
+    const maxInterests = 5; 
+    const minInterests = 3; 
     const saveButton_Value = document.querySelector('.js-save-button--add-interests .text'); 
-
+    
+    saveButton_Value.innerText = `Save ${checker}/5`; 
     interests.forEach((interest) => {
         if(interest && !interest.hasAttribute("clickListener")) {
             interest.addEventListener('click', (e) => {
                 const clickedField = e.currentTarget; 
-                clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
-                (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
-                saveButton_Value.innerText = `Save ${arr.length}/5`; 
+                clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), checker--): 
+                (checker === maxInterests ? "" : (clickedField.classList.add('active'), checker++)); 
+                saveButton_Value.innerText = `Save ${checker}/5`; 
+                handleStyleOfSaveButton_addInterests(checker, saveButton, maxInterests, minInterests); 
             });
         } 
         !interest.hasAttribute("clickListener") ? interest.setAttribute("clickListener", "") : ""; 
@@ -366,42 +349,54 @@ function handleInterestFieldClick(arr, max) {
 }
 
 /*
-    const interests = document.querySelectorAll('.js-selection-field--add-interests');
-    const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');  
-    interests.forEach((interest) => {
-        interest.addEventListener('click', (e) => {
-            handleInterestFieldClick(arr, max, clickedField); 
-        })
+    function handleInterestFieldClick(interests, saveButton, checker) {
+        const maxInterests = 5; 
+        const minInterests = 3; 
+        const saveButton_Value = document.querySelector('.js-save-button--add-interests .text'); 
+        
+        saveButton_Value.innerText = `Save ${checker}/5`; 
+
+        return interests.reduce((handleInterestFieldClick, interest) => {
+            if (interest && !interest.hasAttribute("clickListener")) {
+                interest.addEventListener('click', (e) => {
+                    const clickedField = e.currentTarget; 
+                    clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), handleInterestFieldClick(checker - 1)) : 
+                    (checker === maxInterests ? handleInterestFieldClick(checker) : (clickedField.classList.add('active'), handleInterestFieldClick(checker + 1))); 
+                    saveButton_Value.innerText = `Save ${checker}/5`; 
+                    handleStyleOfSaveButton_addInterests(checker, saveButton, maxInterests, minInterests); 
+                });
+            } 
+            !interest.hasAttribute("clickListener") ? interest.setAttribute("clickListener", "") : "";
+            return handleInterestFieldClick;
+        }, handleInterestFieldClick);
     }
 
-    function handleInterestFieldClick(arr, max, clickedField) {
-        clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), removeCurrentInterest(arr, clickedField)) : 
-        (arr.length === max ? "" : (clickedField.classList.add('active'), arr.push(clickedField))); 
-
-        saveButton_Value.innerText = `Save ${arr.length}/5`; 
-        console.log(arr); 
-    }
 */
 
-function handleSaveButtonClick_addInterests(saveButton, arr) {
+function handleStyleOfSaveButton_addInterests(checker, saveButton, max, min) {
+    (inBetween(checker, max, min) || checker === 0) ? saveButton.removeAttribute("disabled") 
+    : saveButton.setAttribute("disabled", ""); 
+    saveButton_onDisable(saveButton);    
+}
+
+function handleSaveButtonClick_addInterests(saveButton, interestsArr/*, arr*/) {
     const interests_Reflection = document.querySelector('.js-interests--reflection'); 
     if(saveButton && !saveButton.hasAttribute('clickEvent')) {
         saveButton.addEventListener('click', (e) => {
             e.preventDefault(); 
-            const formatArr = []; 
-            interests_Reflection.innerText = ""; 
-            const copyArr = getDeepCopyOfArr(arr);   
+            const selectedInterests = interestsArr.filter((interest) => interest.classList.contains('active')); 
+            interests_Reflection.innerText = "";   
             interests_Reflection.style.visibility = "visible"; 
-            copyArr.forEach((val) => {
-                interests_Reflection.append(val);
-                formatArr.push(val.outerHTML);  
-            })
+            const copyArr = getDeepCopyOfArr(selectedInterests); 
+            if(copyArr.length > 0) {
+                copyArr.forEach((val) => {
+                    interests_Reflection.insertAdjacentHTML("beforeend", val); 
+                })
+            }
             // sessionStorage.setItem('interests', JSON.stringify(Object.values(copyArr))); 
-            sessionStorage.setItem("interests", JSON.stringify(formatArr)); 
+            sessionStorage.setItem("interests", JSON.stringify(copyArr)); 
         })
     }
-    // saveButton && !saveButton.hasAttribute('clickEvent') ? saveButton.setAttribute('clickEvent', "") 
-    // : ""; 
     if(saveButton && !saveButton.hasAttribute('clickEvent')) {
         saveButton.setAttribute('clickEvent', ""); 
     }
@@ -422,9 +417,11 @@ function handleLeftSectionButtonClick(buttons, leftSectionButtons_Group) {
 
 function getDeepCopyOfArr(arr) {
     const copyArr = []; 
-    for(val of arr) {
-        const copy = val.cloneNode(true);
-        copyArr.push(copy);  
+    if(arr.length > 0) {
+        for(val of arr) {
+            const copy = val.cloneNode(true);
+            copyArr.push(copy.outerHTML);  
+        }
     }
     return copyArr; 
 }
@@ -441,7 +438,7 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
     const changedContent = document.querySelector('.js-changed-content--relationship-intent'); 
     const relationshipIntent_Reflection = document.querySelector('.js-relationship-intent--reflection'); 
     saveButton.setAttribute("disabled", ""); 
-    handleStyleOfSaveButton(saveButton); 
+    saveButton_onDisable(saveButton); 
     for(const button of buttons) {
         button.addEventListener('click', (e) => {
             relationshipIntent_Reflection.style.visibility = "visible";     // the style is changed everytime there is a click, however I want to change the color once and forever the first click appears, not on each click the style change 
@@ -455,7 +452,7 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
             }); 
             handleStyleOfSelectedButton(selectedButton); 
             saveButton.removeAttribute("disabled"); 
-            handleStyleOfSaveButton(saveButton); 
+            saveButton_onDisable(saveButton); 
             changeRelationshipIntentContent(originalContent, changedContent);
 
             relationshipIntent_Reflection.append(imageToReflect[0]); 
@@ -465,10 +462,9 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
 }
 
 function functionality_AddInterests() {
-    const maxInterests = 5; 
-    const minInterests = 3; 
     let selectedInterests = []; 
-
+    const interests = document.querySelectorAll('.js-selection-field--add-interests');
+    const interestsArr = Array.from(interests); 
     const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
     const mainContainer = document.querySelector('.js-modal.add-interests'); 
     
@@ -484,48 +480,60 @@ function functionality_AddInterests() {
                     blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
                     mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
                     if(sessionStorage.getItem("interests")) {
-                        selectedInterests = Object.values(JSON.parse(sessionStorage.getItem("interests"))); 
+                        selectedInterests = JSON.parse(sessionStorage.getItem("interests"));  
                     }
-                    
-                    handleSaveButtonClick_addInterests(saveButton_addInterests, selectedInterests); 
-                    handleInterestFieldClick(selectedInterests, maxInterests);
+
+                    interestsArr.forEach((interest) => {
+                        interest.classList.remove('active');
+                    })
+
+                    if(selectedInterests.length > 0) {
+                        selectedInterests.forEach((interestToSelect) => {
+                            const foundInterest = findMatching(interestToSelect); 
+                            foundInterest.classList.add('active'); 
+                        })
+                    }
+
+                    handleInterestFieldClick(/*selectedInterests, */interests, saveButton_addInterests);
+                    handleSaveButtonClick_addInterests(saveButton_addInterests, interestsArr/*, selectedInterests*/); 
                 }
             }
         })
-        handleSaveButtonStyling(selectedInterests); 
     })
 
-    function handleSaveButtonStyling(selectedInterests) {
-        const observer_saveButton = new MutationObserver((mutations) => {
-            console.log(mutations)
-            // CURRENT: with each time we open the modal window, 1+ mutations are added 
-            // console.log(mutations)
-            mutations.forEach((mutation) => {
-                if(mutation.type === 'childList') {
-                    // CURRENT: for some reason, with each time we open the modal window, it is invoked 3 times (if it is 3rd time we open the window) 
-                    if(!saveButton_addInterests.hasAttribute("addedStyle")) {
-                        ((inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
-                        : saveButton_addInterests.setAttribute("disabled", "")); 
-                        handleStyleOfSaveButton(saveButton_addInterests);    
-                    }
-                    (!saveButton_addInterests.hasAttribute("addedStyle")) ? saveButton_addInterests.setAttribute("addedStyle") : "";  
-                }
-            })
-        })
-        observer_saveButton.observe(saveButton_addInterests, {
-            subtree: true,
-            childList: true
-        }); 
+    function findMatching(interestToSelect) {
+        return interestsArr.find((interest) => interestToSelect.includes(interest.innerText));  
     }
 
+    // const observer_saveButton = new MutationObserver((mutations) => {
+    //     console.log(mutations)
+    //     // CURRENT: with each time we open the modal window, 1+ mutations are added 
+    //     // console.log(mutations)
+    //     const mutation = mutations[0]; 
+    //     if(mutation.type === 'childList') {
+    //         // CURRENT: for some reason, with each time we open the modal window, it is invoked 3 times (if it is 3rd time we open the window) 
+    //         ((inBetween(selectedInterests.length, maxInterests, minInterests) || selectedInterests.length === 0) ? saveButton_addInterests.removeAttribute("disabled") 
+    //         : saveButton_addInterests.setAttribute("disabled", "")); 
+    //         saveButton_onDisable(saveButton_addInterests);    
+    //     }
+    // })
+    
     observer_modalWindow.observe(mainContainer, {attributes: true});  // attributes (config) - change to check for. if there are any changes 
                                                                     // related to the attribute list (some attributes were removed or added), 
                                                                     // then, on each such a change they will be displayed in the mutation record list 
-                                                                
-    
+    // observer_saveButton.observe(saveButton_addInterests, {
+    //     subtree: true,
+    //     childList: true
+    // }); 
 }
 
 
+// function mutationCallback_saveButton(mutations) {
+//     const mutation = mutations[0]; 
+//     if(mutation.type === "clildList") {
+
+//     }
+// }
 
 // the following is the structure of the code, assuming the problem is related to the event listener (we just basically get the code out of the loop):
 // (this does not work the way we want because it is called only one time. the statement of 'mainContainer.classList.contains('active')' is only checked once)
@@ -566,7 +574,7 @@ function functionality_AddInterests() {
         
    
 
-function handleStyleOfSaveButton(saveButton) {
+function saveButton_onDisable(saveButton) {
     saveButton.hasAttribute("disabled") ? (saveButton.style.cursor = "default", saveButton.classList.remove('active')) : (saveButton.style.cursor = "pointer", saveButton.classList.add('active')); 
 }
 

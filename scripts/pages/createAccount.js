@@ -326,65 +326,46 @@ function enableSingleSelection(btn, arr) {
     })
 }
 
-function handleInterestFieldClick(/*arr, */interests, saveButton) {
-    let checker = 0; 
-    let firstCall = true; 
+function handleInterestFieldClick(interests, saveButton, selectedInterests) {
+    let currentValue = selectedInterests.length; 
     const maxInterests = 5; 
     const minInterests = 3; 
     const saveButton_Value = document.querySelector('.js-save-button--add-interests .text'); 
-    
-    saveButton_Value.innerText = `Save ${checker}/5`; 
+
+    saveButton_Value.innerText = `Save ${currentValue}/5`;
+    (saveButton_Value && !saveButton_Value.hasAttribute("modalWindowJustOpened")) ? (saveButton_Value.setAttribute("modalWindowJustOpened", ""))
+    : "";  
+    function addActive(clickedField) {   
+        saveButton_Value.hasAttribute("modalWindowJustOpened") ? (saveButton_Value.removeAttribute("modalWindowJustOpened"), currentValue = currentValue) : ""; 
+        currentValue === maxInterests ? "" : (clickedField.classList.add('active'), currentValue ++);     
+    } 
     interests.forEach((interest) => {
         if(interest && !interest.hasAttribute("clickListener")) {
             interest.addEventListener('click', (e) => {
                 const clickedField = e.currentTarget; 
-                clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), checker--): 
-                (checker === maxInterests ? "" : (clickedField.classList.add('active'), checker++)); 
-                saveButton_Value.innerText = `Save ${checker}/5`; 
-                handleStyleOfSaveButton_addInterests(checker, saveButton, maxInterests, minInterests); 
+                clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), currentValue--) 
+                : (addActive(clickedField)); 
+                saveButton_Value.innerText = `Save ${currentValue}/5`; 
+                handleStyleOfSaveButton_addInterests(currentValue, saveButton, maxInterests, minInterests); 
             });
         } 
-        !interest.hasAttribute("clickListener") ? interest.setAttribute("clickListener", "") : ""; 
+        !interest.hasAttribute("clickListener") ? (interest.setAttribute("clickListener", "")) : ""; 
     }) 
 }
 
-/*
-    function handleInterestFieldClick(interests, saveButton, checker) {
-        const maxInterests = 5; 
-        const minInterests = 3; 
-        const saveButton_Value = document.querySelector('.js-save-button--add-interests .text'); 
-        
-        saveButton_Value.innerText = `Save ${checker}/5`; 
-
-        return interests.reduce((handleInterestFieldClick, interest) => {
-            if (interest && !interest.hasAttribute("clickListener")) {
-                interest.addEventListener('click', (e) => {
-                    const clickedField = e.currentTarget; 
-                    clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), handleInterestFieldClick(checker - 1)) : 
-                    (checker === maxInterests ? handleInterestFieldClick(checker) : (clickedField.classList.add('active'), handleInterestFieldClick(checker + 1))); 
-                    saveButton_Value.innerText = `Save ${checker}/5`; 
-                    handleStyleOfSaveButton_addInterests(checker, saveButton, maxInterests, minInterests); 
-                });
-            } 
-            !interest.hasAttribute("clickListener") ? interest.setAttribute("clickListener", "") : "";
-            return handleInterestFieldClick;
-        }, handleInterestFieldClick);
-    }
-
-*/
-
-function handleStyleOfSaveButton_addInterests(checker, saveButton, max, min) {
-    (inBetween(checker, max, min) || checker === 0) ? saveButton.removeAttribute("disabled") 
+function handleStyleOfSaveButton_addInterests(currentValue, saveButton, max, min) {
+    (inBetween(currentValue, max, min) || currentValue === 0) ? saveButton.removeAttribute("disabled") 
     : saveButton.setAttribute("disabled", ""); 
     saveButton_onDisable(saveButton);    
 }
 
-function handleSaveButtonClick_addInterests(saveButton, interestsArr/*, arr*/) {
+function handleSaveButtonClick_addInterests(saveButton, interestsArr) {
     const interests_Reflection = document.querySelector('.js-interests--reflection'); 
     if(saveButton && !saveButton.hasAttribute('clickEvent')) {
         saveButton.addEventListener('click', (e) => {
             e.preventDefault(); 
             const selectedInterests = interestsArr.filter((interest) => interest.classList.contains('active')); 
+            
             interests_Reflection.innerText = "";   
             interests_Reflection.style.visibility = "visible"; 
             const copyArr = getDeepCopyOfArr(selectedInterests); 
@@ -482,7 +463,6 @@ function functionality_AddInterests() {
                     if(sessionStorage.getItem("interests")) {
                         selectedInterests = JSON.parse(sessionStorage.getItem("interests"));  
                     }
-
                     interestsArr.forEach((interest) => {
                         interest.classList.remove('active');
                     })
@@ -494,8 +474,8 @@ function functionality_AddInterests() {
                         })
                     }
 
-                    handleInterestFieldClick(/*selectedInterests, */interests, saveButton_addInterests);
-                    handleSaveButtonClick_addInterests(saveButton_addInterests, interestsArr/*, selectedInterests*/); 
+                    handleInterestFieldClick(interests, saveButton_addInterests, selectedInterests);
+                    handleSaveButtonClick_addInterests(saveButton_addInterests, interestsArr); 
                 }
             }
         })
@@ -504,6 +484,7 @@ function functionality_AddInterests() {
     function findMatching(interestToSelect) {
         return interestsArr.find((interest) => interestToSelect.includes(interest.innerText));  
     }
+
 
     // const observer_saveButton = new MutationObserver((mutations) => {
     //     console.log(mutations)

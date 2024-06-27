@@ -358,8 +358,8 @@ function selectLastSavedInterests(lastSavedInterests) {
     })
 }
 
-function handleInterestFieldClick(interests, saveButton, selectedInterests) {
-    let currentValue = selectedInterests.length;  
+function handleInterestFieldClick(interests, saveButton, lastSavedInterests) {
+    let currentValue = lastSavedInterests.length;  
     const maxInterests = 5; 
     const minInterests = 3; 
     const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');
@@ -389,6 +389,11 @@ function handleStyleOfSaveButton_addInterests(currentValue, saveButton, max, min
     saveButton_onDisable(saveButton);    
 }
 
+
+// the problem: 
+
+// 1. when clicking on 'save' button, all of the previous selected interests are carried over; SOLVED by removing all of the previous values from the 'lastSavedInterests' array before
+// pushing new values
 function handleSaveButtonClick_addInterests(saveButton, interestsArr, lastSavedInterests) {
     const interests_Reflection = document.querySelector('.js-interests--reflection'); 
     if(saveButton && !saveButton.hasAttribute('clickEvent')) {
@@ -403,9 +408,12 @@ function handleSaveButtonClick_addInterests(saveButton, interestsArr, lastSavedI
                     interests_Reflection.insertAdjacentHTML("beforeend", val); 
                 })
             }
-            selectedInterests.forEach((interest) => {
-                lastSavedInterests.push(interest); 
-            }) 
+            lastSavedInterests.splice(0, lastSavedInterests.length); 
+            if(lastSavedInterests.length === 0) {
+                selectedInterests.forEach((interest) => {
+                    lastSavedInterests.push(interest); 
+                }) 
+            } 
             // sessionStorage.setItem('interests', JSON.stringify(Object.values(copyArr))); 
             // sessionStorage.setItem("interests", JSON.stringify(copyArr)); 
         })
@@ -493,14 +501,12 @@ function functionality_AddInterests() {
                     const blurEffect = document.querySelector('.add-interests .js-blur-effect');  
                     blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
                     mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
- 
-                    const selectedInterests = interestsArr.filter((interest) => interest.classList.contains('active')); 
                     interestsArr.forEach((interest) => {
                         interest.classList.remove('active'); 
                     })
 
                     selectLastSavedInterests(lastSavedInterests); 
-                    handleInterestFieldClick(interestsArr, saveButton_addInterests, selectedInterests);
+                    handleInterestFieldClick(interestsArr, saveButton_addInterests, lastSavedInterests);
                     handleSaveButtonClick_addInterests(saveButton_addInterests, interestsArr, lastSavedInterests); 
                 }
             }

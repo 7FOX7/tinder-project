@@ -326,25 +326,55 @@ function enableSingleSelection(btn, arr) {
     })
 }
 
+// function handleInterestFieldClick(interests, saveButton, selectedInterests) {
+//     let currentValue = selectedInterests.length; 
+//     const maxInterests = 5; 
+//     const minInterests = 3; 
+//     const saveButton_Value = document.querySelector('.js-save-button--add-interests .text'); 
+
+//     saveButton_Value.innerText = `Save ${currentValue}/5`;
+//     (saveButton_Value && !saveButton_Value.hasAttribute("modalWindowJustOpened")) ? (saveButton_Value.setAttribute("modalWindowJustOpened", ""))
+//     : "";  
+//     function addActive(clickedField) {   
+//         saveButton_Value.hasAttribute("modalWindowJustOpened") ? (saveButton_Value.removeAttribute("modalWindowJustOpened"), currentValue = currentValue) : ""; 
+//         currentValue === maxInterests ? "" : (clickedField.classList.add('active'), currentValue ++);     
+//     } 
+//     interests.forEach((interest) => {
+//         if(interest && !interest.hasAttribute("clickListener")) {
+//             interest.addEventListener('click', (e) => {
+//                 const clickedField = e.currentTarget; 
+//                 clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), currentValue--) 
+//                 : (addActive(clickedField)); 
+//                 saveButton_Value.innerText = `Save ${currentValue}/5`; 
+//                 handleStyleOfSaveButton_addInterests(currentValue, saveButton, maxInterests, minInterests); 
+//             });
+//         } 
+//         !interest.hasAttribute("clickListener") ? (interest.setAttribute("clickListener", "")) : ""; 
+//     }) 
+// }
+function selectLastSavedInterests(lastSavedInterests) {
+    lastSavedInterests.forEach((lastSavedInterest) => {
+        lastSavedInterest.classList.add('active'); 
+    })
+}
+
 function handleInterestFieldClick(interests, saveButton, selectedInterests) {
-    let currentValue = selectedInterests.length; 
+    let currentValue = selectedInterests.length;  
     const maxInterests = 5; 
     const minInterests = 3; 
-    const saveButton_Value = document.querySelector('.js-save-button--add-interests .text'); 
+    const saveButton_Value = document.querySelector('.js-save-button--add-interests .text');
+    saveButton_Value.innerText = `Save ${currentValue}/5`; 
 
-    saveButton_Value.innerText = `Save ${currentValue}/5`;
-    (saveButton_Value && !saveButton_Value.hasAttribute("modalWindowJustOpened")) ? (saveButton_Value.setAttribute("modalWindowJustOpened", ""))
-    : "";  
-    function addActive(clickedField) {   
-        saveButton_Value.hasAttribute("modalWindowJustOpened") ? (saveButton_Value.removeAttribute("modalWindowJustOpened"), currentValue = currentValue) : ""; 
-        currentValue === maxInterests ? "" : (clickedField.classList.add('active'), currentValue ++);     
-    } 
+    // selectedInterests.forEach((selectedInterest) => {
+    //     selectedInterest.classList.add('active'); 
+    // })
+
     interests.forEach((interest) => {
         if(interest && !interest.hasAttribute("clickListener")) {
             interest.addEventListener('click', (e) => {
                 const clickedField = e.currentTarget; 
                 clickedField.classList.contains('active') ? (clickedField.classList.remove('active'), currentValue--) 
-                : (addActive(clickedField)); 
+                : currentValue === maxInterests ? "" : (clickedField.classList.add('active'), currentValue++); 
                 saveButton_Value.innerText = `Save ${currentValue}/5`; 
                 handleStyleOfSaveButton_addInterests(currentValue, saveButton, maxInterests, minInterests); 
             });
@@ -359,13 +389,12 @@ function handleStyleOfSaveButton_addInterests(currentValue, saveButton, max, min
     saveButton_onDisable(saveButton);    
 }
 
-function handleSaveButtonClick_addInterests(saveButton, interestsArr) {
+function handleSaveButtonClick_addInterests(saveButton, interestsArr, lastSavedInterests) {
     const interests_Reflection = document.querySelector('.js-interests--reflection'); 
     if(saveButton && !saveButton.hasAttribute('clickEvent')) {
         saveButton.addEventListener('click', (e) => {
             e.preventDefault(); 
             const selectedInterests = interestsArr.filter((interest) => interest.classList.contains('active')); 
-            
             interests_Reflection.innerText = "";   
             interests_Reflection.style.visibility = "visible"; 
             const copyArr = getDeepCopyOfArr(selectedInterests); 
@@ -374,8 +403,11 @@ function handleSaveButtonClick_addInterests(saveButton, interestsArr) {
                     interests_Reflection.insertAdjacentHTML("beforeend", val); 
                 })
             }
+            selectedInterests.forEach((interest) => {
+                lastSavedInterests.push(interest); 
+            }) 
             // sessionStorage.setItem('interests', JSON.stringify(Object.values(copyArr))); 
-            sessionStorage.setItem("interests", JSON.stringify(copyArr)); 
+            // sessionStorage.setItem("interests", JSON.stringify(copyArr)); 
         })
     }
     if(saveButton && !saveButton.hasAttribute('clickEvent')) {
@@ -443,11 +475,12 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
 }
 
 function functionality_AddInterests() {
-    let selectedInterests = []; 
+    // let selectedInterests = []; 
     const interests = document.querySelectorAll('.js-selection-field--add-interests');
     const interestsArr = Array.from(interests); 
     const saveButton_addInterests = document.querySelector('.js-save-button--add-interests'); 
     const mainContainer = document.querySelector('.js-modal.add-interests'); 
+    let lastSavedInterests = []; 
     
     const observer_modalWindow = new MutationObserver((mutations) => {
         // here, each time a new modal window is opened/closed, there is only a single message of 'mutationRecords' (which is good) 
@@ -460,22 +493,15 @@ function functionality_AddInterests() {
                     const blurEffect = document.querySelector('.add-interests .js-blur-effect');  
                     blurEffect.style.top = `${mainPart.offsetHeight + 80}px`; 
                     mainPart.style.paddingRight = `${mainPart.offsetWidth - mainPart.clientWidth}px`; 
-                    if(sessionStorage.getItem("interests")) {
-                        selectedInterests = JSON.parse(sessionStorage.getItem("interests"));  
-                    }
+ 
+                    const selectedInterests = interestsArr.filter((interest) => interest.classList.contains('active')); 
                     interestsArr.forEach((interest) => {
-                        interest.classList.remove('active');
+                        interest.classList.remove('active'); 
                     })
 
-                    if(selectedInterests.length > 0) {
-                        selectedInterests.forEach((interestToSelect) => {
-                            const foundInterest = findMatching(interestToSelect); 
-                            foundInterest.classList.add('active'); 
-                        })
-                    }
-
-                    handleInterestFieldClick(interests, saveButton_addInterests, selectedInterests);
-                    handleSaveButtonClick_addInterests(saveButton_addInterests, interestsArr); 
+                    selectLastSavedInterests(lastSavedInterests); 
+                    handleInterestFieldClick(interestsArr, saveButton_addInterests, selectedInterests);
+                    handleSaveButtonClick_addInterests(saveButton_addInterests, interestsArr, lastSavedInterests); 
                 }
             }
         })

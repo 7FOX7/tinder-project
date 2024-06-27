@@ -1,40 +1,40 @@
 $(document).ready(function() {
-    const inputFile = $('.js-file-input'); 
-    $('.js-stretchbox').click(function() {
-        inputFile.click(); 
-    });
+    // const inputFile = $('.js-file-input'); 
+    // $('.js-stretchbox').click(function() {
+    //     inputFile.click(); 
+    // });
 
-    $('.js-remove-image-button').css("display", "none");
-    $('#createAccountContinueButton')
-        .prop('disabled', true)
-        .css({'background': 'rgba(0, 0, 0, 0.2)', 'cursor': 'default'}); 
+    // $('.js-remove-image-button').css("display", "none");
+    // $('#createAccountContinueButton')
+    //     .prop('disabled', true)
+    //     .css({'background': 'rgba(0, 0, 0, 0.2)', 'cursor': 'default'}); 
     
-    inputFile.on("change", (e) => {
-        const imageUrl = URL.createObjectURL(e.target.files[0]); 
-        if(!imageUrl) {
-            return; 
-        }
-        else {
-            $('.js-image-field').each(function() {
-                if($(this).css('background-image') === 'none') {
-                    $(this).css({"background-image" : `url(${imageUrl})`});
-                    var addImageButton = $(this).closest('.js-stretchbox').find('.js-add-image-button');  
-                    var removeImageButton = $(this).closest('.js-stretchbox').find('.js-remove-image-button'); 
-                    toggleButton(addImageButton, removeImageButton); 
-                    return false; 
-                }
-            })
-        }
-    }); 
+    // inputFile.on("change", (e) => {
+    //     const imageUrl = URL.createObjectURL(e.target.files[0]); 
+    //     if(!imageUrl) {
+    //         return; 
+    //     }
+    //     else {
+    //         $('.js-image-field').each(function() {
+    //             if($(this).css('background-image') === 'none') {
+    //                 $(this).css({"background-image" : `url(${imageUrl})`});
+    //                 var addImageButton = $(this).closest('.js-stretchbox').find('.js-add-image-button');  
+    //                 var removeImageButton = $(this).closest('.js-stretchbox').find('.js-remove-image-button'); 
+    //                 toggleButton(addImageButton, removeImageButton); 
+    //                 return false; 
+    //             }
+    //         })
+    //     }
+    // }); 
 
-    $('.js-remove-image-button').click(function() {
-        var parent = $(this).closest('.js-stretchbox'); 
-        var addImageButton = parent.find('.js-add-image-button'); 
-        var removeImageButton = parent.find('.js-remove-image-button'); 
-        var image = parent.find('.js-image-field'); 
-        image.css("backgroundImage", "none");
-        toggleButton(removeImageButton, addImageButton);  
-    })
+    // $('.js-remove-image-button').click(function() {
+    //     var parent = $(this).closest('.js-stretchbox'); 
+    //     var addImageButton = parent.find('.js-add-image-button'); 
+    //     var removeImageButton = parent.find('.js-remove-image-button'); 
+    //     var image = parent.find('.js-image-field'); 
+    //     image.css("backgroundImage", "none");
+    //     toggleButton(removeImageButton, addImageButton);  
+    // })
     
     const nameField = $('#firstName'); 
     const emailField = $('#emailAddress'); 
@@ -65,14 +65,6 @@ $(document).ready(function() {
                 errorMessage.removeClass('active'); 
                 removeRedBorder(nameField); 
             }
-            if(allFilled()) {
-                $('#createAccountContinueButton')
-                    .removeAttr('disabled')
-                    .css({"background": "var(--main-color)", "cursor": "pointer"})
-            }
-            else {
-                $('#createAccountContinueButton').prop('disabled', 'disabled'); 
-            }
         })
     }
 
@@ -84,21 +76,13 @@ $(document).ready(function() {
             var stringValue = $(emailField).val(); 
             if(!regex.test(stringValue)) {
                 errorMessage.addClass('active'); 
-                $('#createAccountContinueButton').prop('disabled', 'disabled');
+                // $('#createAccountContinueButton').prop('disabled', 'disabled');
                 addRedBorder(emailField); 
             }
             else {
                 errorMessage.removeClass('active'); 
-                $('#createAccountContinueButton').removeAttr('disabled'); 
+                // $('#createAccountContinueButton').removeAttr('disabled'); 
                 removeRedBorder(emailField); 
-            }
-            if(allFilled() && regex.test(stringValue)) {
-                $('#createAccountContinueButton')
-                    .removeAttr('disabled')
-                    .css({"background": "var(--main-color)", "cursor": "pointer"}) 
-            }
-            else {
-                $('#createAccountContinueButton').prop('disabled', 'disabled'); 
             }
         })
     }
@@ -137,15 +121,6 @@ $(document).ready(function() {
                 errorMessage.addClass('active'); 
                 addRedBorder(month);
             }
-
-            if(allFilled()) {
-                $('#createAccountContinueButton')
-                    .removeAttr('disabled')
-                    .css({"background": "var(--main-color)", "cursor": "pointer"}) 
-            }
-            else {
-                $('#createAccountContinueButton').prop('disabled', 'disabled'); 
-            }
         })   
     }
 
@@ -182,12 +157,6 @@ $(document).ready(function() {
                 errorMessage.addClass('active'); 
                 addRedBorder(day); 
             }
-
-            allFilled() ? $('#createAccountContinueButton')
-                .removeAttr('disabled')
-                .css({"background": "var(--main-color)", "cursor": "pointer"}) 
-                : 
-                $('#createAccountContinueButton').prop('disabled', 'disabled');
         }); 
     }
 
@@ -215,24 +184,20 @@ $(document).ready(function() {
                 errorMessage.addClass('active'); 
                 addRedBorder(year);
             }
-
-            allFilled() ?  $('#createAccountContinueButton')
-                .removeAttr('disabled')
-                .css({"background": "var(--main-color)", "cursor": "pointer"})  
-                :
-                $('#createAccountContinueButton').prop('disabled', 'disabled')
         })
     }
 
-    function allFilled() {
-        var filled = true; 
-        $('.js-required-field').each(function() {
-            if($(this).val() === '') {
-                filled = false; 
-            }
-        });
-        return filled; 
-    }
+    // function allFilled() {
+    //     $('.js-required-field').each(function() {
+    //         if($(this).val() === '') {
+    //             $('#createAccountContinueButton').prop('disabled', 'disabled');
+    //         }
+    //     });
+    //     ('#createAccountContinueButton')
+    //             .removeAttr('disabled')
+    //             .css({"background": "var(--main-color)", "cursor": "pointer"}) 
+
+    // }
 
     function removeRedBorder(field) {
         $(field).css("border-color", "rgba(0, 0, 0, 0.4)"); 
@@ -248,23 +213,27 @@ $(document).ready(function() {
         }); 
     }
 
-    function toggleButton(element1, element2) {
-        element1.css("display", "none"); 
-        element2.css("display", "flex"); 
-    }
+    // function toggleButton(element1, element2) {
+    //     element1.css("display", "none"); 
+    //     element2.css("display", "flex"); 
+    // }
 }); 
 
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "complete") {
         const reflectImg_Arr = []; 
+        checkAllFieldsAreFilled(); 
         functionality_AddInterests(); 
-
         const leftSectionButtons_Gender = document.querySelectorAll('.js-left-section-button--gender'); 
         const leftSectionButtons_InterestGroup = document.querySelectorAll('.js-left-section-button--interest-group'); 
         
         const form = document.querySelector('form'); 
         form.addEventListener('submit', e => {
             e.preventDefault(); 
+            const fd = new FormData(form); 
+            for(data of fd) {
+                console.log(data)
+            }
         }); 
 
         const saveButton_relationshipIntent = document.querySelector('.js-save-button--relationship-intent'); 
@@ -480,6 +449,150 @@ function handleRelationshipIntentButtonClick(buttons, saveButton, imgArr) {
             relationshipIntent_Reflection.append(textContent); 
         })
     }
+}
+
+function handleStyleOfContinueButton(continueButton) {
+    continueButton.hasAttribute("disabled") ? "" : continueButton.style.background = "var(--main-color)";
+}
+
+function toggleButton(element1, element2) {
+    element1.style.display = "none";  
+    element2.style.display = "flex"; 
+}
+
+function checkAllFieldsAreFilled() {
+    // const inputFile = $('.js-file-input'); 
+    // $('.js-stretchbox').click(function() {
+    //     inputFile.click(); 
+    // });
+
+    // $('.js-remove-image-button').css("display", "none");
+    // $('#createAccountContinueButton')
+    //     .prop('disabled', true)
+    //     .css({'background': 'rgba(0, 0, 0, 0.2)', 'cursor': 'default'}); 
+    
+    // inputFile.on("change", (e) => {
+    //     const imageUrl = URL.createObjectURL(e.target.files[0]); 
+    //     if(!imageUrl) {
+    //         return; 
+    //     }
+    //     else {
+    //         $('.js-image-field').each(function() {
+    //             if($(this).css('background-image') === 'none') {
+    //                 $(this).css({"background-image" : `url(${imageUrl})`});
+    //                 var addImageButton = $(this).closest('.js-stretchbox').find('.js-add-image-button');  
+    //                 var removeImageButton = $(this).closest('.js-stretchbox').find('.js-remove-image-button'); 
+    //                 toggleButton(addImageButton, removeImageButton); 
+    //                 return false; 
+    //             }
+    //         })
+    //     }
+    // }); 
+
+    // $('.js-remove-image-button').click(function() {
+    //     var parent = $(this).closest('.js-stretchbox'); 
+    //     var addImageButton = parent.find('.js-add-image-button'); 
+    //     var removeImageButton = parent.find('.js-remove-image-button'); 
+    //     var image = parent.find('.js-image-field'); 
+    //     image.css("backgroundImage", "none");
+    //     toggleButton(removeImageButton, addImageButton);  
+    // })
+    const clickEvent = new MouseEvent("click"); 
+    const inputFile = document.querySelector('.js-file-input'); 
+    const strBoxes = Array.from(document.querySelectorAll('.js-stretchbox')); 
+    const removeImageButtons = Array.from(document.querySelectorAll('.js-remove-image-button')); 
+    const inputFields = Array.from(document.querySelectorAll('.js-required-field')); 
+    const imageFields = Array.from(document.querySelectorAll('.js-image-field')); 
+    const continueButton = document.querySelector('#createAccountContinueButton'); 
+    
+    strBoxes.forEach((strBox) => {
+        strBox.addEventListener("click", () => {
+            inputFile.dispatchEvent(clickEvent);
+        });   
+    })
+
+    removeImageButtons.forEach((removeImageButton) => {
+        removeImageButton.style.display = "none"; 
+    })
+
+    inputFile.addEventListener("change", (e) => {
+        const imageUrl = URL.createObjectURL(e.target.files[0]); 
+        if(!imageUrl) return;
+        else {  
+            imageFields.forEach((imageField) => {
+                if(imageField.style.backgroundImage === "none") {
+                    imageField.style.backgroundImage = `url(${imageUrl})`; 
+                    const strBox = imageField.closest('.js-stretchbox'); 
+                    const addImageButton = strBox.querySelector('.js-add-image-button'); 
+                    const removeImageButton = strBox.querySelector('.js-remove-image-button'); 
+                    toggleButton(addImageButton, removeImageButton); 
+                    return false; 
+                }
+            })
+        }
+    }); 
+
+    removeImageButtons.forEach((removeImageButton) => {
+        removeImageButton.addEventListener('click', (e) => {    
+            const removeImageButton = e.currentTarget; 
+            const strBox = removeImageButton.closest('.js-stretchbox'); 
+            const addImageButton = strBox.querySelector('.js-js-add-image-button');  
+            const image = strBox.querySelector('.js-image-field') 
+            image.style.backgroundImage = "none"; 
+            toggleButton(removeImageButton, addImageButton); 
+        })
+    })
+
+    function allFilled() {
+        if(inputFieldsAreFilled() && twoImagesAreUploaded()) {
+            return true; 
+        }
+        return false; 
+    }
+
+    function inputFieldsAreFilled() {
+        const filledFields = inputFields.filter((inputField) => inputField.val !== ''); 
+        if(filledFields.length < inputFields.length) {
+            return false; 
+        }
+        return true; 
+    }
+    function twoImagesAreUploaded() {
+        const uploadedImages = imageFields.filter((imageField) => imageField.style.backgroundImage !== "none"); 
+        if(inBetween(uploadedImages.length, imageFields.length, 2)) {
+            return true; 
+        }
+        return false; 
+    }
+
+    // const observer_userSection = new MutationObserver((mutations) => {
+    //     mutations.forEach((mutation) => {
+    //         if(mutation.type === "childList") {
+    //             allFilled() ? continueButton.removeAttribute("disabled") : continueButton.setAttribute("disabled", ""); 
+    //             handleStyleOfContinueButton(continueButton); 
+    //         }
+    //         if(mutation.type === "characterData") {
+    //             console.log('hey'); 
+    //         }
+    //     })
+    // })
+
+    // observer_userSection.observe(mainList, 
+    //     {
+    //         characterData: true,
+    //         characterDataOldValue: true, 
+    //         subtree: true, 
+    //         childList: true, 
+    //     }
+    // ); 
+
+
+    inputFields.forEach((inputField) => {
+        inputField.addEventListener("change", () => {
+            allFilled() ? continueButton.removeAttribute("disabled") : continueButton.setAttribute("disabled", ""); 
+            handleStyleOfContinueButton(continueButton); 
+        })
+    }); 
 }
 
 function functionality_AddInterests() {

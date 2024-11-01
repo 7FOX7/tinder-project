@@ -106,8 +106,8 @@ button {
     flex-direction: column; 
     width: 100%; 
     justify-content: space-around; 
-    padding-left: 12%; 
-    padding-right: 12%; 
+    padding-left: 13%; 
+    padding-right: 13%; 
     font-size: 17px;
     font-weight: 600; 
 }

@@ -4,8 +4,8 @@ chooseGenderHTML = `
     <div class="choose-gender modal js-modal" data-modal="More-Genders">
         <div class="header-container">
             <div class="header">
-                <label style="font-size: 23px; font-weight: bold;">What's your gender?</label>
-                <span style="font-size: 19px; color: rgba(0, 0, 0, 0.65); margin-top: 6px;">Select one that best represents you</span>
+                <h1>What's your gender?</h1>
+                <p style="font-size: 1.1rem; color: rgba(0, 0, 0, 0.65); margin-top: 6px;">Select one that best represents you</p>
             </div>
         </div>
         <div class="search-input-container">
@@ -218,7 +218,7 @@ chooseGenderHTML = `
                 </div>
             </li>
         </ul>
-        <div style="backdrop-filter: blur(2px); width: 100%; height: 145px; position: relative; top: -65px;"></div>
+        <div style="backdrop-filter: blur(2px); width: 100%; height: 220px; position: relative; top: -40px;"></div>
         <div class="checkbox-container">
             <label class="js-custom-checkbox custom-checkbox" for="checkboxInput">
                 <input class="custom-checkbox-input" type="checkbox" id="checkboxInput">

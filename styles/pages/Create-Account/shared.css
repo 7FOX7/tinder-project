@@ -25,6 +25,11 @@ button {
     font-weight: 600; 
 }
 
+.create-account-format {
+    padding-left: 12%; 
+    padding-right: 12%; 
+}
+
 .create-account-format button:hover {
     filter: brightness(92%); 
 }
@@ -36,14 +41,16 @@ button {
 }
 
 .create-account-format .header{
+    width: 100%; 
     display: flex;
     background-color: white;  
-    position: sticky; 
+    position: fixed; 
+    left: 0; 
     top: 0;
     justify-content: space-between; 
     padding-right: 15px; 
     padding-left: 15px; 
-    z-index: 5; 
+    z-index: 10; 
 }
 
 .create-account-format .header .line {
@@ -95,8 +102,6 @@ button {
     display: flex; 
     width: 100%; 
     justify-content: space-around; 
-    padding-left: 12%; 
-    padding-right: 12%; 
     font-size: 17px; 
     font-weight: 600; 
 }
@@ -106,8 +111,6 @@ button {
     flex-direction: column; 
     width: 100%; 
     justify-content: space-around; 
-    padding-left: 13%; 
-    padding-right: 13%; 
     font-size: 17px;
     font-weight: 600; 
 }

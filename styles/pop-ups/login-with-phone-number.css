@@ -1,10 +1,9 @@
 
 .login-with-phone-number {
+    justify-content: center;
     flex-direction: column;
     padding: 20px;
     align-items: center;
-    width: 30vw; 
-    height: 55vh; 
 }
 
 .login-with-phone-number .header {
@@ -18,7 +17,6 @@
     display: flex; 
     flex-direction: row; 
     justify-content: space-between; 
-    margin-left: 47%; 
 }
 
 .login-with-phone-number .header .header-lower-section {
@@ -31,7 +29,6 @@
     display: flex; 
     flex-direction: column; 
     width: 100%; 
-    margin-top: 5%; 
     justify-content: space-between; 
 }
 
@@ -56,12 +53,12 @@
 }
 
 .main-body-phone .phone-enter-section .form .next-button {
-    margin-top: 12%; 
     font-size: 20px; 
     font-weight: bold; 
     padding: 15px; 
-    width: 15vw; 
+    width: 70%; 
     border-radius: 35px; 
+    margin-top: 15px; 
     color: white; 
     background-image: linear-gradient(to bottom right, red, hotpink);
     transition: 0.35s; 
@@ -72,17 +69,10 @@
 }
 
 .login-with-phone-number .main-body-phone .alert {
-    font-size: 1vw; 
-    margin-top: 4%; 
     padding: 10px; 
+    margin-top: 10px; 
     border-radius: 5px;
     border: none; 
-}
-
-.login-with-phone-number .main-body-phone .alert-info {
-    border-color: #bce8f1;
-    color: #31708f;
-    background-color: #d9edf7;
 }
 
 .login-with-phone-number .main-body-phone .alert-error {

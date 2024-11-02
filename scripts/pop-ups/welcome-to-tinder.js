@@ -4,14 +4,14 @@ welcomeToTinderHTML += `
     <div class="modal js-modal welcome-to-tinder" data-modal="Welcome To Tinder" id="888j">
         <div style="display: flex; flex-direction: column; align-items: center; background-color: #fff; width: 100%; height: 100%; border-radius: 10px; padding: 5%;" >
             <div class="header-popup">
-                <div style="display: flex; width: 100%; height: 100%; flex-direction: column; align-items: center;">
-                    <div style="margin: 2px;">
-                        <img src="../images/favicon.ico" style="width: 20px;">
+                <div style="display: flex; width: 100%; height: 100%; flex-direction: column; align-items: center; justify-items: center; text-align: center;">
+                    <div>
+                        <img src="../images/favicon.ico" style="width: 30px;">
                     </div>
-                    <div style="margin: 5px;">
-                        <label style="font-size: 25px;">Welcome to Tinder</label>
+                    <div>
+                        <h1>Welcome to Tinder</h1>
                     </div>
-                    <div style="margin: 2px">
+                    <div>
                         <span style="font-size: 16px;">Please follow these house rules</span>
                     </div>
                 </div>
@@ -54,41 +54,25 @@ welcomeToTinderHTML += `
             </div>
             <div class="footage-popup">
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    <button class="js-close-modal" id="888j" style="font-size: 20px; font-weight: bold; cursor: pointer; padding: 15px; width: 80%; border-radius: 35px; 
-                    color: white; border: none; background-image: linear-gradient(to bottom right, red, hotpink); transition: 0.35s; ">I agree</button>
+                    <button class="js-close-modal agree-button" id="888j" style="font-size: 20px; font-weight: bold; cursor: pointer; padding: 15px; width: 80%; border-radius: 35px; 
+                    color: white; border: none; background-image: linear-gradient(to bottom right, red, hotpink); transition: 0.35s;">I agree</button>
                 </div>
             </div>
         </div>
     </div>
 `
 
-
-// $('head').append('<link rel="stylesheet" type="text/css" href="../../styles/pop-ups/welcome-to-tinder.css">'); 
-
-// $(document).ready(function() {
-//     document.querySelector('.js-welcome-popup')
-//     .innerHTML = welcomeToTinderHTML; 
-
-//     $('.js-popup').addClass('active'); 
-//     $('.js-overlay').addClass('active'); 
-
-//     document.body.style.position = 'fixed'; 
-//     document.body.style.top = `-${window.scrollY}px`;
-
-//     $("#agree-button").on("click", function() {
-//         document.body.style.position = ''; 
-//         document.body.style.top = ''; 
-//         document.body.style.overflow = 'auto'; 
-//         $('.js-overlay').removeClass('active');
-//         $('.js-popup').removeClass('active'); 
-//     }); 
-// })
-
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "interactive") {
         addStylesheet_welcomeToTinder(); 
         const container = document.querySelector('.js-welcome-to-tinder-popup'); 
         container.innerHTML = welcomeToTinderHTML; 
+
+        console.log('this is executing')
+        const welcomeToTinderPopup = document.querySelector('.js-modal[id="888j"]')
+        welcomeToTinderPopup.classList.add('active')
+        document.querySelector('.js-overlay').classList.add('active')
+        document.body.style.overflow = "hidden"
     }
 }); 
 

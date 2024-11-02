@@ -4,13 +4,13 @@ loginToTinderHTML += `
     <div class="modal js-modal login-to-tinder" data-modal="Create-Account" id="786y">
         <div class="header">
             <div class="header-upper-section">
-                <img src="../../images/favicon.ico">
+                <img src="../../images/favicon.ico" />
                 <button class="close-modal js-close-modal" id="786y">
                     <img src="../../images/close_window_icon.png">
                 </button>
             </div>
             <div class="header-lower-section">
-                <h2 class="js-header-title">Create account</h2>
+                <h1 class="js-header-title">Create account</h1>
             </div>
         </div>
         <div class="main-body">

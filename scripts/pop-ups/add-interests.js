@@ -6,8 +6,8 @@ addInterestsHTML += `
         <div class="js-inner-container inner-container">
             <div class="header">
                 <div class="header-top-part">
-                    <div class="header-label">
-                        <label>What are you into?</label>
+                    <div class="heading">
+                        <h1>What are you into?</h1>
                     </div>
                     <span class="js-close-modal" style="cursor: pointer;" id="888jjja6">
                         <svg focusable="false" aria-hidden="true" role="presentation" viewBox="0 0 24 24" class="svg_close_icon">
@@ -81,11 +81,10 @@ addInterestsHTML += `
                 <div class="js-selection-field--add-interests selection-field--add-interests">
                     <span>Dance</span>
                 </div>
-                <div class="js-blur-effect blur-effect"></div>
             </div>
             <div class="footage">
-                <button class="js-save-button--add-interests save-button--add-interests active">
-                    <span class="text">Save (0/5)</span>
+                <button class="js-save-button--add-interests save-button--add-interests" disabled>
+                    <span class="text">Save (0/8)</span>
                 </button>
             </div>
         </div>

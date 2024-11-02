@@ -72,8 +72,6 @@ addRelationshipIntentHTML += `
     </div>
 `
 
-// based on what we know about the states: on loading, the elements inside a body should already be available; 
-// when the state is 'interactive' it means that CSS is fully loaded and styles are applied to the elements (it was in my case)
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "interactive") {
         addStylesheet_addRelationshipIntent(); 

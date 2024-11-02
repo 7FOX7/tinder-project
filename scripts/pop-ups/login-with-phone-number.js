@@ -4,7 +4,9 @@ loginWithPhoneNumberHTML += `
     <div class="modal js-modal login-with-phone-number" data-modal="Phone Login" id="788y">
         <div class="header">
             <div class="header-upper-section">
-                <img src="../images/favicon.ico">
+                <div style="margin-left: 45%">
+                    <img src="../images/favicon.ico">
+                </div>
                 <button class="close-modal js-close-modal" id="788y">
                     <img src="../images/close_window_icon.png">
                 </button>
@@ -16,12 +18,11 @@ loginWithPhoneNumberHTML += `
         <div class="main-body-phone">
             <div class="phone-enter-section">
                 <form class="form js-form">
-                    <span>Phone Number</span>
-                    <input class="phone-input-field js-phone-input-field" type="tel" name="phone">
-                    <input type="submit" class="next-button" value="Next"/>
+                    <label style="margin-bottom: 10px" for="phone">Phone Number</label>
+                    <input id="phone" class="phone-input-field js-phone-input-field" type="tel" name="phone">
+                    <div class="alert alert-error js-alert-error" style="visibility: hidden;"></div>
+                    <button type="submit" class="next-button">Next</button>
                 </form>
-                <div class="alert alert-info js-alert-info" style="display: none"></div>
-                <div class="alert alert-error js-alert-error" style="display: none"></div>
             </div>
         </div>
     </div>
@@ -30,14 +31,14 @@ loginWithPhoneNumberHTML += `
 
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "interactive") {
+        console.log('done')
         addStylesheet_loginWithPhoneNumber(); 
         const container = document.querySelector('.js-login-with-phone-number-popup'); 
         container.innerHTML = loginWithPhoneNumberHTML; 
     }
     else if(e.target.readyState === "complete") {
         const form = document.querySelector('.js-form'); 
-        const info = document.querySelector('.js-alert-info'); 
-        const error = document.querySelector('.js-alert-error'); 
+        const error = document.querySelector('.js-alert-error');
 
         form.addEventListener("submit", (e) => {
             process(e); 
@@ -50,24 +51,17 @@ document.addEventListener('readystatechange', (e) => {
                 "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
         });
 
-
         function process(event) {
             event.preventDefault(); 
-            info.style.display = "none"; 
-            error.style.display = "none"; 
-            const phoneNumber = phoneInput.getNumber();  
 
-            if(phoneInput.isValidNumber()) {
-                console.log('valid number'); 
-                info.style.display = "";
-                info.innerHTML = `Phone number: <strong>${phoneNumber}</strong>`; 
-                window.location.replace("../../pages/createAccount.html"); 
-            }
-            else {
+            error.style.visibility = "hidden"
+            if(!phoneInput.isValidNumber()) {
                 console.log('invalid number'); 
-                error.style.display = ""; 
-                error.innerHTML = `Invalid phone number`; 
+                error.style.visibility = "visible"; 
+                error.innerHTML = `Invalid phone number`;
+                return; 
             }
+            window.location.replace("../../pages/create-account.html"); 
         }; 
     }
 }) 

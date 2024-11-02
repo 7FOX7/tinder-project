@@ -27,19 +27,19 @@
     display: flex; 
     flex-direction: column; 
     align-items: center;
-    height: 13%; 
     justify-content: space-between;
+    text-align: center; 
 }
 
 .add-interests .inner-container .header .header-top-part {
-    font-weight: 700; 
+    width: 100%;
     display: flex; 
-    width: 100%; 
+    flex-direction: row; 
     justify-content: space-between; 
-    font-size: 1.3em; 
+    align-items: center; 
 }
 
-.add-interests .header .header-top-part .header-label {
+.add-interests .header .header-top-part .heading {
     margin: auto; 
 }
 
@@ -57,18 +57,9 @@
     width: 100%; 
     height: 70%; 
     overflow-y: scroll; 
+    overflow-x: hidden; 
     box-sizing: content-box;
     justify-content: space-between; 
-}
-
-.add-interests .inner-container .main-part .blur-effect {
-    width: 100%; 
-    height: 25px; 
-    position: fixed; 
-    left: 0; 
-    top: 0;
-    background: rgba(255, 255, 255, 0.6); 
-    backdrop-filter: blur(1.5px);
 }
 
 .add-interests .main-part .selection-field--add-interests {
@@ -90,23 +81,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%; 
-    height: 16%; 
 }
 
 .add-interests .footage .save-button--add-interests {
+    width: 80%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     font-size: 1.2em; 
     font-weight: bold; 
-    background: rgba(0, 0, 0, 0.1); 
     transition: 0.35s; 
     border-radius: 50px; 
     padding: 16px 55px; 
-    color: rgba(0, 0, 0, 0.3); 
-}
-
-.add-interests .footage .save-button--add-interests.active {
     background: var(--main-color); 
     color: #fff; 
+}
+
+.add-interests .footage .save-button--add-interests:disabled {
+    background: rgba(0, 0, 0, 0.1); 
+    color: rgba(0, 0, 0, 0.3);
+    cursor: default;
 }
 
 .add-interests .footage .save-button--add-interests:hover {

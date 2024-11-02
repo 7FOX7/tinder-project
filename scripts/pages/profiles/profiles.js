@@ -34,7 +34,7 @@ export const profiles = [
                     </button>
                 </div>
             </div>
-            <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 61%;"></div>
+            <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 60%;"></div>
             <div class="js-user-info-container user-info-container unselectable">
                 <div class="user-info-content">
                     <div style="display: flex; align-items: center;">
@@ -107,7 +107,7 @@ export const profiles = [
                     </button>
                 </div>
             </div>
-            <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 61%;"></div>
+            <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 60%;"></div>
             <div class="js-user-info-container user-info-container unselectable">
                 <div class="user-info-content">
                     <div style="display: flex; align-items: center;">
@@ -180,7 +180,7 @@ export const profiles = [
                     </button>
                 </div>
             </div>
-            <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 61%;"></div>
+            <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 60%;"></div>
             <div class="js-user-info-container user-info-container unselectable">
                 <div class="user-info-content">
                     <div style="display: flex; align-items: center;">
@@ -253,7 +253,7 @@ export const profiles = [
                     </button>
                 </div>
             </div>
-            <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 61%;"></div>
+            <div style="z-index: 2; background-image: linear-gradient(to top, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%); width: 100%; position: absolute; height: 25%; left: 0; top: 60%;"></div>
             <div class="js-user-info-container user-info-container unselectable">
                 <div class="user-info-content">
                     <div style="display: flex; align-items: center;">

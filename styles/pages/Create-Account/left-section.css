@@ -2,25 +2,17 @@
     display: flex; 
     flex-direction: column; 
     width: 54%; 
-    height: 770px; 
 }
 
 .create-account-format .main-body .input-section {
     display: flex; 
     flex-direction: column; 
     padding-right: 10%;
+    margin-bottom: 3px; 
 }
 
 .create-account-format .main-body .left-section-button--unselected {
-    /* 
-    the style with 'background' property is commented out, because it was giving us undesired result with
-    toggling the classes where the bottom of the 'unselected' border was noticeably THICKER
-
-    background: rgba(0, 0, 0, 0.5); 
-    background-origin: border-box;
-    */
     border-radius: 50px;
-    width: 32.5%; 
     border: 2px solid rgba(0, 0, 0, 0.4); 
 } 
 
@@ -28,7 +20,6 @@
     background: var(--main-color); 
     background-origin: border-box;  
     border-radius: 50px;
-    width: 32.5%; 
     border: 2px solid transparent; 
 }
 
@@ -152,4 +143,10 @@
 
 .create-account-format .error-message.active {
     visibility: visible; 
+}
+
+.create-account-format .main-body-left-section .interests-preview {
+    font-weight: 400;
+    width: 350px;
+    margin-top: 10px;  
 }

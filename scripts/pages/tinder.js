@@ -1,9 +1,4 @@
 $(document).ready(function() {
-    const welcomeToTinderPopup = $('.js-modal[id="888j"]'); 
-    welcomeToTinderPopup.addClass('active'); 
-    $('.js-overlay').addClass('active'); 
-    $("body").css({"overflow": "hidden"});
-
     const registrationHeaderTitle = $('.js-header-title'); 
     $('.js-button').click(function() {
         var modalName = $(this).attr('data-modal');
@@ -45,19 +40,13 @@ $(document).ready(function() {
     }
     
     $('.js-overlay').click(function() {
-        welcomeToTinderPopup.hasClass('active') ? 0 : ($(this).removeClass('active'), $('.js-modal').removeClass('active'), $("body").css({"overflow": "auto"})); 
+        if($('.js-modal[id="888j').hasClass('active')) {
+            return
+        } 
+        else {
+            $(this).removeClass('active') & $('body').css({"overflow": "auto"})
+            $('.js-modal').removeClass('active')
+        }
     })
 })
-
-// document.addEventListener('readystatechange', (e) => {
-//     if(e.target.readyState === "interactive") {
-//         const modalButtons = document.querySelectorAll('.js-button');
-//         modalButtons.forEach((modalButton) => {
-//             modalButton.addEventListener('click', (e) => {
-//                 const modalName = e.target.dataset.modal; 
-                
-//             })
-//         }) 
-//     }
-// })
 

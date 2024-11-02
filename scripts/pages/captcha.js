@@ -1,23 +1,9 @@
-
-const crossButton = document.querySelector('.js-cross-sign-button'); 
-
-crossButton.addEventListener('mouseenter', () => {
-    document.querySelector('.js-cross-small').classList.add('inactive'); 
-    document.querySelector('.js-cross-large').classList.add('active'); 
-});
-
-crossButton.addEventListener('mouseleave', () => {
-    document.querySelector('.js-cross-small').classList.remove('inactive');
-    document.querySelector('.js-cross-large').classList.remove('active');  
-});
-
 const createImage = function(src, alt) {
     const image = new Image(); 
     image.src = src; 
     image.alt = alt; 
     return image; 
 } 
-
 
 const blueDolphinImg = createImage('../../images/CAPTCHA-blue_dolphin.png', 'blue dolphin'); 
 blueDolphinImg.setAttribute('data', 'blue'); 
@@ -128,7 +114,6 @@ listArr.forEach((list) => {
 function init() {
     locateAtRandomPositions(); 
     document.querySelector('.js-captcha-inner-content').style.display = "none"; 
-    document.querySelector('.js-captcha-inner-container').style.transform = "translate(-45%, -60%)"; 
     document.querySelector('.js-captcha-inner-container').prepend(CAPTCHA_addText); 
     document.querySelector('.js-captcha-inner-container').append(CAPTCHA_text); 
     document.querySelector('.js-captcha-inner-container').append(CAPTCHA_imageList);
@@ -164,7 +149,7 @@ function compareSelections(userSelection) {
     else {
         CAPTCHA_resultText.style.visibility = "visible"; 
         CAPTCHA_resultText.style.color = "var(--wrong-answer-color)"; 
-        CAPTCHA_resultText.textContent = "Oops! Please, try again";  
+        CAPTCHA_resultText.textContent = "Oops! Please try again";  
         locateAtRandomPositions(); 
         generateRandomColor(); 
     }

@@ -1,6 +1,5 @@
 .add-relationship-intent { 
-    width: 23%; 
-    height: 500px; 
+    width: 30%; 
     padding: 35px 40px; 
 }
 
@@ -32,6 +31,7 @@
 }
 
 .add-relationship-intent .inner-container .main-body {
+    width: 100%; 
     display: flex; 
     justify-content: center; 
     margin-top: 15px; 
@@ -43,7 +43,6 @@
     font-size: 0.95em; 
     display: grid; 
     grid-template-columns: auto auto auto; 
-    width: 92%; 
     gap: 6px;
 }
 

@@ -14,6 +14,7 @@
 .create-account-format .main-body .left-section-button--unselected {
     border-radius: 50px;
     border: 2px solid rgba(0, 0, 0, 0.4); 
+    width: 32%; 
 } 
 
 .create-account-format .main-body .left-section-button--selected {
@@ -21,6 +22,7 @@
     background-origin: border-box;  
     border-radius: 50px;
     border: 2px solid transparent; 
+    width: 32%; 
 }
 
 /* .create-account-format .main-body .left-section-button::after {
@@ -89,7 +91,7 @@
     align-items: center; 
     justify-content: center;
     background: rgb(250, 250, 250); 
-    font-size: 18px; 
+    font-size: 0.85rem; 
     transition: 0.2s;
     padding: 10px; 
     width: 100%; 

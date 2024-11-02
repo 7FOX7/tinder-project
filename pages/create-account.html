@@ -14,7 +14,6 @@
     <body>
         <div class="overlay js-overlay"></div>
         <div class="js-choose-gender-popup"></div>
-        <div class="js-login-to-tinder-popup"></div>
         <div class="js-welcome-to-tinder-popup"></div>
         <div class="js-add-relationship-intent"></div>
         <div class="js-add-interests"></div>
@@ -36,38 +35,38 @@
             <div class="title">
                 <h2>Create Account</h2>
             </div>
-            <form>
+            <form id="create-account-form">
                 <div class="main-body js-main-body">
                     <div class="main-body-left-section">
                         <div class="input-section js-input-section">
                             <label for="firstName" class="first-name-label">First Name</label>
-                            <input id="firstName" type="text" class="js-required-field" placeholder="First Name" id="firstName">
+                            <input id="firstName" type="text" class="js-required-field" placeholder="First Name" />
                             <span class="error-message js-error-message">This field must be between 1 - 22 characters.</span>
                         </div>
                         <div class="input-section js-input-section">
-                            <label for="email" class="email-label">Email</label>
-                            <input id="email" type="text" class="js-required-field" placeholder="Email" id="emailAddress">
+                            <label for="emailAddress" class="email-label">Email</label>
+                            <input id="emailAddress" type="text" class="js-required-field" placeholder="Email" />
                             <span class="error-message js-error-message">Please enter a valid email.</span>
                         </div>
                         <div class="input-section js-input-section">
-                            <label for="birthMonth" class="birthday-label">Birth Data</label>
+                            <label for="monthOfBirth" class="birthday-label">Birth Data</label>
                             <div class="birthday-data">
                                 <div>
-                                    <label for="birthMonth" class="month-birth-label">Month</label>
+                                    <label for="monthOfBirth" class="month-birth-label">Month</label>
                                     <div class="month-input-field">
-                                        <input id="birthMonth" type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="MM" id="monthOfBirth">
+                                        <input id="monthOfBirth" type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="MM" />
                                     </div>
                                 </div>
                                 <div>
-                                    <label for="birthDay" birthclass="day-birth-label">Day</label>
+                                    <label for="dayOfBirth" birthclass="day-birth-label">Day</label>
                                     <div class="day-input-field">
-                                        <input id="birthDay" type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="DD" id="dayOfBirth">
+                                        <input id="dayOfBirth" type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="DD" />
                                     </div>
                                 </div>
                                 <div>
                                     <label for="yearOfBirth" class="year-birth-label">Year</label>
                                     <div class="year-input-field">
-                                        <input type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="YYYY" id="yearOfBirth">
+                                        <input id="yearOfBirth" type="text" class="js-required-field" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" placeholder="YYYY" />
                                     </div>
                                 </div>
                             </div>
@@ -76,17 +75,17 @@
                         <div class="input-section js-input-section">
                             <label for="genderMan" class="gender-label">Gender</label>
                             <div class="gender-selection">
-                                <div class="left-section-button--unselected js-left-section-button--gender js-left-section-button" role="button">
+                                <div class="left-section-button--unselected js-left-section-button--container" role="button">
                                     <button id="genderMan" class="js-button--gender">
                                         Man
                                     </button>
                                 </div>
-                                <div class="left-section-button--unselected js-left-section-button--gender js-left-section-button" role="button">
+                                <div class="left-section-button--unselected js-left-section-button--container" role="button">
                                     <button class="js-button--gender">
                                         Woman
                                     </button>
                                 </div>
-                                <div class="left-section-button--unselected js-left-section-button--gender js-left-section-button" role="button">
+                                <div class="left-section-button--unselected js-left-section-button--container" role="button">
                                     <button class="js-button js-button--gender" data-modal="More-Genders">
                                         More > 
                                     </button>
@@ -103,24 +102,24 @@
                         <div class="input-section js-input-section">
                             <label for="interestGroup" class="interested-in-label">Interested in</label>
                             <div class="interest-group">
-                                <div class="left-section-button--unselected js-left-section-button--interest-group js-left-section-button" role="button">
+                                <div class="left-section-button--unselected js-left-section-button--container" role="button">
                                     <button id="interestGroup" class="js-button--interest-group">
                                         Men
                                     </button>
                                 </div>
-                                <div class="left-section-button--unselected js-left-section-button--interest-group js-left-section-button" role="button">
+                                <div class="left-section-button--unselected js-left-section-button--container" role="button">
                                     <button class="js-button--interest-group">
                                         Women
                                     </button>
                                 </div>
-                                <div class="left-section-button--unselected js-left-section-button--interest-group js-left-section-button" role="button">
+                                <div class="left-section-button--unselected js-left-section-button--container" role="button">
                                     <button class="js-button--interest-group">
                                         Everyone
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="input-section js-input-section">
+                        <div class="input-section">
                             <label for="relationshipIntent" class="relationship-intent-label">Looking for</label>
                             <button id="relationshipIntent" class="js-button js-button--relationship-intent modal-window-button" data-modal="Relationship-Intent">
                                 <span class="js-original-content--relationship-intent">
@@ -149,6 +148,20 @@
                                 </span>
                             </button>
                             <div class="js-relationship-intent--reflection reflection-field"></div>
+                        </div>
+                        <div class="input-section">
+                            <label for="interests" style="margin: 8px;">Interests</label>
+                            <button id="interests" class="js-button modal-window-button" data-modal="Add Interests">
+                                <span style="width: 100%; display: flex; justify-content: space-between; align-items: center; height: 100%; position: relative;">
+                                    <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24">
+                                        <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
+                                    </svg>
+                                    <span style="margin-left: 5px;">
+                                        Add interests
+                                    </span>
+                                </span>
+                            </button>
+                            <div class="interests-preview js-interests-preview"></div>
                         </div>
                     </div>
                     <div class="main-body-right-section">
@@ -321,7 +334,6 @@
                                     </li>
                                 </ul>
                             </section>
-                            <input id="uploadPhotos" class="js-file-input" type="file" accept="image/*" style="display: none;">
                             <div class="upload-image-message">
                                 <span>Upload 2 photos to start. Add 4 or more to make your profile stand out.</span>
                             </div>
@@ -329,34 +341,18 @@
                     </div>
                 </div>
                 <div class="footage">
-                    <div style="width: 100%; display: flex; flex-direction: row; align-items: center;">
-                        <div class="line"></div>
-                        <label style="margin: 8px;">Optional</label>
-                        <div class="line"></div>
-                    </div>
-                    <div class="footage-left-section">
-                        <label for="interests" style="margin: 8px;">Interests</label>
-                        <button id="interests" class="js-button modal-window-button" data-modal="Add Interests">
-                            <span style="width: 100%; display: flex; justify-content: space-between; align-items: center; height: 100%; position: relative;">
-                                <svg focusable="true" aria-hidden="true" role="presentation" viewbox="0 0 24 24">
-                                    <path fill="black" d="M12 0C10.8954 0 10 0.89543 10 2V10H2C0.895431 10 0 10.8954 0 12C0 13.1046 0.895431 14 2 14H10V22C10 23.1046 10.8954 24 12 24C13.1046 24 14 23.1046 14 22V14H22C23.1046 14 24 13.1046 24 12C24 10.8954 23.1046 10 22 10H14V2C14 0.895431 13.1046 0 12 0Z"></path>
-                                </svg>
-                                <span style="margin-left: 5px;">
-                                    Add interests
-                                </span>
-                            </span>
-                        </button>
-                    </div>
                     <div class="footage-bottom-section">
-                        <button class="footage-button create-account-continue-button" style="width: 15%; background: var(--main-color); color: #fff;" id="createAccountContinueButton" type="submit">Continue</button>
-                        <button class="js-button footage-button" style="margin-block: 45px; color: rgb(59, 59, 255); background-color: #fff;" data-modal="Create-Account" data-modal-type="Login">
-                            Already have an account? Log in.
-                        </button>
+                        <button id="createAccountContinueButton" class="footage-button" type="submit" disabled>Continue</button>
                     </div>
                 </div>
+                <input id="uploadPhotos" class="js-file-input" type="file" accept="image/*" style="display: none;" />
+                <input id="uploadPhotos" class="js-file-input" type="file" accept="image/*" style="display: none;" />
+                <input id="uploadPhotos" class="js-file-input" type="file" accept="image/*" style="display: none;" />
+                <input id="uploadPhotos" class="js-file-input" type="file" accept="image/*" style="display: none;" />
+                <input id="uploadPhotos" class="js-file-input" type="file" accept="image/*" style="display: none;" />
+                <input id="uploadPhotos" class="js-file-input" type="file" accept="image/*" style="display: none;" />
             </form>
         </div>
-        <script src="../scripts/pop-ups/login-to-tinder.js"></script>
         <script src="../scripts/pop-ups/choose-gender-popup.js"></script>
         <script src="../scripts/pages/createAccount.js"></script>
         <script src="../scripts/pop-ups/welcome-to-tinder.js"></script>

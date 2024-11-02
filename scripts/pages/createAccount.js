@@ -379,7 +379,7 @@ function checkAllFieldsAreFilled() {
     });
     
     continueButton.addEventListener('click', () => {
-        window.location.replace("../../pages/captcha.html")
+        window.location.replace("../../captcha/index.html")
     })
 }
 

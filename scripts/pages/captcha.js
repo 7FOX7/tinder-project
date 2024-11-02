@@ -143,7 +143,7 @@ function compareSelections(userSelection) {
         CAPTCHA_resultText.style.color = "var(--right-answer-color)"; 
         CAPTCHA_resultText.textContent = "Correct!"; 
         setTimeout(() => {
-            window.location.replace('../../pages/view.html');
+            window.location.replace('../../view/index.html');
         }, 1500); 
     }
     else {

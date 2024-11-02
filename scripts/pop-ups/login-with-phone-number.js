@@ -59,7 +59,7 @@ document.addEventListener('readystatechange', (e) => {
                 error.innerHTML = `Invalid phone number`;
                 return; 
             }
-            window.location.replace("../../pages/create-account.html"); 
+            window.location.replace("../../create-account/index.html"); 
         }; 
     }
 }) 

@@ -1,10 +1,10 @@
 .low-level-content {
     cursor: default;  
     height: 10%; 
-    width: 55%; 
+    width: 50%; 
     position: absolute; 
     top: 89%; 
-    left: 23.5%; 
+    left: 27.5%; 
 }
 
 .low-level-content .container {

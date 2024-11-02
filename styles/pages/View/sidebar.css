@@ -9,12 +9,12 @@ aside {
 
 .header {
     width: 100%; 
-    height: 10%; 
-    padding: 20px 8px;
+    padding: 15px 8px;
     background: var(--main-color); 
 }
 
 .navigation {
+    width: "100%"; 
     display: flex; 
     justify-content: space-between;
     align-items: center;
@@ -22,17 +22,14 @@ aside {
 
 .navigation .profile-container {
     color: #fff; 
-    display: flex; 
-    width: 30%; 
-    margin-right: 90px; 
+    display: flex;
+    margin-right: "15px";  
 }
 
 .profile-container > .profile-link-button {
     width: 100%; 
-    height: 55px; 
     display: flex; 
     align-items: center; 
-    justify-content: space-around;
     border-radius: 40px; 
     cursor: pointer;
     font-weight: 600; 
@@ -111,7 +108,3 @@ aside {
     flex-direction: column; 
     align-items: center;
 }
-
-/*TODO: if you add more lists (that are from the <nav> element) then 
-change this (give a class name) so, it does not have a negative effect: 
-*/

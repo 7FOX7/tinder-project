@@ -119,8 +119,6 @@
     filter: brightness(85%); 
 }
 
-/*TODO: make it also trigger the checkmark on the page*/
-
 .choose-gender .custom-checkbox-input:checked + .checkmark {
     background: rgb(255, 23, 93)
     url(../../images/checkmark.png) center/70% no-repeat;

@@ -170,8 +170,6 @@ document.addEventListener('readystatechange', (e) => {
         const form = document.getElementById('create-account-form'); 
         form.addEventListener('submit', e => {
             e.preventDefault(); 
-            // console.log('submit')
-            // window.location.replace("../../pages/captcha.html");
         }); 
 
         const saveButton_relationshipIntent = document.querySelector('.js-save-button--relationship-intent'); 
@@ -228,7 +226,6 @@ function createImage(source, alt) {
 function enableSingleSelection(btn, btns, cntr) {
     btns.forEach((val) => {
         val === btn ? (val.closest(cntr).classList.add('left-section-button--selected')) : (val.closest(cntr).classList.remove('left-section-button--selected')); 
-        console.log(val)
     })
 }
 
@@ -263,7 +260,6 @@ function handleLeftSectionButtonClick(buttons, container) {
 }
 
 function removeCurrentInterest(arr, interest) {
-    console.log(typeof(interest)); 
     arr.forEach((val, index) => {
         val === interest ? arr.splice(index, 1) : ''; 
     })
@@ -323,7 +319,6 @@ function checkAllFieldsAreFilled() {
 
     for(let i = 0; i < inputFiles.length; i++) {
         strBoxes[i].addEventListener('click', () => {
-            console.log('done')
             inputFiles[i].dispatchEvent(clickEvent)
         })
 
@@ -356,10 +351,8 @@ function checkAllFieldsAreFilled() {
 
     function allFilled() {
         if(inputFieldsAreFilled() && isValidEmail() && isGenderSelected && isInterestGroupSelected && isRelationshipIntentSelected && areInterestsSelected) {
-            console.log('pass')
             return true; 
         }
-        console.log('not pass')
         return false; 
     }
 

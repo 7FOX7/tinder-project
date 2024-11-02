@@ -60,11 +60,6 @@ button {
 }
 
 .main-page .tinder-header-left-section {
-    /*
-        even if you set width to 100%, it will NOT occupy (overlap)
-        the entire header because there are still other flex-items 
-        that matter
-    */
     min-width: 130px;  
 }
 
@@ -190,19 +185,6 @@ button {
     animation-timing-function: linear; 
 }
 
-/* 
-.google-icon {
-    
-}
-
-.facebook-icon {
-    
-}
-
-.phone-icon {
-    
-} */
-
 .main-page .tinder-background.active {
     filter: brightness(55%);
 }
@@ -220,56 +202,3 @@ button {
         transform: translateY(-15px); 
     }
 }
-
-
-/*
-@media only screen and (max-width: 900px) and (min-width: 430px){
-    .tinder-header {
-        display: none; 
-    }
-
-    .tinder-main-body > button {
-        font-size: 20px; 
-        padding: 15px; 
-        width: 410px; 
-    }
-
-    .tinder-main-body {
-        margin-top: 10%; 
-        font-size: 10vw; 
-    }
-
-    .tinder-footage {
-        display: none; 
-    }
-
-    .create-account-button {
-        margin-top: 140px;    
-    }
-}
-
-@media only screen and (max-width: 429px) {
-    .tinder-header {
-        display: none; 
-    }
-
-    .tinder-main-body > button {
-        font-size: 20px; 
-        padding: 15px; 
-        width: 350px; 
-    }
-
-    .tinder-main-body {
-        margin-top: 10%; 
-        font-size: 15px;  
-    }
-
-    .tinder-footage {
-        display: none; 
-    }
-
-    .create-account-button {
-        margin-top: 290px;    
-    }
-} 
-*/

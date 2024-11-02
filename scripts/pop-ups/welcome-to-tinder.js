@@ -68,7 +68,6 @@ document.addEventListener('readystatechange', (e) => {
         const container = document.querySelector('.js-welcome-to-tinder-popup'); 
         container.innerHTML = welcomeToTinderHTML; 
 
-        console.log('this is executing')
         const welcomeToTinderPopup = document.querySelector('.js-modal[id="888j"]')
         welcomeToTinderPopup.classList.add('active')
         document.querySelector('.js-overlay').classList.add('active')

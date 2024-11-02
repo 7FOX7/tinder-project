@@ -22,7 +22,6 @@ const COLOR_explore_searchImg = document.querySelector('.js-COLOR-explore-search
 const COLOR_workImg = document.querySelector('.js-COLOR-suitcase-img'); 
 const COLOR_guardImg = document.querySelector('.js-COLOR-guard-img'); 
 
-
 toggleImages(exploreBtn, explore_squaresImg, COLOR_explore_squaresImg); 
 toggleImages(exploreBtn, explore_searchImg, COLOR_explore_searchImg); 
 toggleImages(workBtn, workImg, COLOR_workImg); 
@@ -83,30 +82,13 @@ const timing = {
     duration
 }; 
 
-// doSomething(matchesBtn, underlineMessages, moveLeft, timing); 
-
-// runAnimation(matchesBtn, underlineMatches, underlineMessages, moveLeft, timing); 
-// runAnimation(messagesBtn, underlineMessages, underlineMatches, moveRight, timing); 
-
 function runAnimation(btn, underlineToShow, underlineToHide, animation, timing) {
     btn.addEventListener('click', () => {
-        // const t0 = performance.now(); 
-        underlineToHide.animate(animation, timing); 
-        // figure.animate(addAnimation, addTiming);
-        // runAnimationForCard();  
+        underlineToHide.animate(animation, timing);   
         const animationPromise = underlineToHide.animate(animation, timing).finished; 
-        animationPromise.then(() => {
-            // const t1 = performance.now(); 
-            // const millisecondTime = t1 - t0; 
-            // const executionTime = (Math.round(millisecondTime)/1000).toFixed(1); 
-            // console.log(executionTime); 
-            // if(Number(executionTime) === 0.3 || Number(executionTime) === 0.4) {    
-                underlineToHide.style.opacity = "0"; 
-                underlineToShow.style.opacity = "1";
-            //} 
-            // else {
-            //     console.log("transition failed"); 
-            // }
+        animationPromise.then(() => {  
+            underlineToHide.style.opacity = "0"; 
+            underlineToShow.style.opacity = "1";
         })
     })
 }

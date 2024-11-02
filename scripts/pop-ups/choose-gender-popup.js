@@ -236,20 +236,9 @@ $('head').append('<link rel="stylesheet" type="text/css" href="../../styles/pop-
 $('head').append('<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />'); 
 
 $(document).ready(function() { 
-    // there was a problem with selecting the <div> with the data ['More-Genders']
-    // what caused the problem: I defined it BEFORE I initialized 'chooseGenderHTML' to the HTML. 
-    // I solved this by putting the declaration of 'chooseGenderPopup'   after   'document.querySelector('.js-choose-gender-popup').innerHTML = chooseGenderHTML; 
-
-    
     document.querySelector('.js-choose-gender-popup')
         .innerHTML = chooseGenderHTML; 
     const chooseGenderPopup = $('.js-modal[data-modal="More-Genders"]'); 
-    // $('.js-gender-button').click(function() {
-    //     document.body.style.overflow = 'hidden'; 
-    //     $('.js-popup-container').addClass('active');
-    //     $('.js-overlay').addClass('active');  
-    // });
-
 
     $('.js-menu-option').on('click', function() { 
         enableSingleCheck(); 
@@ -265,7 +254,6 @@ $(document).ready(function() {
                 var parent = getParentOf($(this)); 
                 var gender = parent.find('.js-label-gender').attr("data-gender"); 
                 $('.js-button[data-modal="More-Genders"]').text(`${gender} >`); 
-                console.log(gender); 
             }
             else {
                 return; 
@@ -307,12 +295,6 @@ $(document).ready(function() {
             $(this).removeClass('font-bold'); 
         })
     }
-
-    // function findChooseGenderPopup() {
-    //     return $('.js-modal').data('modal', 'More Genders'); 
-    // }
-
-    // console.log(findChooseGenderPopup()); 
 });
 
 

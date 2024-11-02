@@ -1,4 +1,5 @@
 import { profiles } from "./profiles/profiles.js";
+
 document.addEventListener('DOMContentLoaded', () => {
     const pageMaxWidth = document.querySelector('.js-main').clientWidth; 
     const pageMinWidth = Math.floor(pageMaxWidth/4); 
@@ -43,8 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let sliderPosition = 0;
         let isDragging = false; 
         let previousMouseX = 0; 
-        let previousMouseY = 0;
-        console.log(`renderProfileCards func has just been called. sliderPosition: ${sliderPosition}`);  
+        let previousMouseY = 0;  
 
         const currentProfile = getCurrentFrom(profiles); 
         currentProfile.style.zIndex = "10"; 
@@ -86,6 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function onKeyDown(e) {
             if(e.repeat) return;
+            else if(e.key === " ") {
+                onNextSlideButton()
+                return
+            }
             (e.key === "ArrowLeft" || e.key === "ArrowRight" || e.key === "Enter") ? showNextProfile(e) : console.log(`${e.key} key is not acceptable`); 
         }
 
@@ -205,20 +209,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         sliderDotArr.forEach((dot, index) => {
             dot.addEventListener('click', () => {
-                // const currentDot = e.currentTarget;   
-                // for(let i = 0; i < arr.length; i++) {
-                //     arr[i] === currentDot ? (arr[i].classList.add('active'), sliderPosition = i) : arr[i].classList.remove('active'); 
-                // }
-                // console.log('you clicked on the dot!'); 
                 sliderPosition = index; 
                 showSliderButtons(); 
                 updateSlide(); 
             });
-            // dotContainer.childElementCount !== (sliderDotArr.length) ? dotContainer.append(dot) : 0; 
             dotContainer.append(dot); 
         }); 
-
-        
         
         rejectBtn.addEventListener('click', showNextProfile); 
         likeBtn.addEventListener('click', showNextProfile); 
@@ -239,25 +235,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function updateSlide() {
+            if(sliderPosition === sliderImageArr.length) return
             sliderImageArr.forEach((image, index) => {
                 updateSlideImage(image, index); 
                 updateDots(index); 
             })
-
-            /*
-                sliderImageArr.forEach(image, index) => {
-                    updateSlideImage(image, index); 
-                }
-                sliderDotArr.find(() => {
-                    const progressButton = sliderDotArr[sliderPosition]; 
-                    progressButton.classList.add('active');     
-                }); 
-
-                selectedDot() {
-                    const progressButton = sliderDotArr[sliderPosition]; 
-                    progressButton.classList.add('active'); 
-                }
-            */
         } 
 
         function showSliderButtons() {
@@ -427,21 +409,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 }); 
 
-
-
-    // the problem: the nextSlide_button and previousSlider_button select all the elements from the document. 
-    // we need to limit it to only one HTML element
-    
-
-    // the problem: we have common arrays which store values that are common for each item. we need to somehow make the arrays store the values for one specific item, by comparing the data of the profile container with the data of the images, and, if they match, fill the 
-    // array with those images
-    // sample usage: 
-    // 
-    // profileContainer.getAttribute('data') === sliderImageArr
-    
-
-
-
     // the problem: the sliderImageArr will be overriden 5 times (per each profile-container, so, only the last elements will be considered). we need to probably create another array that would store objects inside of which the will be the profile container 
     // and its specific sliderImageArr, and then access it
 
@@ -487,16 +454,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //     })
     //     profiles.push({"profile": profile, "image": updatedImages}); 
     // }
-
-
-    // what we want: to have a card which has a dot container which does not 
-    // interact with the dots from another card in anyway, but uses the same logic and functionality: 
-
-    // 
-
-
-
-    
 
     /////////////////////////////////////////////////////////////////////////////////////
     // make the slider buttons appear/disappear on hover:

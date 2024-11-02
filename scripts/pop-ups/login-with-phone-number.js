@@ -31,7 +31,6 @@ loginWithPhoneNumberHTML += `
 
 document.addEventListener('readystatechange', (e) => {
     if(e.target.readyState === "interactive") {
-        console.log('done')
         addStylesheet_loginWithPhoneNumber(); 
         const container = document.querySelector('.js-login-with-phone-number-popup'); 
         container.innerHTML = loginWithPhoneNumberHTML; 
@@ -56,7 +55,6 @@ document.addEventListener('readystatechange', (e) => {
 
             error.style.visibility = "hidden"
             if(!phoneInput.isValidNumber()) {
-                console.log('invalid number'); 
                 error.style.visibility = "visible"; 
                 error.innerHTML = `Invalid phone number`;
                 return; 
